@@ -1,0 +1,390 @@
+﻿Imports Newtonsoft.Json.Linq
+Imports System.IO
+Imports System.Drawing.Printing
+Imports Newtonsoft.Json
+
+Public Class frmMain
+
+    Private _dictStaticValues As IDictionary(Of String, String())
+
+    Private _printDoc As PrintDocument
+
+
+    Public Sub New()
+        InitializeComponent()
+        LoadPrintVariables()
+        LoadCustomers()
+        CreatePrintDocument()
+    End Sub
+
+
+
+    Private Sub CreatePrintDocument()
+        _printDoc = New PrintDocument
+        ' Hide Print dialog
+        Dim prntController As PrintController = New StandardPrintController()
+        _printDoc.PrintController = prntController
+        Dim pprSize As New PaperSize("custom", 827, 1170)
+        _printDoc.DefaultPageSettings.PaperSize = pprSize
+        _printDoc.DefaultPageSettings.Landscape = False
+        AddHandler _printDoc.PrintPage, AddressOf PrintDocument1_PrintPage
+        printPreviewCtrl.Document = _printDoc
+    End Sub
+
+
+
+    Private Sub frmMain_HandleDestroyed(sender As Object, e As EventArgs) Handles Me.HandleDestroyed
+        Dim path As String = Directory.GetCurrentDirectory() & "\Data"
+        If Not (Directory.Exists(path)) Then
+            Directory.CreateDirectory(path)
+        End If
+    End Sub
+
+
+    Private Sub LoadCertificationsRecords(ByVal fieldName As String, ByVal fieldValue As String, ByVal fromLeft As String, ByVal fromTop As String)
+        Dim row As DataGridViewRow = Me.dgrdPrintVariables.Rows(Me.dgrdPrintVariables.Rows.Add)
+        row.Cells("FieldName").Value = fieldName
+        row.Cells("FieldValue").Value = fieldValue
+        row.Cells("xCoordinate").Value = fromLeft
+        row.Cells("yCoordinate").Value = fromTop
+        Me.dgrdPrintVariables.Refresh()
+    End Sub
+
+
+
+
+
+#Region "Print"
+
+    Private Sub PrintDocument1_PrintPage(sender As Object, e As Printing.PrintPageEventArgs)
+        Dim reportFont As Font = New Drawing.Font("Times New Roman", 14)
+        For Each row As DataGridViewRow In Me.dgrdPrintVariables.Rows
+            If Not (row.IsNewRow) Then
+                e.Graphics.DrawString(row.Cells("FieldValue").Value.ToString, reportFont, Brushes.Black, row.Cells("xCoordinate").Value.ToString, row.Cells("yCoordinate").Value.ToString)
+            End If
+        Next
+    End Sub
+
+
+#End Region
+
+
+#Region "Save"
+    Private Sub SaveRowsToJson()
+        Try
+            Dim json As String = File.ReadAllText("Certifications.json")
+            Dim jObject As JObject = JObject.Parse(json)
+            Dim printVariablesArray As JArray = CType(jObject("printVariables"), JArray)
+            For Each row As DataGridViewRow In Me.dgrdPrintVariables.Rows
+                If Not (row.IsNewRow) Then
+                    For Each item In printVariablesArray
+                        If (item("fieldName").ToString = row.Cells("FieldName").Value) Then
+                            item("fieldValue") = row.Cells("FieldValue").Value.ToString
+                            item("fromLeft") = row.Cells("xCoordinate").Value.ToString
+                            item("fromTop") = row.Cells("yCoordinate").Value.ToString
+                        End If
+                    Next
+                End If
+            Next
+            jObject("PrintVariables") = printVariablesArray
+            Dim output As String = Newtonsoft.Json.JsonConvert.SerializeObject(jObject, Newtonsoft.Json.Formatting.Indented)
+            File.WriteAllText("Certifications.json", output)
+        Catch ex As Exception
+            Console.WriteLine("Update Error : " + ex.Message.ToString())
+        End Try
+
+    End Sub
+
+#End Region
+
+#Region "Load"
+
+    Private Sub LoadPrintVariables()
+        Dim json = File.ReadAllText("Data\PrintLocations.json")
+        Try
+            Dim jObject = Newtonsoft.Json.Linq.JObject.Parse(json)
+            If jObject IsNot Nothing Then
+                Dim printVariablesArrary As JArray = CType(jObject("printVariables"), JArray)
+                If Not (IsNothing(printVariablesArrary)) Then
+                    For Each item In printVariablesArrary
+                        LoadCertificationsRecords(item("fieldName").ToString, item("fieldValue").ToString, item("fromLeft").ToString, item("fromTop").ToString)
+                    Next
+                End If
+            End If
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+        End Try
+    End Sub
+
+#End Region
+
+#Region "Customers"
+
+    ''' <summary>
+    ''' Parse Customer json file and load customer dgrd
+    ''' </summary>
+    Private Sub LoadCustomers()
+        Dim json = File.ReadAllText("Data\Customers.json")
+        Try
+            Dim jObject As JArray = JArray.Parse(json)
+            Dim MyTable As DataTable = JsonConvert.DeserializeObject(Of DataTable)(jObject.ToString())
+            MyTable.TableName = "Test Table"
+            dgrdCustomers.DataSource = MyTable
+            ' Dim dtTmp As DataTable = jObject
+            '   dgrdCustomers.DataSource = jObject
+            'dgrdCustomers.D
+            dgrdCustomers.Columns("Address1").Visible = False
+            dgrdCustomers.Columns("Address2").Visible = False
+            dgrdCustomers.Columns("Address3").Visible = False
+            dgrdCustomers.Columns("Address4").Visible = False
+            dgrdCustomers.Columns("Telephone").Visible = False
+            dgrdCustomers.Columns("Fax").Visible = False
+            dgrdCustomers.Columns("Contacts").Visible = False
+            dgrdCustomers.Columns("Notes").Visible = False
+
+            'dgrdCustomers.Data
+            'dgrdCustomers.Columns(3).Visible = False
+            'dgrdCustomers.Columns(4).Visible = False
+            'dgrdCustomers.Columns(5).Visible = False
+            'dgrdCustomers.Columns(6).Visible = False
+            'dgrdCustomers.Columns(7).Visible = False
+            'If jObject IsNot Nothing Then
+            '    'Dim printVariablesArrary As JArray = JArray.Parse( 'CType(jObject("printVariables"), JArray)
+            '    If Not (IsNothing(jObject)) Then
+            '        For Each item In jObject
+            '            'LoadCustomersRecords(item("Code").ToString, item("Name").ToString, item("Address1").ToString)
+            '            ''Dim DtGrid As DataTable
+            '            'DtGrid = CType(dgrdCustomers.DataSource, DataTable).Copy()
+
+
+            '            LoadCustomersRecords(item)
+            '        Next
+            '    End If
+            'End If
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+        End Try
+    End Sub
+
+
+
+
+    Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs) Handles TextBox1.TextChanged
+
+        CType(dgrdCustomers.DataSource, DataTable).DefaultView.RowFilter = String.Format("Name like '{0}%'", TextBox1.Text)
+
+    End Sub
+
+    ''' <summary>
+    ''' Load individual cusotmer record
+    ''' </summary>
+    ''' <param name="item"></param>
+    Private Sub LoadCustomersRecords(ByVal item As JToken)
+        'Dim dtTable As DataTable = Me.dgrdCustomers.
+        ' Dim row As DataGridViewRow = Me.dgrdCustomers.Rows(Me.dgrdCustomers.Rows.Add)
+        'row.Cells("CustCode").Value = item("Code").ToString
+        'row.Cells("CustName").Value = item("Name").ToString
+        'row.Cells("Address1").Value = item("Address1").ToString
+        'row.Cells("Address2").Value = item("Address2").ToString
+        'row.Cells("Address3").Value = item("Address3").ToString
+        'row.Cells("Address4").Value = item("Address4").ToString
+        'row.Cells("Telephone").Value = item("Telephone").ToString
+        'row.Cells("Fax").Value = item("Fax").ToString
+        'row.Cells("Contacts").Value = item("Contacts").ToString
+        'row.Cells("Notes").Value = item("Notes").ToString
+
+        '  Me.dgrdCustomers.Refresh()
+        ' dsCustomers = dgrdCustomers.DataSource
+    End Sub
+
+    Private dsCustomers As DataSet
+
+    ''' <summary>
+    ''' Load Customer Details when customer selected
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    Private Sub dgrdCustomers_CellMouseClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles dgrdCustomers.CellMouseClick
+        Me.txtCode.Text = dgrdCustomers.Rows(e.RowIndex).Cells("Code").Value.ToString
+        Me.txtName.Text = dgrdCustomers.Rows(e.RowIndex).Cells("Name").Value.ToString
+        Me.txtAddress1.Text = dgrdCustomers.Rows(e.RowIndex).Cells("Address1").Value.ToString
+        Me.txtAddress2.Text = dgrdCustomers.Rows(e.RowIndex).Cells("Address2").Value.ToString
+        Me.txtAddress3.Text = dgrdCustomers.Rows(e.RowIndex).Cells("Address3").Value.ToString
+        Me.txtAddress4.Text = dgrdCustomers.Rows(e.RowIndex).Cells("Address4").Value.ToString
+        Me.txtTelephone.Text = dgrdCustomers.Rows(e.RowIndex).Cells("Telephone").Value.ToString
+        Me.txtFax.Text = dgrdCustomers.Rows(e.RowIndex).Cells("Fax").Value.ToString
+        Me.txtContacts.Text = dgrdCustomers.Rows(e.RowIndex).Cells("Contacts").Value.ToString
+        Me.txtNotes.Text = dgrdCustomers.Rows(e.RowIndex).Cells("Notes").Value.ToString
+        LoadCustomerCerts(Me.txtCode.Text)
+    End Sub
+
+
+    ''' <summary>
+    ''' Load the relative Customer Certs
+    ''' </summary>
+    ''' <param name="customerCode"></param>
+    Private Sub LoadCustomerCerts(ByVal customerCode As String)
+        ' Refresh certs
+        dgrdCerts.Rows.Clear()
+        Try
+            If Not (String.IsNullOrEmpty(customerCode)) Then
+                Dim json As String = File.ReadAllText("Data\Certs.json")
+                Dim jObject As JObject = JObject.Parse(json)
+                Dim certsArray As JArray = CType(jObject("certificates"), JArray)
+                For Each cert As JToken In certsArray.Where(Function(obj) obj("CustomerCode").Value(Of String)() = customerCode)
+                    Dim row As DataGridViewRow = Me.dgrdCerts.Rows(Me.dgrdCerts.Rows.Add)
+                    row.Cells("CertNumber").Value = cert("CertNumber").ToString
+                    row.Cells("DateOfIssue").Value = cert("DateOfIssue").ToString
+                    row.Cells("CertCustomerCode").Value = cert("CustomerCode").ToString
+                    row.Cells("ViewCert").Value = "View Cert"
+                Next
+            End If
+            Me.dgrdCerts.Refresh()
+        Catch ex As Exception
+            Console.WriteLine("Update Error : " + ex.Message.ToString())
+        End Try
+    End Sub
+
+#End Region
+
+
+
+
+
+
+#Region "Company"
+
+    Private Sub AddCertificate()
+        Console.WriteLine("Enter Company ID : ")
+        Dim companyId As String = "55"
+        Console.WriteLine("\nEnter Company Name : ")
+        Dim companyName As String = "Test"
+        Dim newCompanyMember As String = "{ 'companyid': " & companyId & ",'companyname': '" & companyName & "'}"
+        Try
+            Dim json As String = File.ReadAllText("Certifications.json")
+            Dim jsonObj As JObject = JObject.Parse(json)
+            Dim experienceArrary As JArray = jsonObj.GetValue("experiences")
+            Dim newCompany As JObject = JObject.Parse(newCompanyMember)
+            experienceArrary.Add(newCompany)
+            jsonObj("experiences") = experienceArrary
+            Dim newJsonResult As String = Newtonsoft.Json.JsonConvert.SerializeObject(jsonObj, Newtonsoft.Json.Formatting.Indented)
+            File.WriteAllText("Certifications.json", newJsonResult)
+        Catch ex As Exception
+            Console.WriteLine("Add Error : " + ex.Message.ToString())
+        End Try
+    End Sub
+
+    Private Sub UpdateCompany()
+        Try
+            Dim json As String = File.ReadAllText("Certifications.json")
+            Dim jObject As JObject = JObject.Parse(json)
+            Dim experiencesArrary As JArray = CType(jObject("experiences"), JArray)
+            Console.Write("Enter Company ID to Update Company : ")
+            Dim companyId As String = "55"
+            If (companyId > 0) Then
+                Console.Write("Enter new company name : ")
+                Dim companyName As String = "New Test"
+                For Each company As JToken In experiencesArrary.Where(Function(obj) obj("companyid").Value(Of Integer)() = companyId)
+                    company("companyname") = IIf(String.IsNullOrEmpty(companyName), "", companyName)
+                Next
+                For Each item In experiencesArrary
+                    If (item("companyid").ToString = companyId) Then
+                        item("companyname") = companyName
+                    End If
+                Next
+                jObject("experiences") = experiencesArrary
+                Dim output As String = Newtonsoft.Json.JsonConvert.SerializeObject(jObject, Newtonsoft.Json.Formatting.Indented)
+                File.WriteAllText("Certifications.json", output)
+            Else
+                Console.Write("Invalid Company ID, Try Again!")
+                UpdateCompany()
+            End If
+        Catch ex As Exception
+            Console.WriteLine("Update Error : " + ex.Message.ToString())
+        End Try
+    End Sub
+
+    Private Sub DeleteCompany()
+        Dim json As String = File.ReadAllText("Certifications.json")
+        Try
+            Dim jObject As JObject = JObject.Parse(json)
+            Dim experiencesArrary As JArray = CType(jObject("experiences"), JArray)
+            Dim companyId As String = "55"
+            Dim companyToDeleted As JToken = experiencesArrary.FirstOrDefault(Function(obj) obj("companyid").Value(Of Integer)() = companyId)
+            experiencesArrary.Remove(companyToDeleted)
+            Dim output As String = Newtonsoft.Json.JsonConvert.SerializeObject(jObject, Newtonsoft.Json.Formatting.Indented)
+            File.WriteAllText("Certifications.json", output)
+        Catch ex As Exception
+            Console.WriteLine("Error deleting Certificate: " + ex.Message.ToString())
+        End Try
+    End Sub
+
+#End Region
+
+
+
+
+
+
+    Private Sub MetroButton1_Click(sender As Object, e As EventArgs)
+        LoadPrintVariables()
+    End Sub
+
+    Private Sub MetroButton2_Click(sender As Object, e As EventArgs)
+        AddCertificate()
+    End Sub
+
+    Private Sub MetroButton3_Click(sender As Object, e As EventArgs)
+        UpdateCompany()
+    End Sub
+
+    Private Sub MetroButton4_Click(sender As Object, e As EventArgs)
+        DeleteCompany()
+    End Sub
+
+#Region "Test"
+
+    Private Sub PopulateDictionary()
+        '_dictStaticValues = New Dictionary(Of String, String())
+        '_dictStaticValues.Add("Cert No", {"No. 17549", "700", "50"})
+        '_dictStaticValues.Add("Customer No", {"5022", "50", "400"})
+        '_dictStaticValues.Add("Customer Name", {"Kingspan Ltd t/a Aeroboard", "50", "430"})
+        '_dictStaticValues.Add("Customer Address1", {"Askeaton", "50", "460"})
+        '_dictStaticValues.Add("Customer Address2", {"Co. Limerick", "50", "490"})
+        '_dictStaticValues.Add("Test Weights M1", {"", "80", "550"})
+        '_dictStaticValues.Add("Test Weights F1", {"B3118", "80", "580"})
+        '_dictStaticValues.Add("Calibration Interval", {"6 Monthly", "180", "80"})
+        '_dictStaticValues.Add("Tag Identifier", {"KS-01", "50", "400"})
+        '_dictStaticValues.Add("Location", {"Quality Lab", "50", "400"})
+        '_dictStaticValues.Add("Manufacturer", {"Adam Equipment", "50", "400"})
+        '_dictStaticValues.Add("Model", {"ACB 1500", "50", "400"})
+        '_dictStaticValues.Add("Serial No", {"AE325F00180", "50", "400"})
+        '_dictStaticValues.Add("Capacity", {"1500g", "50", "400"})
+        '_dictStaticValues.Add("Min Graduations", {"0.05g", "50", "400"})
+        '_dictStaticValues.Add("Required Tolerance", {"1 Division", "50", "400"})
+        '_dictStaticValues.Add("Electronic", {"X", "50", "400"})
+        '_dictStaticValues.Add("Procedure", {"Quality Assurance Procedure 15", "50", "400"})
+        '_dictStaticValues.Add("Calibration Weight 1", {"0g", "50", "400"})
+        '_dictStaticValues.Add("Calibration Weight 2", {"100g", "50", "400"})
+        '_dictStaticValues.Add("Calibration Weight 3", {"300g", "50", "400"})
+        '_dictStaticValues.Add("Calibration Weight 4", {"500g", "50", "400"})
+        '_dictStaticValues.Add("Calibration Weight 5", {"800g", "50", "400"})
+        '_dictStaticValues.Add("Calibration Weight 6", {"1200g", "50", "400"})
+        '_dictStaticValues.Add("Calibration Weight 7", {"1500g", "50", "400"})
+        ' LoadStaticRecords()
+    End Sub
+
+#End Region
+
+
+
+
+    Private Sub MetroButton5_Click(sender As Object, e As EventArgs) Handles btnPrint.Click
+        printPreviewCtrl.InvalidatePreview()
+        SaveRowsToJson()
+        _printDoc.Print()
+    End Sub
+
+
+
+End Class
