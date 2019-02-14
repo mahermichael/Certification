@@ -57,3 +57,27 @@ C:\Users\maher\Google Drive\Atlas\Certification\Certification\obj\Debug\Certific
 C:\Users\maher\Google Drive\Atlas\Certification\Certification\obj\Debug\Certification.pdb
 C:\Users\maher\Google Drive\Atlas\Certification\Certification\bin\Debug\Data\PrintLocations.json
 C:\Users\maher\Google Drive\Atlas\Certification\Certification\bin\Debug\Data\Certs.json
+C:\GitWork\Certification\Certification\bin\Debug\Data\Certs.json
+C:\GitWork\Certification\Certification\bin\Debug\Data\PrintLocations.json
+C:\GitWork\Certification\Certification\bin\Debug\Data\Customers.json
+C:\GitWork\Certification\Certification\bin\Debug\Certification.exe.config
+C:\GitWork\Certification\Certification\bin\Debug\Certification.exe.manifest
+C:\GitWork\Certification\Certification\bin\Debug\Certification.application
+C:\GitWork\Certification\Certification\bin\Debug\Certification.exe
+C:\GitWork\Certification\Certification\bin\Debug\Certification.pdb
+C:\GitWork\Certification\Certification\bin\Debug\Certification.xml
+C:\GitWork\Certification\Certification\bin\Debug\MetroFramework.Design.dll
+C:\GitWork\Certification\Certification\bin\Debug\MetroFramework.dll
+C:\GitWork\Certification\Certification\bin\Debug\MetroFramework.Fonts.dll
+C:\GitWork\Certification\Certification\bin\Debug\Newtonsoft.Json.dll
+C:\GitWork\Certification\Certification\obj\Debug\Certification.vbprojAssemblyReference.cache
+C:\GitWork\Certification\Certification\obj\Debug\Certification.frmMain.resources
+C:\GitWork\Certification\Certification\obj\Debug\Certification.Resources.resources
+C:\GitWork\Certification\Certification\obj\Debug\Certification.vbproj.GenerateResource.cache
+C:\GitWork\Certification\Certification\obj\Debug\Certification.vbproj.CoreCompileInputs.cache
+C:\GitWork\Certification\Certification\obj\Debug\Certification.exe.manifest
+C:\GitWork\Certification\Certification\obj\Debug\Certification.application
+C:\GitWork\Certification\Certification\obj\Debug\Certification.vbproj.CopyComplete
+C:\GitWork\Certification\Certification\obj\Debug\Certification.exe
+C:\GitWork\Certification\Certification\obj\Debug\Certification.xml
+C:\GitWork\Certification\Certification\obj\Debug\Certification.pdb
