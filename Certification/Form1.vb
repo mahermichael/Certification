@@ -9,7 +9,17 @@ Public Class frmMain
 
     Private _printDoc As PrintDocument
 
+    Private _selectedCustomerRowIndex As Integer = -1
 
+    Private _maxCustomerId As Integer = -1
+
+    Private _addingCustomer As Boolean = False
+
+#Region "Form"
+
+    ''' <summary>
+    ''' Constructor
+    ''' </summary>
     Public Sub New()
         InitializeComponent()
         LoadPrintVariables()
@@ -18,6 +28,22 @@ Public Class frmMain
     End Sub
 
 
+    ''' <summary>
+    ''' Data folder check
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    Private Sub frmMain_HandleDestroyed(sender As Object, e As EventArgs) Handles Me.HandleDestroyed
+        Dim path As String = Directory.GetCurrentDirectory() & "\Data"
+        If Not (Directory.Exists(path)) Then
+            Directory.CreateDirectory(path)
+        End If
+    End Sub
+
+#End Region
+
+
+#Region "Print"
 
     Private Sub CreatePrintDocument()
         _printDoc = New PrintDocument
@@ -32,15 +58,6 @@ Public Class frmMain
     End Sub
 
 
-
-    Private Sub frmMain_HandleDestroyed(sender As Object, e As EventArgs) Handles Me.HandleDestroyed
-        Dim path As String = Directory.GetCurrentDirectory() & "\Data"
-        If Not (Directory.Exists(path)) Then
-            Directory.CreateDirectory(path)
-        End If
-    End Sub
-
-
     Private Sub LoadCertificationsRecords(ByVal fieldName As String, ByVal fieldValue As String, ByVal fromLeft As String, ByVal fromTop As String)
         Dim row As DataGridViewRow = Me.dgrdPrintVariables.Rows(Me.dgrdPrintVariables.Rows.Add)
         row.Cells("FieldName").Value = fieldName
@@ -49,6 +66,19 @@ Public Class frmMain
         row.Cells("yCoordinate").Value = fromTop
         Me.dgrdPrintVariables.Refresh()
     End Sub
+
+#End Region
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -70,6 +100,7 @@ Public Class frmMain
 
 
 #Region "Save"
+
     Private Sub SaveRowsToJson()
         Try
             Dim json As String = File.ReadAllText("Certifications.json")
@@ -161,17 +192,26 @@ Public Class frmMain
             '        Next
             '    End If
             'End If
+
+            ' Set themax customer Id for adding new customers
+            SetMaxCustomerId()
         Catch ex As Exception
             MessageBox.Show(ex.Message)
         End Try
     End Sub
 
+    Private Sub SetMaxCustomerId()
+        For x As Integer = 0 To dgrdCustomers.Rows.Count - 1
+            If (_maxCustomerId < dgrdCustomers.Rows(x).Cells("Code").Value) Then
+                _maxCustomerId = dgrdCustomers.Rows(x).Cells(0).Value
+            End If
+        Next
+    End Sub
 
 
+    Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs) Handles txtSearchCustomer.TextChanged
 
-    Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs) Handles TextBox1.TextChanged
-
-        CType(dgrdCustomers.DataSource, DataTable).DefaultView.RowFilter = String.Format("Name like '{0}%'", TextBox1.Text)
+        CType(dgrdCustomers.DataSource, DataTable).DefaultView.RowFilter = String.Format("Name like '{0}%'", txtSearchCustomer.Text)
 
     End Sub
 
@@ -197,7 +237,7 @@ Public Class frmMain
         ' dsCustomers = dgrdCustomers.DataSource
     End Sub
 
-    Private dsCustomers As DataSet
+    ' Private dsCustomers As DataSet
 
     ''' <summary>
     ''' Load Customer Details when customer selected
@@ -205,17 +245,20 @@ Public Class frmMain
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     Private Sub dgrdCustomers_CellMouseClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles dgrdCustomers.CellMouseClick
-        Me.txtCode.Text = dgrdCustomers.Rows(e.RowIndex).Cells("Code").Value.ToString
-        Me.txtName.Text = dgrdCustomers.Rows(e.RowIndex).Cells("Name").Value.ToString
-        Me.txtAddress1.Text = dgrdCustomers.Rows(e.RowIndex).Cells("Address1").Value.ToString
-        Me.txtAddress2.Text = dgrdCustomers.Rows(e.RowIndex).Cells("Address2").Value.ToString
-        Me.txtAddress3.Text = dgrdCustomers.Rows(e.RowIndex).Cells("Address3").Value.ToString
-        Me.txtAddress4.Text = dgrdCustomers.Rows(e.RowIndex).Cells("Address4").Value.ToString
-        Me.txtTelephone.Text = dgrdCustomers.Rows(e.RowIndex).Cells("Telephone").Value.ToString
-        Me.txtFax.Text = dgrdCustomers.Rows(e.RowIndex).Cells("Fax").Value.ToString
-        Me.txtContacts.Text = dgrdCustomers.Rows(e.RowIndex).Cells("Contacts").Value.ToString
-        Me.txtNotes.Text = dgrdCustomers.Rows(e.RowIndex).Cells("Notes").Value.ToString
-        LoadCustomerCerts(Me.txtCode.Text)
+        If (e.RowIndex > -1) Then
+            _selectedCustomerRowIndex = e.RowIndex
+            Me.txtCode.Text = dgrdCustomers.Rows(e.RowIndex).Cells("Code").Value.ToString
+            Me.txtName.Text = dgrdCustomers.Rows(e.RowIndex).Cells("Name").Value.ToString
+            Me.txtAddress1.Text = dgrdCustomers.Rows(e.RowIndex).Cells("Address1").Value.ToString
+            Me.txtAddress2.Text = dgrdCustomers.Rows(e.RowIndex).Cells("Address2").Value.ToString
+            Me.txtAddress3.Text = dgrdCustomers.Rows(e.RowIndex).Cells("Address3").Value.ToString
+            Me.txtAddress4.Text = dgrdCustomers.Rows(e.RowIndex).Cells("Address4").Value.ToString
+            Me.txtTelephone.Text = dgrdCustomers.Rows(e.RowIndex).Cells("Telephone").Value.ToString
+            Me.txtFax.Text = dgrdCustomers.Rows(e.RowIndex).Cells("Fax").Value.ToString
+            Me.txtContacts.Text = dgrdCustomers.Rows(e.RowIndex).Cells("Contacts").Value.ToString
+            Me.txtNotes.Text = dgrdCustomers.Rows(e.RowIndex).Cells("Notes").Value.ToString
+            LoadCustomerCerts(Me.txtCode.Text)
+        End If
     End Sub
 
 
@@ -225,24 +268,106 @@ Public Class frmMain
     ''' <param name="customerCode"></param>
     Private Sub LoadCustomerCerts(ByVal customerCode As String)
         ' Refresh certs
-        dgrdCerts.Rows.Clear()
+        dgrdInstalledMachines.Rows.Clear()
         Try
             If Not (String.IsNullOrEmpty(customerCode)) Then
                 Dim json As String = File.ReadAllText("Data\Certs.json")
                 Dim jObject As JObject = JObject.Parse(json)
                 Dim certsArray As JArray = CType(jObject("certificates"), JArray)
                 For Each cert As JToken In certsArray.Where(Function(obj) obj("CustomerCode").Value(Of String)() = customerCode)
-                    Dim row As DataGridViewRow = Me.dgrdCerts.Rows(Me.dgrdCerts.Rows.Add)
+                    Dim row As DataGridViewRow = Me.dgrdInstalledMachines.Rows(Me.dgrdInstalledMachines.Rows.Add)
                     row.Cells("CertNumber").Value = cert("CertNumber").ToString
                     row.Cells("DateOfIssue").Value = cert("DateOfIssue").ToString
                     row.Cells("CertCustomerCode").Value = cert("CustomerCode").ToString
                     row.Cells("ViewCert").Value = "View Cert"
                 Next
             End If
-            Me.dgrdCerts.Refresh()
+            Me.dgrdInstalledMachines.Refresh()
         Catch ex As Exception
             Console.WriteLine("Update Error : " + ex.Message.ToString())
         End Try
+    End Sub
+
+
+    ''' <summary>
+    ''' Save Customers
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    Private Sub btnSaveCustomer_Click(sender As Object, e As EventArgs) Handles btnSaveCustomer.Click
+        If (ValidateCustomer()) Then
+            Try
+                Dim json As String = File.ReadAllText("Data\Customers.json")
+                Dim jsonObject As JArray = JArray.Parse(json)
+
+                If (_addingCustomer) Then
+                    'Dim newCust As New JToken
+                    Dim newCustomerMember As String = "{ 'Code': '" & txtCode.Text &
+                        "','Name': '" & txtName.Text &
+                        "','Address1': '" & txtAddress1.Text &
+                        "','Address2': '" & txtAddress2.Text &
+                        "','Address3': '" & txtAddress3.Text &
+                        "','Address4': '" & txtAddress4.Text &
+                        "','Telephone': '" & txtTelephone.Text &
+                        "','Fax': '" & txtFax.Text &
+                        "','Contacts': '" & txtContacts.Text &
+                        "','Notes': '" & txtNotes.Text &
+                        "'}"
+                    Dim newCompany As JObject = JObject.Parse(newCustomerMember)
+
+                    jsonObject.Add(newCompany)
+                    Dim output As String = Newtonsoft.Json.JsonConvert.SerializeObject(jsonObject, Newtonsoft.Json.Formatting.Indented)
+                    File.WriteAllText("Data\Customers.json", output)
+                    _maxCustomerId += 1
+                Else
+                    Try
+                        For Each customer As JToken In jsonObject.Where(Function(obj) obj("Code").Value(Of String)() = txtCode.Text)
+                            customer("Address1") = txtAddress1.Text
+                        Next
+
+                        Dim output As String = Newtonsoft.Json.JsonConvert.SerializeObject(jsonObject, Newtonsoft.Json.Formatting.Indented)
+                        File.WriteAllText("Data\Customers.json", output)
+                        ' Update the open customer grid also
+                        dgrdCustomers.Rows(_selectedCustomerRowIndex).Cells("Address1").Value = txtAddress1.Text
+                        MessageBox.Show("Customer Update")
+                    Catch ex As Exception
+                        MessageBox.Show("Update Error : " + ex.Message.ToString() + " Please try again.")
+                    End Try
+                End If
+            Catch ex As Exception
+                MessageBox.Show(ex.Message)
+            End Try
+
+
+        End If
+    End Sub
+
+
+    ''' <summary>
+    ''' Validate Customer details
+    ''' </summary>
+    ''' <returns></returns>
+    Private Function ValidateCustomer() As Boolean
+        If (String.IsNullOrEmpty(txtCode.Text)) Then
+            MessageBox.Show("Customer Code Empty.")
+            Return False
+        ElseIf (String.IsNullOrEmpty(txtName.Text)) Then
+            MessageBox.Show("Please enter a Customer Name.")
+            Return False
+        End If
+        Return True
+    End Function
+
+
+    ''' <summary>
+    ''' Add Customer
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    Private Sub btnAddCustomer_Click(sender As Object, e As EventArgs) Handles btnAddCustomer.Click
+        _addingCustomer = True
+        txtCode.Text = _maxCustomerId + 1
+
     End Sub
 
 #End Region
@@ -384,7 +509,6 @@ Public Class frmMain
         SaveRowsToJson()
         _printDoc.Print()
     End Sub
-
 
 
 End Class
