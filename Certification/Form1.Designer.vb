@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class frmMain
     Inherits MetroFramework.Forms.MetroForm
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class frmMain
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim DataGridViewCellStyle24 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle25 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
@@ -63,6 +63,8 @@ Partial Class frmMain
         Me.MetroButton5 = New MetroFramework.Controls.MetroButton()
         Me.MetroButton6 = New MetroFramework.Controls.MetroButton()
         Me.tabCustomersNew = New MetroFramework.Controls.MetroTabPage()
+        Me.VScrollBar1 = New System.Windows.Forms.VScrollBar()
+        Me.btnDeleteCustomer = New MetroFramework.Controls.MetroButton()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.btnAddCustomer = New MetroFramework.Controls.MetroButton()
         Me.btnSaveCustomer = New MetroFramework.Controls.MetroButton()
@@ -429,6 +431,8 @@ Partial Class frmMain
         '
         'tabCustomersNew
         '
+        Me.tabCustomersNew.Controls.Add(Me.VScrollBar1)
+        Me.tabCustomersNew.Controls.Add(Me.btnDeleteCustomer)
         Me.tabCustomersNew.Controls.Add(Me.Label1)
         Me.tabCustomersNew.Controls.Add(Me.btnAddCustomer)
         Me.tabCustomersNew.Controls.Add(Me.btnSaveCustomer)
@@ -469,6 +473,24 @@ Partial Class frmMain
         Me.tabCustomersNew.VerticalScrollbarHighlightOnWheel = False
         Me.tabCustomersNew.VerticalScrollbarSize = 10
         '
+        'VScrollBar1
+        '
+        Me.VScrollBar1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.VScrollBar1.Location = New System.Drawing.Point(729, 59)
+        Me.VScrollBar1.Name = "VScrollBar1"
+        Me.VScrollBar1.Size = New System.Drawing.Size(44, 412)
+        Me.VScrollBar1.TabIndex = 38
+        '
+        'btnDeleteCustomer
+        '
+        Me.btnDeleteCustomer.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnDeleteCustomer.Location = New System.Drawing.Point(1081, 419)
+        Me.btnDeleteCustomer.Name = "btnDeleteCustomer"
+        Me.btnDeleteCustomer.Size = New System.Drawing.Size(120, 52)
+        Me.btnDeleteCustomer.TabIndex = 35
+        Me.btnDeleteCustomer.Text = "Delete Customer"
+        Me.btnDeleteCustomer.UseSelectable = True
+        '
         'Label1
         '
         Me.Label1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
@@ -484,9 +506,9 @@ Partial Class frmMain
         'btnAddCustomer
         '
         Me.btnAddCustomer.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnAddCustomer.Location = New System.Drawing.Point(1213, 33)
+        Me.btnAddCustomer.Location = New System.Drawing.Point(891, 419)
         Me.btnAddCustomer.Name = "btnAddCustomer"
-        Me.btnAddCustomer.Size = New System.Drawing.Size(170, 52)
+        Me.btnAddCustomer.Size = New System.Drawing.Size(120, 52)
         Me.btnAddCustomer.TabIndex = 32
         Me.btnAddCustomer.Text = "Add New Customer"
         Me.btnAddCustomer.UseSelectable = True
@@ -494,9 +516,9 @@ Partial Class frmMain
         'btnSaveCustomer
         '
         Me.btnSaveCustomer.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnSaveCustomer.Location = New System.Drawing.Point(1213, 419)
+        Me.btnSaveCustomer.Location = New System.Drawing.Point(1259, 419)
         Me.btnSaveCustomer.Name = "btnSaveCustomer"
-        Me.btnSaveCustomer.Size = New System.Drawing.Size(170, 52)
+        Me.btnSaveCustomer.Size = New System.Drawing.Size(120, 52)
         Me.btnSaveCustomer.TabIndex = 31
         Me.btnSaveCustomer.Text = "Save Changes"
         Me.btnSaveCustomer.UseSelectable = True
@@ -643,7 +665,7 @@ Partial Class frmMain
         Me.dgrdCustomers.EnableHeadersVisualStyles = False
         Me.dgrdCustomers.Font = New System.Drawing.Font("Segoe UI", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
         Me.dgrdCustomers.GridColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.dgrdCustomers.Location = New System.Drawing.Point(3, 59)
+        Me.dgrdCustomers.Location = New System.Drawing.Point(0, 59)
         Me.dgrdCustomers.MultiSelect = False
         Me.dgrdCustomers.Name = "dgrdCustomers"
         Me.dgrdCustomers.ReadOnly = True
@@ -657,8 +679,9 @@ Partial Class frmMain
         DataGridViewCellStyle23.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
         Me.dgrdCustomers.RowHeadersDefaultCellStyle = DataGridViewCellStyle23
         Me.dgrdCustomers.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
+        Me.dgrdCustomers.ScrollBars = System.Windows.Forms.ScrollBars.None
         Me.dgrdCustomers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgrdCustomers.Size = New System.Drawing.Size(753, 412)
+        Me.dgrdCustomers.Size = New System.Drawing.Size(726, 412)
         Me.dgrdCustomers.TabIndex = 26
         '
         'txtNotes
@@ -913,6 +936,7 @@ Partial Class frmMain
         'txtName
         '
         Me.txtName.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtName.BackColor = System.Drawing.SystemColors.ActiveBorder
         '
         '
         '
@@ -937,6 +961,7 @@ Partial Class frmMain
         Me.txtName.ShortcutsEnabled = True
         Me.txtName.Size = New System.Drawing.Size(492, 23)
         Me.txtName.TabIndex = 17
+        Me.txtName.UseCustomBackColor = True
         Me.txtName.UseSelectable = True
         Me.txtName.WaterMarkColor = System.Drawing.Color.FromArgb(CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer))
         Me.txtName.WaterMarkFont = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel)
@@ -944,6 +969,7 @@ Partial Class frmMain
         'txtCode
         '
         Me.txtCode.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtCode.BackColor = System.Drawing.Color.LightGray
         '
         '
         '
@@ -1178,4 +1204,6 @@ Partial Class frmMain
     Friend WithEvents btnSaveCustomer As MetroFramework.Controls.MetroButton
     Friend WithEvents btnAddCustomer As MetroFramework.Controls.MetroButton
     Friend WithEvents Label1 As Label
+    Friend WithEvents btnDeleteCustomer As MetroFramework.Controls.MetroButton
+    Friend WithEvents VScrollBar1 As VScrollBar
 End Class

@@ -25,6 +25,7 @@ Public Class frmMain
         LoadPrintVariables()
         LoadCustomers()
         CreatePrintDocument()
+
     End Sub
 
 
@@ -173,28 +174,12 @@ Public Class frmMain
             dgrdCustomers.Columns("Contacts").Visible = False
             dgrdCustomers.Columns("Notes").Visible = False
 
-            'dgrdCustomers.Data
-            'dgrdCustomers.Columns(3).Visible = False
-            'dgrdCustomers.Columns(4).Visible = False
-            'dgrdCustomers.Columns(5).Visible = False
-            'dgrdCustomers.Columns(6).Visible = False
-            'dgrdCustomers.Columns(7).Visible = False
-            'If jObject IsNot Nothing Then
-            '    'Dim printVariablesArrary As JArray = JArray.Parse( 'CType(jObject("printVariables"), JArray)
-            '    If Not (IsNothing(jObject)) Then
-            '        For Each item In jObject
-            '            'LoadCustomersRecords(item("Code").ToString, item("Name").ToString, item("Address1").ToString)
-            '            ''Dim DtGrid As DataTable
-            '            'DtGrid = CType(dgrdCustomers.DataSource, DataTable).Copy()
 
-
-            '            LoadCustomersRecords(item)
-            '        Next
-            '    End If
-            'End If
 
             ' Set themax customer Id for adding new customers
             SetMaxCustomerId()
+
+            VScrollBar1.Maximum = dgrdCustomers.Rows.Count
         Catch ex As Exception
             MessageBox.Show(ex.Message)
         End Try
@@ -319,17 +304,62 @@ Public Class frmMain
                     Dim output As String = Newtonsoft.Json.JsonConvert.SerializeObject(jsonObject, Newtonsoft.Json.Formatting.Indented)
                     File.WriteAllText("Data\Customers.json", output)
                     _maxCustomerId += 1
+                    ' Dim row As DataGridViewRow = Me.dgrdCustomers.Rows(Me.dgrdCustomers.Rows.Add)
+                    Dim dtCustomers As DataTable = dgrdCustomers.DataSource
+
+                    Dim row As DataRow = dtCustomers.NewRow
+
+
+
+                    row("Code") = txtCode.Text
+                    row("Name") = txtName.Text
+                    row("Address1") = txtAddress1.Text
+                    row("Address2") = txtAddress2.Text
+                    row("Address3") = txtAddress3.Text
+                    row("Address4") = txtAddress4.Text
+                    row("Telephone") = txtTelephone.Text
+                    row("Fax") = txtFax.Text
+                    row("Contacts") = txtContacts.Text
+                    row("Notes") = txtNotes.Text
+                    dtCustomers.Rows.Add(row)
+
+                    ' Refresh the grid with the new row
+                    dgrdCustomers.EndEdit()
+                    dgrdCustomers.Refresh()
+                    VScrollBar1.Maximum = dgrdCustomers.Rows.Count
+                    ' Scroll to the bottom of the grid to show the new row
+                    _selectedCustomerRowIndex = dgrdCustomers.RowCount - 1
+                    dgrdCustomers.FirstDisplayedScrollingRowIndex = _selectedCustomerRowIndex
+
+                    MessageBox.Show("New Customer Created")
+                    _addingCustomer = False
                 Else
                     Try
                         For Each customer As JToken In jsonObject.Where(Function(obj) obj("Code").Value(Of String)() = txtCode.Text)
+                            customer("Name") = txtName.Text
                             customer("Address1") = txtAddress1.Text
+                            customer("Address2") = txtAddress1.Text
+                            customer("Address3") = txtAddress1.Text
+                            customer("Address4") = txtAddress1.Text
+                            customer("Telephone") = txtAddress1.Text
+                            customer("Fax") = txtAddress1.Text
+                            customer("Contacts") = txtAddress1.Text
+                            customer("Notes") = txtAddress1.Text
                         Next
 
                         Dim output As String = Newtonsoft.Json.JsonConvert.SerializeObject(jsonObject, Newtonsoft.Json.Formatting.Indented)
                         File.WriteAllText("Data\Customers.json", output)
                         ' Update the open customer grid also
+                        dgrdCustomers.Rows(_selectedCustomerRowIndex).Cells("Name").Value = txtName.Text
                         dgrdCustomers.Rows(_selectedCustomerRowIndex).Cells("Address1").Value = txtAddress1.Text
-                        MessageBox.Show("Customer Update")
+                        dgrdCustomers.Rows(_selectedCustomerRowIndex).Cells("Address2").Value = txtAddress2.Text
+                        dgrdCustomers.Rows(_selectedCustomerRowIndex).Cells("Address3").Value = txtAddress3.Text
+                        dgrdCustomers.Rows(_selectedCustomerRowIndex).Cells("Address4").Value = txtAddress4.Text
+                        dgrdCustomers.Rows(_selectedCustomerRowIndex).Cells("Telephone").Value = txtTelephone.Text
+                        dgrdCustomers.Rows(_selectedCustomerRowIndex).Cells("Fax").Value = txtFax.Text
+                        dgrdCustomers.Rows(_selectedCustomerRowIndex).Cells("Contacts").Value = txtContacts.Text
+                        dgrdCustomers.Rows(_selectedCustomerRowIndex).Cells("Notes").Value = txtNotes.Text
+                        MessageBox.Show("Customer Updated")
                     Catch ex As Exception
                         MessageBox.Show("Update Error : " + ex.Message.ToString() + " Please try again.")
                     End Try
@@ -339,6 +369,36 @@ Public Class frmMain
             End Try
 
 
+        End If
+    End Sub
+
+
+    ''' <summary>
+    ''' Delete Customer
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    Private Sub btnDeleteCustomer_Click(sender As Object, e As EventArgs) Handles btnDeleteCustomer.Click
+        If Not (String.IsNullOrEmpty(txtName.Text)) Then
+            Dim result As Integer = MessageBox.Show("Do you wish to Delete Customer " & txtName.Text, "Delete Customer", MessageBoxButtons.YesNo)
+            If result = DialogResult.Yes Then
+                Try
+                    Dim json As String = File.ReadAllText("Data\Customers.json")
+                    Dim jsonObject As JArray = JArray.Parse(json)
+                    Dim customerToDelete As JToken = jsonObject.FirstOrDefault(Function(obj) obj("Code").Value(Of String)() = txtCode.Text)
+                    jsonObject.Remove(customerToDelete)
+                    Dim output As String = Newtonsoft.Json.JsonConvert.SerializeObject(jsonObject, Newtonsoft.Json.Formatting.Indented)
+                    File.WriteAllText("Data\Customers.json", output)
+                    dgrdCustomers.Rows.RemoveAt(_selectedCustomerRowIndex)
+                    ClearCustomerDetails()
+                    VScrollBar1.Maximum = dgrdCustomers.Rows.Count
+                    MessageBox.Show("Customer deleted")
+                Catch ex As Exception
+                    Console.WriteLine("Error deleting Customer : " + ex.Message.ToString())
+                End Try
+            Else
+                Exit Sub
+            End If
         End If
     End Sub
 
@@ -366,8 +426,22 @@ Public Class frmMain
     ''' <param name="e"></param>
     Private Sub btnAddCustomer_Click(sender As Object, e As EventArgs) Handles btnAddCustomer.Click
         _addingCustomer = True
+        ' Clear all fields
+        ClearCustomerDetails()
         txtCode.Text = _maxCustomerId + 1
+    End Sub
 
+    Private Sub ClearCustomerDetails()
+        txtCode.Clear()
+        txtName.Clear()
+        txtAddress1.Clear()
+        txtAddress2.Clear()
+        txtAddress3.Clear()
+        txtAddress4.Clear()
+        txtContacts.Clear()
+        txtFax.Clear()
+        txtTelephone.Clear()
+        txtNotes.Clear()
     End Sub
 
 #End Region
@@ -510,5 +584,22 @@ Public Class frmMain
         _printDoc.Print()
     End Sub
 
+    Private Sub MetrobtnDownTile1_Click(sender As Object, e As EventArgs)
+        If (dgrdCustomers.FirstDisplayedScrollingRowIndex + dgrdCustomers.DisplayedRowCount(False) < dgrdCustomers.Rows.Count) Then
+            dgrdCustomers.FirstDisplayedScrollingRowIndex = dgrdCustomers.FirstDisplayedScrollingRowIndex + dgrdCustomers.DisplayedRowCount(False)
+        End If
 
+    End Sub
+
+    Private Sub btnUp_Click(sender As Object, e As EventArgs)
+        dgrdCustomers.FirstDisplayedScrollingRowIndex = dgrdCustomers.FirstDisplayedScrollingRowIndex - 1
+    End Sub
+
+    Private Sub dgrdCustomers_Scroll(sender As Object, e As ScrollEventArgs) Handles dgrdCustomers.Scroll
+        VScrollBar1.Value = e.NewValue
+    End Sub
+
+    Private Sub VScrollBar1_Scroll(sender As Object, e As ScrollEventArgs) Handles VScrollBar1.Scroll
+        dgrdCustomers.FirstDisplayedScrollingRowIndex = e.NewValue
+    End Sub
 End Class
