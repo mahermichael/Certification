@@ -71,21 +71,7 @@ Public Class frmMain
 #End Region
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#Region "Print"
+#Region "Print 2"
 
     Private Sub PrintDocument1_PrintPage(sender As Object, e As Printing.PrintPageEventArgs)
         Dim reportFont As Font = New Drawing.Font("Times New Roman", 14)
@@ -94,6 +80,18 @@ Public Class frmMain
                 e.Graphics.DrawString(row.Cells("FieldValue").Value.ToString, reportFont, Brushes.Black, row.Cells("xCoordinate").Value.ToString, row.Cells("yCoordinate").Value.ToString)
             End If
         Next
+    End Sub
+
+
+    ''' <summary>
+    ''' Print
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    Private Sub MetroButton5_Click(sender As Object, e As EventArgs) Handles btnPrint.Click
+        printPreviewCtrl.InvalidatePreview()
+        SaveRowsToJson()
+        _printDoc.Print()
     End Sub
 
 
@@ -156,8 +154,9 @@ Public Class frmMain
     ''' Parse Customer json file and load customer dgrd
     ''' </summary>
     Private Sub LoadCustomers()
-        Dim json = File.ReadAllText("Data\Customers.json")
+
         Try
+            Dim json = File.ReadAllText("Data\Customers.json")
             Dim jObject As JArray = JArray.Parse(json)
             Dim MyTable As DataTable = JsonConvert.DeserializeObject(Of DataTable)(jObject.ToString())
             MyTable.TableName = "Test Table"
@@ -256,15 +255,35 @@ Public Class frmMain
         dgrdInstalledMachines.Rows.Clear()
         Try
             If Not (String.IsNullOrEmpty(customerCode)) Then
-                Dim json As String = File.ReadAllText("Data\Certs.json")
-                Dim jObject As JObject = JObject.Parse(json)
-                Dim certsArray As JArray = CType(jObject("certificates"), JArray)
-                For Each cert As JToken In certsArray.Where(Function(obj) obj("CustomerCode").Value(Of String)() = customerCode)
+                Dim json As String = File.ReadAllText("Data\InstalledMachines.json")
+                Dim jsonObject As JArray = JArray.Parse(json)
+                For Each cert As JToken In jsonObject.Where(Function(obj) obj("CustCode").Value(Of String)() = customerCode)
                     Dim row As DataGridViewRow = Me.dgrdInstalledMachines.Rows(Me.dgrdInstalledMachines.Rows.Add)
+                    row.Cells("CustCode").Value = cert("CustCode").ToString
+                    row.Cells("ModelId").Value = cert("ModelId").ToString
+                    row.Cells("SerialNumber").Value = cert("SerialNumber").ToString
                     row.Cells("CertNumber").Value = cert("CertNumber").ToString
-                    row.Cells("DateOfIssue").Value = cert("DateOfIssue").ToString
-                    row.Cells("CertCustomerCode").Value = cert("CustomerCode").ToString
+                    row.Cells("InstallationDate").Value = cert("InstallationDate").ToString
+                    row.Cells("SalesValue").Value = cert("SalesValue").ToString
+                    row.Cells("SupplierInvoice").Value = cert("SupplierInvoice").ToString
+                    row.Cells("CustomerInvoice").Value = cert("CustomerInvoice").ToString
+                    row.Cells("WeightsMeasureDocketNo").Value = cert("WeightsMeasureDocketNo").ToString
+                    row.Cells("GuaranteeExpiryDate").Value = cert("GuaranteeExpiryDate").ToString
+                    row.Cells("InService").Value = cert("InService").ToString
+                    row.Cells("Location").Value = cert("Location").ToString
+                    row.Cells("TagId").Value = cert("TagId").ToString
+                    row.Cells("ContractNumber").Value = cert("ContractNumber").ToString
+                    row.Cells("CalibrationType").Value = cert("CalibrationType").ToString
+                    row.Cells("Capacity").Value = cert("Capacity").ToString
+                    row.Cells("MinimumGraduation").Value = cert("MinimumGraduation").ToString
+                    row.Cells("SalesPerson").Value = cert("SalesPerson").ToString
+                    row.Cells("SelectColumn").Value = cert("SelectColumn").ToString
+                    row.Cells("AdhocSelect").Value = cert("AdhocSelect").ToString
+                    row.Cells("partinfo").Value = cert("partinfo").ToString
+                    row.Cells("Tolerance").Value = cert("Tolerance").ToString
+                    'View Cert Button
                     row.Cells("ViewCert").Value = "View Cert"
+                    row.Cells("ViewCert").Tag = cert
                 Next
             End If
             Me.dgrdInstalledMachines.Refresh()
@@ -447,7 +466,16 @@ Public Class frmMain
 #End Region
 
 
+#Region "Customer Scroll Bar"
 
+    Private Sub dgrdCustomers_Scroll(sender As Object, e As ScrollEventArgs) Handles dgrdCustomers.Scroll
+        VScrollBar1.Value = e.NewValue
+    End Sub
+
+    Private Sub VScrollBar1_Scroll(sender As Object, e As ScrollEventArgs) Handles VScrollBar1.Scroll
+        dgrdCustomers.FirstDisplayedScrollingRowIndex = e.NewValue
+    End Sub
+#End Region
 
 
 
@@ -525,22 +553,6 @@ Public Class frmMain
 
 
 
-    Private Sub MetroButton1_Click(sender As Object, e As EventArgs)
-        LoadPrintVariables()
-    End Sub
-
-    Private Sub MetroButton2_Click(sender As Object, e As EventArgs)
-        AddCertificate()
-    End Sub
-
-    Private Sub MetroButton3_Click(sender As Object, e As EventArgs)
-        UpdateCompany()
-    End Sub
-
-    Private Sub MetroButton4_Click(sender As Object, e As EventArgs)
-        DeleteCompany()
-    End Sub
-
 #Region "Test"
 
     Private Sub PopulateDictionary()
@@ -578,28 +590,5 @@ Public Class frmMain
 
 
 
-    Private Sub MetroButton5_Click(sender As Object, e As EventArgs) Handles btnPrint.Click
-        printPreviewCtrl.InvalidatePreview()
-        SaveRowsToJson()
-        _printDoc.Print()
-    End Sub
 
-    Private Sub MetrobtnDownTile1_Click(sender As Object, e As EventArgs)
-        If (dgrdCustomers.FirstDisplayedScrollingRowIndex + dgrdCustomers.DisplayedRowCount(False) < dgrdCustomers.Rows.Count) Then
-            dgrdCustomers.FirstDisplayedScrollingRowIndex = dgrdCustomers.FirstDisplayedScrollingRowIndex + dgrdCustomers.DisplayedRowCount(False)
-        End If
-
-    End Sub
-
-    Private Sub btnUp_Click(sender As Object, e As EventArgs)
-        dgrdCustomers.FirstDisplayedScrollingRowIndex = dgrdCustomers.FirstDisplayedScrollingRowIndex - 1
-    End Sub
-
-    Private Sub dgrdCustomers_Scroll(sender As Object, e As ScrollEventArgs) Handles dgrdCustomers.Scroll
-        VScrollBar1.Value = e.NewValue
-    End Sub
-
-    Private Sub VScrollBar1_Scroll(sender As Object, e As ScrollEventArgs) Handles VScrollBar1.Scroll
-        dgrdCustomers.FirstDisplayedScrollingRowIndex = e.NewValue
-    End Sub
 End Class
