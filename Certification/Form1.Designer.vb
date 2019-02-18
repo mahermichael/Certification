@@ -109,6 +109,8 @@ Partial Class frmMain
         Me.PartInfo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Tolerance = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ViewCert = New System.Windows.Forms.DataGridViewButtonColumn()
+        Me.searchByName = New MetroFramework.Controls.MetroRadioButton()
+        Me.searchByCode = New MetroFramework.Controls.MetroRadioButton()
         Me.tabPages.SuspendLayout()
         Me.tabPrintCetificate.SuspendLayout()
         Me.MetroPanel1.SuspendLayout()
@@ -124,17 +126,15 @@ Partial Class frmMain
         '
         'tabPages
         '
-        Me.tabPages.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.tabPages.Controls.Add(Me.tabPrintCetificate)
         Me.tabPages.Controls.Add(Me.tabPageTest)
         Me.tabPages.Controls.Add(Me.MetroTabPage1)
         Me.tabPages.Controls.Add(Me.tabCustomersNew)
-        Me.tabPages.Location = New System.Drawing.Point(22, 63)
+        Me.tabPages.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.tabPages.Location = New System.Drawing.Point(20, 60)
         Me.tabPages.Name = "tabPages"
         Me.tabPages.SelectedIndex = 3
-        Me.tabPages.Size = New System.Drawing.Size(1411, 844)
+        Me.tabPages.Size = New System.Drawing.Size(1417, 851)
         Me.tabPages.TabIndex = 0
         Me.tabPages.UseSelectable = True
         '
@@ -382,6 +382,8 @@ Partial Class frmMain
         '
         'tabCustomersNew
         '
+        Me.tabCustomersNew.Controls.Add(Me.searchByCode)
+        Me.tabCustomersNew.Controls.Add(Me.searchByName)
         Me.tabCustomersNew.Controls.Add(Me.VScrollBar1)
         Me.tabCustomersNew.Controls.Add(Me.btnDeleteCustomer)
         Me.tabCustomersNew.Controls.Add(Me.Label1)
@@ -417,7 +419,7 @@ Partial Class frmMain
         Me.tabCustomersNew.HorizontalScrollbarSize = 10
         Me.tabCustomersNew.Location = New System.Drawing.Point(4, 38)
         Me.tabCustomersNew.Name = "tabCustomersNew"
-        Me.tabCustomersNew.Size = New System.Drawing.Size(1403, 802)
+        Me.tabCustomersNew.Size = New System.Drawing.Size(1409, 809)
         Me.tabCustomersNew.TabIndex = 3
         Me.tabCustomersNew.Text = "Customers"
         Me.tabCustomersNew.VerticalScrollbarBarColor = True
@@ -427,7 +429,7 @@ Partial Class frmMain
         'VScrollBar1
         '
         Me.VScrollBar1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.VScrollBar1.Location = New System.Drawing.Point(729, 59)
+        Me.VScrollBar1.Location = New System.Drawing.Point(735, 59)
         Me.VScrollBar1.Name = "VScrollBar1"
         Me.VScrollBar1.Size = New System.Drawing.Size(44, 412)
         Me.VScrollBar1.TabIndex = 38
@@ -435,7 +437,7 @@ Partial Class frmMain
         'btnDeleteCustomer
         '
         Me.btnDeleteCustomer.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnDeleteCustomer.Location = New System.Drawing.Point(1081, 419)
+        Me.btnDeleteCustomer.Location = New System.Drawing.Point(1087, 419)
         Me.btnDeleteCustomer.Name = "btnDeleteCustomer"
         Me.btnDeleteCustomer.Size = New System.Drawing.Size(120, 52)
         Me.btnDeleteCustomer.TabIndex = 35
@@ -449,7 +451,7 @@ Partial Class frmMain
         Me.Label1.Font = New System.Drawing.Font("Segoe UI", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.Location = New System.Drawing.Point(3, 496)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(1380, 70)
+        Me.Label1.Size = New System.Drawing.Size(1386, 70)
         Me.Label1.TabIndex = 34
         Me.Label1.Text = "Installed Machines For Selected Customer"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -457,7 +459,7 @@ Partial Class frmMain
         'btnAddCustomer
         '
         Me.btnAddCustomer.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnAddCustomer.Location = New System.Drawing.Point(891, 419)
+        Me.btnAddCustomer.Location = New System.Drawing.Point(897, 419)
         Me.btnAddCustomer.Name = "btnAddCustomer"
         Me.btnAddCustomer.Size = New System.Drawing.Size(120, 52)
         Me.btnAddCustomer.TabIndex = 32
@@ -467,7 +469,7 @@ Partial Class frmMain
         'btnSaveCustomer
         '
         Me.btnSaveCustomer.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnSaveCustomer.Location = New System.Drawing.Point(1259, 419)
+        Me.btnSaveCustomer.Location = New System.Drawing.Point(1265, 419)
         Me.btnSaveCustomer.Name = "btnSaveCustomer"
         Me.btnSaveCustomer.Size = New System.Drawing.Size(120, 52)
         Me.btnSaveCustomer.TabIndex = 31
@@ -546,7 +548,7 @@ Partial Class frmMain
         Me.dgrdInstalledMachines.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
         Me.dgrdInstalledMachines.RowTemplate.Height = 40
         Me.dgrdInstalledMachines.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgrdInstalledMachines.Size = New System.Drawing.Size(1380, 230)
+        Me.dgrdInstalledMachines.Size = New System.Drawing.Size(1386, 237)
         Me.dgrdInstalledMachines.TabIndex = 27
         '
         'dgrdCustomers
@@ -600,7 +602,7 @@ Partial Class frmMain
         Me.dgrdCustomers.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
         Me.dgrdCustomers.ScrollBars = System.Windows.Forms.ScrollBars.None
         Me.dgrdCustomers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgrdCustomers.Size = New System.Drawing.Size(726, 412)
+        Me.dgrdCustomers.Size = New System.Drawing.Size(732, 412)
         Me.dgrdCustomers.TabIndex = 26
         '
         'txtNotes
@@ -619,7 +621,7 @@ Partial Class frmMain
         Me.txtNotes.CustomButton.UseSelectable = True
         Me.txtNotes.CustomButton.Visible = False
         Me.txtNotes.Lines = New String(-1) {}
-        Me.txtNotes.Location = New System.Drawing.Point(891, 367)
+        Me.txtNotes.Location = New System.Drawing.Point(897, 367)
         Me.txtNotes.MaxLength = 32767
         Me.txtNotes.Multiline = True
         Me.txtNotes.Name = "txtNotes"
@@ -651,7 +653,7 @@ Partial Class frmMain
         Me.txtContacts.CustomButton.UseSelectable = True
         Me.txtContacts.CustomButton.Visible = False
         Me.txtContacts.Lines = New String(-1) {}
-        Me.txtContacts.Location = New System.Drawing.Point(891, 338)
+        Me.txtContacts.Location = New System.Drawing.Point(897, 338)
         Me.txtContacts.MaxLength = 32767
         Me.txtContacts.Name = "txtContacts"
         Me.txtContacts.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
@@ -682,7 +684,7 @@ Partial Class frmMain
         Me.txtFax.CustomButton.UseSelectable = True
         Me.txtFax.CustomButton.Visible = False
         Me.txtFax.Lines = New String(-1) {}
-        Me.txtFax.Location = New System.Drawing.Point(891, 306)
+        Me.txtFax.Location = New System.Drawing.Point(897, 306)
         Me.txtFax.MaxLength = 32767
         Me.txtFax.Name = "txtFax"
         Me.txtFax.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
@@ -713,7 +715,7 @@ Partial Class frmMain
         Me.txtTelephone.CustomButton.UseSelectable = True
         Me.txtTelephone.CustomButton.Visible = False
         Me.txtTelephone.Lines = New String(-1) {}
-        Me.txtTelephone.Location = New System.Drawing.Point(891, 277)
+        Me.txtTelephone.Location = New System.Drawing.Point(897, 277)
         Me.txtTelephone.MaxLength = 32767
         Me.txtTelephone.Name = "txtTelephone"
         Me.txtTelephone.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
@@ -744,7 +746,7 @@ Partial Class frmMain
         Me.txtAddress4.CustomButton.UseSelectable = True
         Me.txtAddress4.CustomButton.Visible = False
         Me.txtAddress4.Lines = New String(-1) {}
-        Me.txtAddress4.Location = New System.Drawing.Point(891, 248)
+        Me.txtAddress4.Location = New System.Drawing.Point(897, 248)
         Me.txtAddress4.MaxLength = 32767
         Me.txtAddress4.Name = "txtAddress4"
         Me.txtAddress4.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
@@ -775,7 +777,7 @@ Partial Class frmMain
         Me.txtAddress3.CustomButton.UseSelectable = True
         Me.txtAddress3.CustomButton.Visible = False
         Me.txtAddress3.Lines = New String(-1) {}
-        Me.txtAddress3.Location = New System.Drawing.Point(891, 218)
+        Me.txtAddress3.Location = New System.Drawing.Point(897, 218)
         Me.txtAddress3.MaxLength = 32767
         Me.txtAddress3.Name = "txtAddress3"
         Me.txtAddress3.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
@@ -806,7 +808,7 @@ Partial Class frmMain
         Me.txtAddress2.CustomButton.UseSelectable = True
         Me.txtAddress2.CustomButton.Visible = False
         Me.txtAddress2.Lines = New String(-1) {}
-        Me.txtAddress2.Location = New System.Drawing.Point(891, 189)
+        Me.txtAddress2.Location = New System.Drawing.Point(897, 189)
         Me.txtAddress2.MaxLength = 32767
         Me.txtAddress2.Name = "txtAddress2"
         Me.txtAddress2.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
@@ -837,7 +839,7 @@ Partial Class frmMain
         Me.txtAddress1.CustomButton.UseSelectable = True
         Me.txtAddress1.CustomButton.Visible = False
         Me.txtAddress1.Lines = New String(-1) {}
-        Me.txtAddress1.Location = New System.Drawing.Point(891, 161)
+        Me.txtAddress1.Location = New System.Drawing.Point(897, 161)
         Me.txtAddress1.MaxLength = 32767
         Me.txtAddress1.Name = "txtAddress1"
         Me.txtAddress1.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
@@ -869,7 +871,7 @@ Partial Class frmMain
         Me.txtName.CustomButton.UseSelectable = True
         Me.txtName.CustomButton.Visible = False
         Me.txtName.Lines = New String(-1) {}
-        Me.txtName.Location = New System.Drawing.Point(891, 132)
+        Me.txtName.Location = New System.Drawing.Point(897, 132)
         Me.txtName.MaxLength = 32767
         Me.txtName.Name = "txtName"
         Me.txtName.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
@@ -902,7 +904,7 @@ Partial Class frmMain
         Me.txtCode.CustomButton.UseSelectable = True
         Me.txtCode.CustomButton.Visible = False
         Me.txtCode.Lines = New String(-1) {}
-        Me.txtCode.Location = New System.Drawing.Point(891, 103)
+        Me.txtCode.Location = New System.Drawing.Point(897, 103)
         Me.txtCode.MaxLength = 32767
         Me.txtCode.Name = "txtCode"
         Me.txtCode.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
@@ -924,7 +926,7 @@ Partial Class frmMain
         Me.MetroLabel10.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.MetroLabel10.AutoSize = True
         Me.MetroLabel10.FontWeight = MetroFramework.MetroLabelWeight.Regular
-        Me.MetroLabel10.Location = New System.Drawing.Point(815, 367)
+        Me.MetroLabel10.Location = New System.Drawing.Point(821, 367)
         Me.MetroLabel10.Name = "MetroLabel10"
         Me.MetroLabel10.Size = New System.Drawing.Size(45, 19)
         Me.MetroLabel10.TabIndex = 15
@@ -935,7 +937,7 @@ Partial Class frmMain
         Me.MetroLabel9.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.MetroLabel9.AutoSize = True
         Me.MetroLabel9.FontWeight = MetroFramework.MetroLabelWeight.Regular
-        Me.MetroLabel9.Location = New System.Drawing.Point(815, 342)
+        Me.MetroLabel9.Location = New System.Drawing.Point(821, 342)
         Me.MetroLabel9.Name = "MetroLabel9"
         Me.MetroLabel9.Size = New System.Drawing.Size(63, 19)
         Me.MetroLabel9.TabIndex = 14
@@ -946,7 +948,7 @@ Partial Class frmMain
         Me.MetroLabel8.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.MetroLabel8.AutoSize = True
         Me.MetroLabel8.FontWeight = MetroFramework.MetroLabelWeight.Regular
-        Me.MetroLabel8.Location = New System.Drawing.Point(815, 310)
+        Me.MetroLabel8.Location = New System.Drawing.Point(821, 310)
         Me.MetroLabel8.Name = "MetroLabel8"
         Me.MetroLabel8.Size = New System.Drawing.Size(29, 19)
         Me.MetroLabel8.TabIndex = 13
@@ -957,7 +959,7 @@ Partial Class frmMain
         Me.MetroLabel7.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.MetroLabel7.AutoSize = True
         Me.MetroLabel7.FontWeight = MetroFramework.MetroLabelWeight.Regular
-        Me.MetroLabel7.Location = New System.Drawing.Point(814, 281)
+        Me.MetroLabel7.Location = New System.Drawing.Point(820, 281)
         Me.MetroLabel7.Name = "MetroLabel7"
         Me.MetroLabel7.Size = New System.Drawing.Size(71, 19)
         Me.MetroLabel7.TabIndex = 12
@@ -968,7 +970,7 @@ Partial Class frmMain
         Me.MetroLabel6.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.MetroLabel6.AutoSize = True
         Me.MetroLabel6.FontWeight = MetroFramework.MetroLabelWeight.Regular
-        Me.MetroLabel6.Location = New System.Drawing.Point(815, 252)
+        Me.MetroLabel6.Location = New System.Drawing.Point(821, 252)
         Me.MetroLabel6.Name = "MetroLabel6"
         Me.MetroLabel6.Size = New System.Drawing.Size(70, 19)
         Me.MetroLabel6.TabIndex = 11
@@ -979,7 +981,7 @@ Partial Class frmMain
         Me.MetroLabel5.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.MetroLabel5.AutoSize = True
         Me.MetroLabel5.FontWeight = MetroFramework.MetroLabelWeight.Regular
-        Me.MetroLabel5.Location = New System.Drawing.Point(814, 193)
+        Me.MetroLabel5.Location = New System.Drawing.Point(820, 193)
         Me.MetroLabel5.Name = "MetroLabel5"
         Me.MetroLabel5.Size = New System.Drawing.Size(70, 19)
         Me.MetroLabel5.TabIndex = 10
@@ -990,7 +992,7 @@ Partial Class frmMain
         Me.MetroLabel4.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.MetroLabel4.AutoSize = True
         Me.MetroLabel4.FontWeight = MetroFramework.MetroLabelWeight.Regular
-        Me.MetroLabel4.Location = New System.Drawing.Point(815, 222)
+        Me.MetroLabel4.Location = New System.Drawing.Point(821, 222)
         Me.MetroLabel4.Name = "MetroLabel4"
         Me.MetroLabel4.Size = New System.Drawing.Size(70, 19)
         Me.MetroLabel4.TabIndex = 9
@@ -1001,7 +1003,7 @@ Partial Class frmMain
         Me.MetroLabel3.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.MetroLabel3.AutoSize = True
         Me.MetroLabel3.FontWeight = MetroFramework.MetroLabelWeight.Regular
-        Me.MetroLabel3.Location = New System.Drawing.Point(815, 165)
+        Me.MetroLabel3.Location = New System.Drawing.Point(821, 165)
         Me.MetroLabel3.Name = "MetroLabel3"
         Me.MetroLabel3.Size = New System.Drawing.Size(70, 19)
         Me.MetroLabel3.TabIndex = 8
@@ -1012,7 +1014,7 @@ Partial Class frmMain
         Me.MetroLabel2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.MetroLabel2.AutoSize = True
         Me.MetroLabel2.FontWeight = MetroFramework.MetroLabelWeight.Regular
-        Me.MetroLabel2.Location = New System.Drawing.Point(815, 136)
+        Me.MetroLabel2.Location = New System.Drawing.Point(821, 136)
         Me.MetroLabel2.Name = "MetroLabel2"
         Me.MetroLabel2.Size = New System.Drawing.Size(45, 19)
         Me.MetroLabel2.TabIndex = 7
@@ -1023,7 +1025,7 @@ Partial Class frmMain
         Me.MetroLabel1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.MetroLabel1.AutoSize = True
         Me.MetroLabel1.FontWeight = MetroFramework.MetroLabelWeight.Regular
-        Me.MetroLabel1.Location = New System.Drawing.Point(814, 107)
+        Me.MetroLabel1.Location = New System.Drawing.Point(820, 107)
         Me.MetroLabel1.Name = "MetroLabel1"
         Me.MetroLabel1.Size = New System.Drawing.Size(41, 19)
         Me.MetroLabel1.TabIndex = 6
@@ -1199,6 +1201,28 @@ Partial Class frmMain
         Me.ViewCert.Text = "View Cert"
         Me.ViewCert.UseColumnTextForButtonValue = True
         '
+        'searchByName
+        '
+        Me.searchByName.AutoSize = True
+        Me.searchByName.Checked = True
+        Me.searchByName.Location = New System.Drawing.Point(492, 28)
+        Me.searchByName.Name = "searchByName"
+        Me.searchByName.Size = New System.Drawing.Size(109, 15)
+        Me.searchByName.TabIndex = 39
+        Me.searchByName.TabStop = True
+        Me.searchByName.Text = "Search By Name"
+        Me.searchByName.UseSelectable = True
+        '
+        'searchByCode
+        '
+        Me.searchByCode.AutoSize = True
+        Me.searchByCode.Location = New System.Drawing.Point(643, 28)
+        Me.searchByCode.Name = "searchByCode"
+        Me.searchByCode.Size = New System.Drawing.Size(105, 15)
+        Me.searchByCode.TabIndex = 40
+        Me.searchByCode.Text = "Search By Code"
+        Me.searchByCode.UseSelectable = True
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1300,4 +1324,6 @@ Partial Class frmMain
     Friend WithEvents PartInfo As DataGridViewTextBoxColumn
     Friend WithEvents Tolerance As DataGridViewTextBoxColumn
     Friend WithEvents ViewCert As DataGridViewButtonColumn
+    Friend WithEvents searchByCode As MetroFramework.Controls.MetroRadioButton
+    Friend WithEvents searchByName As MetroFramework.Controls.MetroRadioButton
 End Class

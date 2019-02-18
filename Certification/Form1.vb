@@ -194,8 +194,12 @@ Public Class frmMain
 
 
     Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs) Handles txtSearchCustomer.TextChanged
-
-        CType(dgrdCustomers.DataSource, DataTable).DefaultView.RowFilter = String.Format("Name like '{0}%'", txtSearchCustomer.Text)
+        If (searchByName.Checked) Then
+            CType(dgrdCustomers.DataSource, DataTable).DefaultView.RowFilter = String.Format("Name like '{0}%'", txtSearchCustomer.Text)
+        Else
+            CType(dgrdCustomers.DataSource, DataTable).DefaultView.RowFilter = String.Format("Code like '{0}%'", txtSearchCustomer.Text)
+        End If
+        VScrollBar1.Maximum = dgrdCustomers.Rows.Count
 
     End Sub
 
