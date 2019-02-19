@@ -22,9 +22,9 @@ Public Class frmMain
     ''' </summary>
     Public Sub New()
         InitializeComponent()
-        LoadPrintVariables()
+        ' LoadPrintVariables()
         LoadCustomers()
-        CreatePrintDocument()
+        '  CreatePrintDocument()
 
     End Sub
 
@@ -203,27 +203,7 @@ Public Class frmMain
 
     End Sub
 
-    ''' <summary>
-    ''' Load individual cusotmer record
-    ''' </summary>
-    ''' <param name="item"></param>
-    Private Sub LoadCustomersRecords(ByVal item As JToken)
-        'Dim dtTable As DataTable = Me.dgrdCustomers.
-        ' Dim row As DataGridViewRow = Me.dgrdCustomers.Rows(Me.dgrdCustomers.Rows.Add)
-        'row.Cells("CustCode").Value = item("Code").ToString
-        'row.Cells("CustName").Value = item("Name").ToString
-        'row.Cells("Address1").Value = item("Address1").ToString
-        'row.Cells("Address2").Value = item("Address2").ToString
-        'row.Cells("Address3").Value = item("Address3").ToString
-        'row.Cells("Address4").Value = item("Address4").ToString
-        'row.Cells("Telephone").Value = item("Telephone").ToString
-        'row.Cells("Fax").Value = item("Fax").ToString
-        'row.Cells("Contacts").Value = item("Contacts").ToString
-        'row.Cells("Notes").Value = item("Notes").ToString
 
-        '  Me.dgrdCustomers.Refresh()
-        ' dsCustomers = dgrdCustomers.DataSource
-    End Sub
 
     ' Private dsCustomers As DataSet
 
@@ -361,13 +341,13 @@ Public Class frmMain
                         For Each customer As JToken In jsonObject.Where(Function(obj) obj("Code").Value(Of String)() = txtCode.Text)
                             customer("Name") = txtName.Text
                             customer("Address1") = txtAddress1.Text
-                            customer("Address2") = txtAddress1.Text
-                            customer("Address3") = txtAddress1.Text
-                            customer("Address4") = txtAddress1.Text
-                            customer("Telephone") = txtAddress1.Text
-                            customer("Fax") = txtAddress1.Text
-                            customer("Contacts") = txtAddress1.Text
-                            customer("Notes") = txtAddress1.Text
+                            customer("Address2") = txtAddress2.Text
+                            customer("Address3") = txtAddress3.Text
+                            customer("Address4") = txtAddress4.Text
+                            customer("Telephone") = txtTelephone.Text
+                            customer("Fax") = txtFax.Text
+                            customer("Contacts") = txtContacts.Text
+                            customer("Notes") = txtNotes.Text
                         Next
 
                         Dim output As String = Newtonsoft.Json.JsonConvert.SerializeObject(jsonObject, Newtonsoft.Json.Formatting.Indented)
@@ -587,6 +567,15 @@ Public Class frmMain
         '_dictStaticValues.Add("Calibration Weight 6", {"1200g", "50", "400"})
         '_dictStaticValues.Add("Calibration Weight 7", {"1500g", "50", "400"})
         ' LoadStaticRecords()
+    End Sub
+
+    Private Sub dgrdInstalledMachines_CellClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles dgrdInstalledMachines.CellMouseClick
+        If (e.RowIndex > -1) Then
+            If (e.ColumnIndex = dgrdInstalledMachines.Columns("ViewCert").Index) Then
+                Dim frm As New frmPrint(dgrdInstalledMachines.Rows(e.RowIndex).Cells("CustCode").Value, dgrdInstalledMachines.Rows(e.RowIndex).Cells("SerialNumber").Value)
+                frm.ShowDialog()
+            End If
+        End If
     End Sub
 
 #End Region

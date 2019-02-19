@@ -56,6 +56,9 @@ Partial Class frmMain
         Me.MetroButton5 = New MetroFramework.Controls.MetroButton()
         Me.MetroButton6 = New MetroFramework.Controls.MetroButton()
         Me.tabCustomersNew = New MetroFramework.Controls.MetroTabPage()
+        Me.btnNewCert = New MetroFramework.Controls.MetroButton()
+        Me.searchByCode = New MetroFramework.Controls.MetroRadioButton()
+        Me.searchByName = New MetroFramework.Controls.MetroRadioButton()
         Me.VScrollBar1 = New System.Windows.Forms.VScrollBar()
         Me.btnDeleteCustomer = New MetroFramework.Controls.MetroButton()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -64,28 +67,6 @@ Partial Class frmMain
         Me.MetroLabel12 = New MetroFramework.Controls.MetroLabel()
         Me.txtSearchCustomer = New System.Windows.Forms.TextBox()
         Me.dgrdInstalledMachines = New MetroFramework.Controls.MetroGrid()
-        Me.dgrdCustomers = New MetroFramework.Controls.MetroGrid()
-        Me.txtNotes = New MetroFramework.Controls.MetroTextBox()
-        Me.txtContacts = New MetroFramework.Controls.MetroTextBox()
-        Me.txtFax = New MetroFramework.Controls.MetroTextBox()
-        Me.txtTelephone = New MetroFramework.Controls.MetroTextBox()
-        Me.txtAddress4 = New MetroFramework.Controls.MetroTextBox()
-        Me.txtAddress3 = New MetroFramework.Controls.MetroTextBox()
-        Me.txtAddress2 = New MetroFramework.Controls.MetroTextBox()
-        Me.txtAddress1 = New MetroFramework.Controls.MetroTextBox()
-        Me.txtName = New MetroFramework.Controls.MetroTextBox()
-        Me.txtCode = New MetroFramework.Controls.MetroTextBox()
-        Me.MetroLabel10 = New MetroFramework.Controls.MetroLabel()
-        Me.MetroLabel9 = New MetroFramework.Controls.MetroLabel()
-        Me.MetroLabel8 = New MetroFramework.Controls.MetroLabel()
-        Me.MetroLabel7 = New MetroFramework.Controls.MetroLabel()
-        Me.MetroLabel6 = New MetroFramework.Controls.MetroLabel()
-        Me.MetroLabel5 = New MetroFramework.Controls.MetroLabel()
-        Me.MetroLabel4 = New MetroFramework.Controls.MetroLabel()
-        Me.MetroLabel3 = New MetroFramework.Controls.MetroLabel()
-        Me.MetroLabel2 = New MetroFramework.Controls.MetroLabel()
-        Me.MetroLabel1 = New MetroFramework.Controls.MetroLabel()
-        Me.PrintPreviewDialog1 = New System.Windows.Forms.PrintPreviewDialog()
         Me.CustCode = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.SerialNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ModelId = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -109,8 +90,28 @@ Partial Class frmMain
         Me.PartInfo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Tolerance = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ViewCert = New System.Windows.Forms.DataGridViewButtonColumn()
-        Me.searchByName = New MetroFramework.Controls.MetroRadioButton()
-        Me.searchByCode = New MetroFramework.Controls.MetroRadioButton()
+        Me.dgrdCustomers = New MetroFramework.Controls.MetroGrid()
+        Me.txtNotes = New MetroFramework.Controls.MetroTextBox()
+        Me.txtContacts = New MetroFramework.Controls.MetroTextBox()
+        Me.txtFax = New MetroFramework.Controls.MetroTextBox()
+        Me.txtTelephone = New MetroFramework.Controls.MetroTextBox()
+        Me.txtAddress4 = New MetroFramework.Controls.MetroTextBox()
+        Me.txtAddress3 = New MetroFramework.Controls.MetroTextBox()
+        Me.txtAddress2 = New MetroFramework.Controls.MetroTextBox()
+        Me.txtAddress1 = New MetroFramework.Controls.MetroTextBox()
+        Me.txtName = New MetroFramework.Controls.MetroTextBox()
+        Me.txtCode = New MetroFramework.Controls.MetroTextBox()
+        Me.MetroLabel10 = New MetroFramework.Controls.MetroLabel()
+        Me.MetroLabel9 = New MetroFramework.Controls.MetroLabel()
+        Me.MetroLabel8 = New MetroFramework.Controls.MetroLabel()
+        Me.MetroLabel7 = New MetroFramework.Controls.MetroLabel()
+        Me.MetroLabel6 = New MetroFramework.Controls.MetroLabel()
+        Me.MetroLabel5 = New MetroFramework.Controls.MetroLabel()
+        Me.MetroLabel4 = New MetroFramework.Controls.MetroLabel()
+        Me.MetroLabel3 = New MetroFramework.Controls.MetroLabel()
+        Me.MetroLabel2 = New MetroFramework.Controls.MetroLabel()
+        Me.MetroLabel1 = New MetroFramework.Controls.MetroLabel()
+        Me.PrintPreviewDialog1 = New System.Windows.Forms.PrintPreviewDialog()
         Me.tabPages.SuspendLayout()
         Me.tabPrintCetificate.SuspendLayout()
         Me.MetroPanel1.SuspendLayout()
@@ -143,7 +144,7 @@ Partial Class frmMain
         Me.tabPrintCetificate.Controls.Add(Me.MetroPanel1)
         Me.tabPrintCetificate.Location = New System.Drawing.Point(4, 38)
         Me.tabPrintCetificate.Name = "tabPrintCetificate"
-        Me.tabPrintCetificate.Size = New System.Drawing.Size(1403, 802)
+        Me.tabPrintCetificate.Size = New System.Drawing.Size(1409, 809)
         Me.tabPrintCetificate.TabIndex = 0
         Me.tabPrintCetificate.Text = "Print Certificate"
         '
@@ -156,7 +157,7 @@ Partial Class frmMain
         Me.MetroPanel1.HorizontalScrollbarSize = 10
         Me.MetroPanel1.Location = New System.Drawing.Point(0, 0)
         Me.MetroPanel1.Name = "MetroPanel1"
-        Me.MetroPanel1.Size = New System.Drawing.Size(1403, 802)
+        Me.MetroPanel1.Size = New System.Drawing.Size(1409, 809)
         Me.MetroPanel1.TabIndex = 0
         Me.MetroPanel1.VerticalScrollbarBarColor = True
         Me.MetroPanel1.VerticalScrollbarHighlightOnWheel = False
@@ -178,7 +179,7 @@ Partial Class frmMain
         Me.TableLayoutPanel1.RowCount = 2
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 79.22705!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20.77295!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(1383, 774)
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(1389, 781)
         Me.TableLayoutPanel1.TabIndex = 5
         '
         'dgrdPrintVariables
@@ -231,7 +232,7 @@ Partial Class frmMain
         Me.dgrdPrintVariables.RowHeadersDefaultCellStyle = DataGridViewCellStyle4
         Me.dgrdPrintVariables.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
         Me.dgrdPrintVariables.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgrdPrintVariables.Size = New System.Drawing.Size(808, 607)
+        Me.dgrdPrintVariables.Size = New System.Drawing.Size(812, 612)
         Me.dgrdPrintVariables.TabIndex = 4
         '
         'FieldName
@@ -261,10 +262,10 @@ Partial Class frmMain
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.printPreviewCtrl.AutoZoom = False
-        Me.printPreviewCtrl.Location = New System.Drawing.Point(817, 3)
+        Me.printPreviewCtrl.Location = New System.Drawing.Point(821, 3)
         Me.printPreviewCtrl.Name = "printPreviewCtrl"
         Me.TableLayoutPanel1.SetRowSpan(Me.printPreviewCtrl, 2)
-        Me.printPreviewCtrl.Size = New System.Drawing.Size(563, 768)
+        Me.printPreviewCtrl.Size = New System.Drawing.Size(565, 775)
         Me.printPreviewCtrl.TabIndex = 2
         Me.printPreviewCtrl.Zoom = 0.5R
         '
@@ -273,9 +274,9 @@ Partial Class frmMain
         Me.btnPrint.BackColor = System.Drawing.SystemColors.GradientInactiveCaption
         Me.btnPrint.Dock = System.Windows.Forms.DockStyle.Fill
         Me.btnPrint.FontSize = MetroFramework.MetroButtonSize.Tall
-        Me.btnPrint.Location = New System.Drawing.Point(3, 616)
+        Me.btnPrint.Location = New System.Drawing.Point(3, 621)
         Me.btnPrint.Name = "btnPrint"
-        Me.btnPrint.Size = New System.Drawing.Size(808, 155)
+        Me.btnPrint.Size = New System.Drawing.Size(812, 157)
         Me.btnPrint.TabIndex = 5
         Me.btnPrint.Text = "Save And Print"
         Me.btnPrint.UseCustomBackColor = True
@@ -286,7 +287,7 @@ Partial Class frmMain
         Me.tabPageTest.Controls.Add(Me.MetroPanel2)
         Me.tabPageTest.Location = New System.Drawing.Point(4, 38)
         Me.tabPageTest.Name = "tabPageTest"
-        Me.tabPageTest.Size = New System.Drawing.Size(1403, 802)
+        Me.tabPageTest.Size = New System.Drawing.Size(1409, 809)
         Me.tabPageTest.TabIndex = 1
         Me.tabPageTest.Text = "Test"
         '
@@ -355,7 +356,7 @@ Partial Class frmMain
         Me.MetroTabPage1.HorizontalScrollbarSize = 10
         Me.MetroTabPage1.Location = New System.Drawing.Point(4, 38)
         Me.MetroTabPage1.Name = "MetroTabPage1"
-        Me.MetroTabPage1.Size = New System.Drawing.Size(1403, 802)
+        Me.MetroTabPage1.Size = New System.Drawing.Size(1409, 809)
         Me.MetroTabPage1.TabIndex = 2
         Me.MetroTabPage1.Text = "Customers"
         Me.MetroTabPage1.VerticalScrollbarBarColor = True
@@ -382,6 +383,7 @@ Partial Class frmMain
         '
         'tabCustomersNew
         '
+        Me.tabCustomersNew.Controls.Add(Me.btnNewCert)
         Me.tabCustomersNew.Controls.Add(Me.searchByCode)
         Me.tabCustomersNew.Controls.Add(Me.searchByName)
         Me.tabCustomersNew.Controls.Add(Me.VScrollBar1)
@@ -426,6 +428,41 @@ Partial Class frmMain
         Me.tabCustomersNew.VerticalScrollbarHighlightOnWheel = False
         Me.tabCustomersNew.VerticalScrollbarSize = 10
         '
+        'btnNewCert
+        '
+        Me.btnNewCert.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnNewCert.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.btnNewCert.FontSize = MetroFramework.MetroButtonSize.Tall
+        Me.btnNewCert.Location = New System.Drawing.Point(1117, 496)
+        Me.btnNewCert.Name = "btnNewCert"
+        Me.btnNewCert.Size = New System.Drawing.Size(272, 67)
+        Me.btnNewCert.TabIndex = 41
+        Me.btnNewCert.Text = "Create New Cert for Customer"
+        Me.btnNewCert.UseCustomBackColor = True
+        Me.btnNewCert.UseSelectable = True
+        '
+        'searchByCode
+        '
+        Me.searchByCode.AutoSize = True
+        Me.searchByCode.Location = New System.Drawing.Point(643, 28)
+        Me.searchByCode.Name = "searchByCode"
+        Me.searchByCode.Size = New System.Drawing.Size(105, 15)
+        Me.searchByCode.TabIndex = 40
+        Me.searchByCode.Text = "Search By Code"
+        Me.searchByCode.UseSelectable = True
+        '
+        'searchByName
+        '
+        Me.searchByName.AutoSize = True
+        Me.searchByName.Checked = True
+        Me.searchByName.Location = New System.Drawing.Point(492, 28)
+        Me.searchByName.Name = "searchByName"
+        Me.searchByName.Size = New System.Drawing.Size(109, 15)
+        Me.searchByName.TabIndex = 39
+        Me.searchByName.TabStop = True
+        Me.searchByName.Text = "Search By Name"
+        Me.searchByName.UseSelectable = True
+        '
         'VScrollBar1
         '
         Me.VScrollBar1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -437,7 +474,7 @@ Partial Class frmMain
         'btnDeleteCustomer
         '
         Me.btnDeleteCustomer.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnDeleteCustomer.Location = New System.Drawing.Point(1087, 419)
+        Me.btnDeleteCustomer.Location = New System.Drawing.Point(1072, 45)
         Me.btnDeleteCustomer.Name = "btnDeleteCustomer"
         Me.btnDeleteCustomer.Size = New System.Drawing.Size(120, 52)
         Me.btnDeleteCustomer.TabIndex = 35
@@ -459,7 +496,7 @@ Partial Class frmMain
         'btnAddCustomer
         '
         Me.btnAddCustomer.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnAddCustomer.Location = New System.Drawing.Point(897, 419)
+        Me.btnAddCustomer.Location = New System.Drawing.Point(897, 45)
         Me.btnAddCustomer.Name = "btnAddCustomer"
         Me.btnAddCustomer.Size = New System.Drawing.Size(120, 52)
         Me.btnAddCustomer.TabIndex = 32
@@ -469,7 +506,7 @@ Partial Class frmMain
         'btnSaveCustomer
         '
         Me.btnSaveCustomer.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnSaveCustomer.Location = New System.Drawing.Point(1265, 419)
+        Me.btnSaveCustomer.Location = New System.Drawing.Point(1269, 45)
         Me.btnSaveCustomer.Name = "btnSaveCustomer"
         Me.btnSaveCustomer.Size = New System.Drawing.Size(120, 52)
         Me.btnSaveCustomer.TabIndex = 31
@@ -550,6 +587,166 @@ Partial Class frmMain
         Me.dgrdInstalledMachines.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.dgrdInstalledMachines.Size = New System.Drawing.Size(1386, 237)
         Me.dgrdInstalledMachines.TabIndex = 27
+        '
+        'CustCode
+        '
+        Me.CustCode.HeaderText = "CustomerCode"
+        Me.CustCode.Name = "CustCode"
+        Me.CustCode.ReadOnly = True
+        Me.CustCode.Visible = False
+        '
+        'SerialNumber
+        '
+        Me.SerialNumber.HeaderText = "Serial No."
+        Me.SerialNumber.Name = "SerialNumber"
+        Me.SerialNumber.ReadOnly = True
+        '
+        'ModelId
+        '
+        Me.ModelId.HeaderText = "Model Id"
+        Me.ModelId.Name = "ModelId"
+        Me.ModelId.ReadOnly = True
+        '
+        'CertNumber
+        '
+        Me.CertNumber.HeaderText = "Cert No."
+        Me.CertNumber.Name = "CertNumber"
+        Me.CertNumber.ReadOnly = True
+        '
+        'InstallationDate
+        '
+        Me.InstallationDate.HeaderText = "Installation Date"
+        Me.InstallationDate.Name = "InstallationDate"
+        Me.InstallationDate.ReadOnly = True
+        '
+        'SalesValue
+        '
+        Me.SalesValue.HeaderText = "Sales Value"
+        Me.SalesValue.Name = "SalesValue"
+        Me.SalesValue.ReadOnly = True
+        Me.SalesValue.Visible = False
+        '
+        'SupplierInvoice
+        '
+        Me.SupplierInvoice.HeaderText = "Supplier Invoice"
+        Me.SupplierInvoice.Name = "SupplierInvoice"
+        Me.SupplierInvoice.ReadOnly = True
+        Me.SupplierInvoice.Visible = False
+        '
+        'CustomerInvoice
+        '
+        Me.CustomerInvoice.HeaderText = "Customer Invoice"
+        Me.CustomerInvoice.Name = "CustomerInvoice"
+        Me.CustomerInvoice.ReadOnly = True
+        Me.CustomerInvoice.Visible = False
+        '
+        'WeightsMeasureDocketNo
+        '
+        Me.WeightsMeasureDocketNo.HeaderText = "WeightMeasureDocketNo"
+        Me.WeightsMeasureDocketNo.Name = "WeightsMeasureDocketNo"
+        Me.WeightsMeasureDocketNo.ReadOnly = True
+        Me.WeightsMeasureDocketNo.Visible = False
+        '
+        'GuaranteeExpiryDate
+        '
+        Me.GuaranteeExpiryDate.HeaderText = "GuaranteeExpiryDate"
+        Me.GuaranteeExpiryDate.Name = "GuaranteeExpiryDate"
+        Me.GuaranteeExpiryDate.ReadOnly = True
+        Me.GuaranteeExpiryDate.Visible = False
+        '
+        'InService
+        '
+        Me.InService.HeaderText = "InService"
+        Me.InService.Name = "InService"
+        Me.InService.ReadOnly = True
+        Me.InService.Visible = False
+        '
+        'Location
+        '
+        Me.Location.HeaderText = "Location"
+        Me.Location.Name = "Location"
+        Me.Location.ReadOnly = True
+        Me.Location.Visible = False
+        '
+        'TagId
+        '
+        Me.TagId.HeaderText = "TagId"
+        Me.TagId.Name = "TagId"
+        Me.TagId.ReadOnly = True
+        Me.TagId.Visible = False
+        '
+        'ContractNumber
+        '
+        Me.ContractNumber.HeaderText = "Contract Number"
+        Me.ContractNumber.Name = "ContractNumber"
+        Me.ContractNumber.ReadOnly = True
+        Me.ContractNumber.Visible = False
+        '
+        'CalibrationType
+        '
+        Me.CalibrationType.HeaderText = "CalibrationType"
+        Me.CalibrationType.Name = "CalibrationType"
+        Me.CalibrationType.ReadOnly = True
+        Me.CalibrationType.Visible = False
+        '
+        'Capacity
+        '
+        Me.Capacity.HeaderText = "Capactiy"
+        Me.Capacity.Name = "Capacity"
+        Me.Capacity.ReadOnly = True
+        Me.Capacity.Visible = False
+        '
+        'MinimumGraduation
+        '
+        Me.MinimumGraduation.HeaderText = "MinimumGraduation"
+        Me.MinimumGraduation.Name = "MinimumGraduation"
+        Me.MinimumGraduation.ReadOnly = True
+        Me.MinimumGraduation.Visible = False
+        '
+        'SalesPerson
+        '
+        Me.SalesPerson.HeaderText = "SalesPerson"
+        Me.SalesPerson.Name = "SalesPerson"
+        Me.SalesPerson.ReadOnly = True
+        Me.SalesPerson.Visible = False
+        '
+        'SelectColumn
+        '
+        Me.SelectColumn.HeaderText = "SelectColumn"
+        Me.SelectColumn.Name = "SelectColumn"
+        Me.SelectColumn.ReadOnly = True
+        Me.SelectColumn.Visible = False
+        '
+        'AdhocSelect
+        '
+        Me.AdhocSelect.HeaderText = "adhocSelect"
+        Me.AdhocSelect.Name = "AdhocSelect"
+        Me.AdhocSelect.ReadOnly = True
+        Me.AdhocSelect.Visible = False
+        '
+        'PartInfo
+        '
+        Me.PartInfo.HeaderText = "partinfo"
+        Me.PartInfo.Name = "PartInfo"
+        Me.PartInfo.ReadOnly = True
+        Me.PartInfo.Visible = False
+        '
+        'Tolerance
+        '
+        Me.Tolerance.HeaderText = "Tolerance"
+        Me.Tolerance.Name = "Tolerance"
+        Me.Tolerance.ReadOnly = True
+        Me.Tolerance.Visible = False
+        '
+        'ViewCert
+        '
+        Me.ViewCert.FillWeight = 30.0!
+        Me.ViewCert.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ViewCert.HeaderText = ""
+        Me.ViewCert.Name = "ViewCert"
+        Me.ViewCert.ReadOnly = True
+        Me.ViewCert.Text = "View Cert"
+        Me.ViewCert.UseColumnTextForButtonValue = True
         '
         'dgrdCustomers
         '
@@ -1041,188 +1238,6 @@ Partial Class frmMain
         Me.PrintPreviewDialog1.Name = "PrintPreviewDialog1"
         Me.PrintPreviewDialog1.Visible = False
         '
-        'CustCode
-        '
-        Me.CustCode.HeaderText = "CustomerCode"
-        Me.CustCode.Name = "CustCode"
-        Me.CustCode.ReadOnly = True
-        Me.CustCode.Visible = False
-        '
-        'SerialNumber
-        '
-        Me.SerialNumber.HeaderText = "Serial No."
-        Me.SerialNumber.Name = "SerialNumber"
-        Me.SerialNumber.ReadOnly = True
-        '
-        'ModelId
-        '
-        Me.ModelId.HeaderText = "Model Id"
-        Me.ModelId.Name = "ModelId"
-        Me.ModelId.ReadOnly = True
-        '
-        'CertNumber
-        '
-        Me.CertNumber.HeaderText = "Cert No."
-        Me.CertNumber.Name = "CertNumber"
-        Me.CertNumber.ReadOnly = True
-        '
-        'InstallationDate
-        '
-        Me.InstallationDate.HeaderText = "Installation Date"
-        Me.InstallationDate.Name = "InstallationDate"
-        Me.InstallationDate.ReadOnly = True
-        '
-        'SalesValue
-        '
-        Me.SalesValue.HeaderText = "Sales Value"
-        Me.SalesValue.Name = "SalesValue"
-        Me.SalesValue.ReadOnly = True
-        Me.SalesValue.Visible = False
-        '
-        'SupplierInvoice
-        '
-        Me.SupplierInvoice.HeaderText = "Supplier Invoice"
-        Me.SupplierInvoice.Name = "SupplierInvoice"
-        Me.SupplierInvoice.ReadOnly = True
-        Me.SupplierInvoice.Visible = False
-        '
-        'CustomerInvoice
-        '
-        Me.CustomerInvoice.HeaderText = "Customer Invoice"
-        Me.CustomerInvoice.Name = "CustomerInvoice"
-        Me.CustomerInvoice.ReadOnly = True
-        Me.CustomerInvoice.Visible = False
-        '
-        'WeightsMeasureDocketNo
-        '
-        Me.WeightsMeasureDocketNo.HeaderText = "WeightMeasureDocketNo"
-        Me.WeightsMeasureDocketNo.Name = "WeightsMeasureDocketNo"
-        Me.WeightsMeasureDocketNo.ReadOnly = True
-        Me.WeightsMeasureDocketNo.Visible = False
-        '
-        'GuaranteeExpiryDate
-        '
-        Me.GuaranteeExpiryDate.HeaderText = "GuaranteeExpiryDate"
-        Me.GuaranteeExpiryDate.Name = "GuaranteeExpiryDate"
-        Me.GuaranteeExpiryDate.ReadOnly = True
-        Me.GuaranteeExpiryDate.Visible = False
-        '
-        'InService
-        '
-        Me.InService.HeaderText = "InService"
-        Me.InService.Name = "InService"
-        Me.InService.ReadOnly = True
-        Me.InService.Visible = False
-        '
-        'Location
-        '
-        Me.Location.HeaderText = "Location"
-        Me.Location.Name = "Location"
-        Me.Location.ReadOnly = True
-        Me.Location.Visible = False
-        '
-        'TagId
-        '
-        Me.TagId.HeaderText = "TagId"
-        Me.TagId.Name = "TagId"
-        Me.TagId.ReadOnly = True
-        Me.TagId.Visible = False
-        '
-        'ContractNumber
-        '
-        Me.ContractNumber.HeaderText = "Contract Number"
-        Me.ContractNumber.Name = "ContractNumber"
-        Me.ContractNumber.ReadOnly = True
-        Me.ContractNumber.Visible = False
-        '
-        'CalibrationType
-        '
-        Me.CalibrationType.HeaderText = "CalibrationType"
-        Me.CalibrationType.Name = "CalibrationType"
-        Me.CalibrationType.ReadOnly = True
-        Me.CalibrationType.Visible = False
-        '
-        'Capacity
-        '
-        Me.Capacity.HeaderText = "Capactiy"
-        Me.Capacity.Name = "Capacity"
-        Me.Capacity.ReadOnly = True
-        Me.Capacity.Visible = False
-        '
-        'MinimumGraduation
-        '
-        Me.MinimumGraduation.HeaderText = "MinimumGraduation"
-        Me.MinimumGraduation.Name = "MinimumGraduation"
-        Me.MinimumGraduation.ReadOnly = True
-        Me.MinimumGraduation.Visible = False
-        '
-        'SalesPerson
-        '
-        Me.SalesPerson.HeaderText = "SalesPerson"
-        Me.SalesPerson.Name = "SalesPerson"
-        Me.SalesPerson.ReadOnly = True
-        Me.SalesPerson.Visible = False
-        '
-        'SelectColumn
-        '
-        Me.SelectColumn.HeaderText = "SelectColumn"
-        Me.SelectColumn.Name = "SelectColumn"
-        Me.SelectColumn.ReadOnly = True
-        Me.SelectColumn.Visible = False
-        '
-        'AdhocSelect
-        '
-        Me.AdhocSelect.HeaderText = "adhocSelect"
-        Me.AdhocSelect.Name = "AdhocSelect"
-        Me.AdhocSelect.ReadOnly = True
-        Me.AdhocSelect.Visible = False
-        '
-        'PartInfo
-        '
-        Me.PartInfo.HeaderText = "partinfo"
-        Me.PartInfo.Name = "PartInfo"
-        Me.PartInfo.ReadOnly = True
-        Me.PartInfo.Visible = False
-        '
-        'Tolerance
-        '
-        Me.Tolerance.HeaderText = "Tolerance"
-        Me.Tolerance.Name = "Tolerance"
-        Me.Tolerance.ReadOnly = True
-        Me.Tolerance.Visible = False
-        '
-        'ViewCert
-        '
-        Me.ViewCert.FillWeight = 30.0!
-        Me.ViewCert.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.ViewCert.HeaderText = ""
-        Me.ViewCert.Name = "ViewCert"
-        Me.ViewCert.ReadOnly = True
-        Me.ViewCert.Text = "View Cert"
-        Me.ViewCert.UseColumnTextForButtonValue = True
-        '
-        'searchByName
-        '
-        Me.searchByName.AutoSize = True
-        Me.searchByName.Checked = True
-        Me.searchByName.Location = New System.Drawing.Point(492, 28)
-        Me.searchByName.Name = "searchByName"
-        Me.searchByName.Size = New System.Drawing.Size(109, 15)
-        Me.searchByName.TabIndex = 39
-        Me.searchByName.TabStop = True
-        Me.searchByName.Text = "Search By Name"
-        Me.searchByName.UseSelectable = True
-        '
-        'searchByCode
-        '
-        Me.searchByCode.AutoSize = True
-        Me.searchByCode.Location = New System.Drawing.Point(643, 28)
-        Me.searchByCode.Name = "searchByCode"
-        Me.searchByCode.Size = New System.Drawing.Size(105, 15)
-        Me.searchByCode.TabIndex = 40
-        Me.searchByCode.Text = "Search By Code"
-        Me.searchByCode.UseSelectable = True
-        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1326,4 +1341,5 @@ Partial Class frmMain
     Friend WithEvents ViewCert As DataGridViewButtonColumn
     Friend WithEvents searchByCode As MetroFramework.Controls.MetroRadioButton
     Friend WithEvents searchByName As MetroFramework.Controls.MetroRadioButton
+    Friend WithEvents btnNewCert As MetroFramework.Controls.MetroButton
 End Class
