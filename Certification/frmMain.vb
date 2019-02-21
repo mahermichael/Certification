@@ -46,109 +46,7 @@ Public Class frmMain
 #End Region
 
 
-#Region "Print"
 
-    Private Sub CreatePrintDocument()
-        _printDoc = New PrintDocument
-        ' Hide Print dialog
-        Dim prntController As PrintController = New StandardPrintController()
-        _printDoc.PrintController = prntController
-        Dim pprSize As New PaperSize("custom", 827, 1170)
-        _printDoc.DefaultPageSettings.PaperSize = pprSize
-        _printDoc.DefaultPageSettings.Landscape = False
-        AddHandler _printDoc.PrintPage, AddressOf PrintDocument1_PrintPage
-        printPreviewCtrl.Document = _printDoc
-    End Sub
-
-
-    Private Sub LoadCertificationsRecords(ByVal fieldName As String, ByVal fieldValue As String, ByVal fromLeft As String, ByVal fromTop As String)
-        Dim row As DataGridViewRow = Me.dgrdPrintVariables.Rows(Me.dgrdPrintVariables.Rows.Add)
-        row.Cells("FieldName").Value = fieldName
-        row.Cells("FieldValue").Value = fieldValue
-        row.Cells("xCoordinate").Value = fromLeft
-        row.Cells("yCoordinate").Value = fromTop
-        Me.dgrdPrintVariables.Refresh()
-    End Sub
-
-#End Region
-
-
-#Region "Print 2"
-
-    Private Sub PrintDocument1_PrintPage(sender As Object, e As Printing.PrintPageEventArgs)
-        Dim reportFont As Font = New Drawing.Font("Times New Roman", 14)
-        For Each row As DataGridViewRow In Me.dgrdPrintVariables.Rows
-            If Not (row.IsNewRow) Then
-                e.Graphics.DrawString(row.Cells("FieldValue").Value.ToString, reportFont, Brushes.Black, row.Cells("xCoordinate").Value.ToString, row.Cells("yCoordinate").Value.ToString)
-            End If
-        Next
-    End Sub
-
-
-    ''' <summary>
-    ''' Print
-    ''' </summary>
-    ''' <param name="sender"></param>
-    ''' <param name="e"></param>
-    Private Sub MetroButton5_Click(sender As Object, e As EventArgs) Handles btnPrint.Click
-        printPreviewCtrl.InvalidatePreview()
-        SaveRowsToJson()
-        _printDoc.Print()
-    End Sub
-
-
-#End Region
-
-
-#Region "Save"
-
-    Private Sub SaveRowsToJson()
-        Try
-            Dim json As String = File.ReadAllText("Certifications.json")
-            Dim jObject As JObject = JObject.Parse(json)
-            Dim printVariablesArray As JArray = CType(jObject("printVariables"), JArray)
-            For Each row As DataGridViewRow In Me.dgrdPrintVariables.Rows
-                If Not (row.IsNewRow) Then
-                    For Each item In printVariablesArray
-                        If (item("fieldName").ToString = row.Cells("FieldName").Value) Then
-                            item("fieldValue") = row.Cells("FieldValue").Value.ToString
-                            item("fromLeft") = row.Cells("xCoordinate").Value.ToString
-                            item("fromTop") = row.Cells("yCoordinate").Value.ToString
-                        End If
-                    Next
-                End If
-            Next
-            jObject("PrintVariables") = printVariablesArray
-            Dim output As String = Newtonsoft.Json.JsonConvert.SerializeObject(jObject, Newtonsoft.Json.Formatting.Indented)
-            File.WriteAllText("Certifications.json", output)
-        Catch ex As Exception
-            Console.WriteLine("Update Error : " + ex.Message.ToString())
-        End Try
-
-    End Sub
-
-#End Region
-
-#Region "Load"
-
-    Private Sub LoadPrintVariables()
-        Dim json = File.ReadAllText("Data\PrintLocations.json")
-        Try
-            Dim jObject = Newtonsoft.Json.Linq.JObject.Parse(json)
-            If jObject IsNot Nothing Then
-                Dim printVariablesArrary As JArray = CType(jObject("printVariables"), JArray)
-                If Not (IsNothing(printVariablesArrary)) Then
-                    For Each item In printVariablesArrary
-                        LoadCertificationsRecords(item("fieldName").ToString, item("fieldValue").ToString, item("fromLeft").ToString, item("fromTop").ToString)
-                    Next
-                End If
-            End If
-        Catch ex As Exception
-            MessageBox.Show(ex.Message)
-        End Try
-    End Sub
-
-#End Region
 
 #Region "Customers"
 
@@ -307,7 +205,7 @@ Public Class frmMain
     Private Sub dgrdInstalledMachines_CellClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles dgrdInstalledMachines.CellMouseClick
         If (e.RowIndex > -1) Then
             If (e.ColumnIndex = dgrdInstalledMachines.Columns("ViewCert").Index) Then
-                Dim frm As New frmPrint(dgrdInstalledMachines.Rows(e.RowIndex).Cells("ViewCert").Tag)
+                Dim frm As New frmPrint(dgrdInstalledMachines.Rows(e.RowIndex).Cells("ViewCert").Tag, False)
                 Dim diaResult As DialogResult
                 diaResult = frm.ShowDialog()
                 If diaResult = DialogResult.OK Then
@@ -329,7 +227,6 @@ Public Class frmMain
             Try
                 Dim json As String = File.ReadAllText("Data\Customers.json")
                 Dim jsonObject As JArray = JArray.Parse(json)
-
                 If (_addingCustomer) Then
                     'Dim newCust As New JToken
                     Dim newCustomerMember As String = "{ 'Code': '" & Me.txtCode.Text &
@@ -344,7 +241,6 @@ Public Class frmMain
                         "','Notes': '" & txtNotes.Text &
                         "'}"
                     Dim newCompany As JObject = JObject.Parse(newCustomerMember)
-
                     jsonObject.Add(newCompany)
                     Dim output As String = Newtonsoft.Json.JsonConvert.SerializeObject(jsonObject, Newtonsoft.Json.Formatting.Indented)
                     File.WriteAllText("Data\Customers.json", output)
@@ -353,8 +249,6 @@ Public Class frmMain
                     Dim dtCustomers As DataTable = dgrdCustomers.DataSource
 
                     Dim row As DataRow = dtCustomers.NewRow
-
-
 
                     row("Code") = txtCode.Text
                     row("Name") = txtName.Text
@@ -412,8 +306,6 @@ Public Class frmMain
             Catch ex As Exception
                 MessageBox.Show(ex.Message)
             End Try
-
-
         End If
     End Sub
 
@@ -504,81 +396,47 @@ Public Class frmMain
 #End Region
 
 
-
-#Region "Company"
-
-    Private Sub AddCertificate()
-        Console.WriteLine("Enter Company ID : ")
-        Dim companyId As String = "55"
-        Console.WriteLine("\nEnter Company Name : ")
-        Dim companyName As String = "Test"
-        Dim newCompanyMember As String = "{ 'companyid': " & companyId & ",'companyname': '" & companyName & "'}"
-        Try
-            Dim json As String = File.ReadAllText("Certifications.json")
-            Dim jsonObj As JObject = JObject.Parse(json)
-            Dim experienceArrary As JArray = jsonObj.GetValue("experiences")
-            Dim newCompany As JObject = JObject.Parse(newCompanyMember)
-            experienceArrary.Add(newCompany)
-            jsonObj("experiences") = experienceArrary
-            Dim newJsonResult As String = Newtonsoft.Json.JsonConvert.SerializeObject(jsonObj, Newtonsoft.Json.Formatting.Indented)
-            File.WriteAllText("Certifications.json", newJsonResult)
-        Catch ex As Exception
-            Console.WriteLine("Add Error : " + ex.Message.ToString())
-        End Try
-    End Sub
-
-    Private Sub UpdateCompany()
-        Try
-            Dim json As String = File.ReadAllText("Certifications.json")
-            Dim jObject As JObject = JObject.Parse(json)
-            Dim experiencesArrary As JArray = CType(jObject("experiences"), JArray)
-            Console.Write("Enter Company ID to Update Company : ")
-            Dim companyId As String = "55"
-            If (companyId > 0) Then
-                Console.Write("Enter new company name : ")
-                Dim companyName As String = "New Test"
-                For Each company As JToken In experiencesArrary.Where(Function(obj) obj("companyid").Value(Of Integer)() = companyId)
-                    company("companyname") = IIf(String.IsNullOrEmpty(companyName), "", companyName)
-                Next
-                For Each item In experiencesArrary
-                    If (item("companyid").ToString = companyId) Then
-                        item("companyname") = companyName
-                    End If
-                Next
-                jObject("experiences") = experiencesArrary
-                Dim output As String = Newtonsoft.Json.JsonConvert.SerializeObject(jObject, Newtonsoft.Json.Formatting.Indented)
-                File.WriteAllText("Certifications.json", output)
-            Else
-                Console.Write("Invalid Company ID, Try Again!")
-                UpdateCompany()
+    ''' <summary>
+    ''' Create New certificate
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    Private Sub btnNewCert_Click(sender As Object, e As EventArgs) Handles btnNewCert.Click
+        If Not (String.IsNullOrEmpty(txtCode.Text)) Then
+            Dim cert As New Certificate
+            cert.CertificateNumber = GenerateUniqueCertNumber()
+            cert.CustomerCode = txtCode.Text
+            cert.CustomerName = txtName.Text
+            cert.CustomerAddress1 = txtAddress1.Text
+            cert.CustomerAddress2 = txtAddress2.Text
+            cert.CustomerAddress3 = txtAddress3.Text
+            cert.CustomerAddress4 = txtAddress4.Text
+            Dim frm As New frmPrint(cert, True)
+            Dim diaResult As DialogResult
+            diaResult = frm.ShowDialog()
+            If diaResult = DialogResult.OK Then
+                'Refresh the grid
+                LoadCustomerCerts()
             End If
-        Catch ex As Exception
-            Console.WriteLine("Update Error : " + ex.Message.ToString())
-        End Try
+        End If
     End Sub
 
-    Private Sub DeleteCompany()
-        Dim json As String = File.ReadAllText("Certifications.json")
-        Try
-            Dim jObject As JObject = JObject.Parse(json)
-            Dim experiencesArrary As JArray = CType(jObject("experiences"), JArray)
-            Dim companyId As String = "55"
-            Dim companyToDeleted As JToken = experiencesArrary.FirstOrDefault(Function(obj) obj("companyid").Value(Of Integer)() = companyId)
-            experiencesArrary.Remove(companyToDeleted)
-            Dim output As String = Newtonsoft.Json.JsonConvert.SerializeObject(jObject, Newtonsoft.Json.Formatting.Indented)
-            File.WriteAllText("Certifications.json", output)
-        Catch ex As Exception
-            Console.WriteLine("Error deleting Certificate: " + ex.Message.ToString())
-        End Try
-    End Sub
 
-#End Region
-
-
-
-
-
-
+    ''' <summary>
+    ''' Generate Unique Cert Number
+    ''' </summary>
+    ''' <returns></returns>
+    Private Function GenerateUniqueCertNumber() As String
+        Dim certNumberSuffix As String = "1"
+        For Each row As DataGridViewRow In dgrdInstalledMachines.Rows
+            Dim certNumber As String = row.Cells("CertNumber").Value.ToString
+            If (certNumber.StartsWith(txtCode.Text & "-")) Then
+                Dim num As Integer = CType(certNumber.Replace(txtCode.Text & "-", ""), Integer)
+                certNumberSuffix = (num + 1).ToString
+            End If
+        Next
+        Return txtCode.Text & "-" & certNumberSuffix
+    End Function
 
 
 End Class
