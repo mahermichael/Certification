@@ -46,12 +46,6 @@ Partial Class frmMain
         Me.YCoordinate = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.printPreviewCtrl = New System.Windows.Forms.PrintPreviewControl()
         Me.btnPrint = New MetroFramework.Controls.MetroButton()
-        Me.tabPageTest = New System.Windows.Forms.TabPage()
-        Me.MetroPanel2 = New MetroFramework.Controls.MetroPanel()
-        Me.MetroButton4 = New MetroFramework.Controls.MetroButton()
-        Me.MetroButton3 = New MetroFramework.Controls.MetroButton()
-        Me.MetroButton2 = New MetroFramework.Controls.MetroButton()
-        Me.MetroButton1 = New MetroFramework.Controls.MetroButton()
         Me.MetroTabPage1 = New MetroFramework.Controls.MetroTabPage()
         Me.MetroButton5 = New MetroFramework.Controls.MetroButton()
         Me.MetroButton6 = New MetroFramework.Controls.MetroButton()
@@ -67,29 +61,6 @@ Partial Class frmMain
         Me.MetroLabel12 = New MetroFramework.Controls.MetroLabel()
         Me.txtSearchCustomer = New System.Windows.Forms.TextBox()
         Me.dgrdInstalledMachines = New MetroFramework.Controls.MetroGrid()
-        Me.CustCode = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.SerialNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ModelId = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.CertNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.InstallationDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.SalesValue = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.SupplierInvoice = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.CustomerInvoice = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.WeightsMeasureDocketNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.GuaranteeExpiryDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.InService = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Location = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.TagId = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ContractNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.CalibrationType = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Capacity = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.MinimumGraduation = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.SalesPerson = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.SelectColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.AdhocSelect = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.PartInfo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Tolerance = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ViewCert = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.dgrdCustomers = New MetroFramework.Controls.MetroGrid()
         Me.txtNotes = New MetroFramework.Controls.MetroTextBox()
         Me.txtContacts = New MetroFramework.Controls.MetroTextBox()
@@ -112,13 +83,16 @@ Partial Class frmMain
         Me.MetroLabel2 = New MetroFramework.Controls.MetroLabel()
         Me.MetroLabel1 = New MetroFramework.Controls.MetroLabel()
         Me.PrintPreviewDialog1 = New System.Windows.Forms.PrintPreviewDialog()
+        Me.SerialNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ModelId = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CertNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.InstallationDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ViewCert = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.tabPages.SuspendLayout()
         Me.tabPrintCetificate.SuspendLayout()
         Me.MetroPanel1.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
         CType(Me.dgrdPrintVariables, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.tabPageTest.SuspendLayout()
-        Me.MetroPanel2.SuspendLayout()
         Me.MetroTabPage1.SuspendLayout()
         Me.tabCustomersNew.SuspendLayout()
         CType(Me.dgrdInstalledMachines, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -128,13 +102,12 @@ Partial Class frmMain
         'tabPages
         '
         Me.tabPages.Controls.Add(Me.tabPrintCetificate)
-        Me.tabPages.Controls.Add(Me.tabPageTest)
-        Me.tabPages.Controls.Add(Me.MetroTabPage1)
         Me.tabPages.Controls.Add(Me.tabCustomersNew)
+        Me.tabPages.Controls.Add(Me.MetroTabPage1)
         Me.tabPages.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tabPages.Location = New System.Drawing.Point(20, 60)
         Me.tabPages.Name = "tabPages"
-        Me.tabPages.SelectedIndex = 3
+        Me.tabPages.SelectedIndex = 1
         Me.tabPages.Size = New System.Drawing.Size(1417, 851)
         Me.tabPages.TabIndex = 0
         Me.tabPages.UseSelectable = True
@@ -282,71 +255,6 @@ Partial Class frmMain
         Me.btnPrint.UseCustomBackColor = True
         Me.btnPrint.UseSelectable = True
         '
-        'tabPageTest
-        '
-        Me.tabPageTest.Controls.Add(Me.MetroPanel2)
-        Me.tabPageTest.Location = New System.Drawing.Point(4, 38)
-        Me.tabPageTest.Name = "tabPageTest"
-        Me.tabPageTest.Size = New System.Drawing.Size(1409, 809)
-        Me.tabPageTest.TabIndex = 1
-        Me.tabPageTest.Text = "Test"
-        '
-        'MetroPanel2
-        '
-        Me.MetroPanel2.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.MetroPanel2.Controls.Add(Me.MetroButton4)
-        Me.MetroPanel2.Controls.Add(Me.MetroButton3)
-        Me.MetroPanel2.Controls.Add(Me.MetroButton2)
-        Me.MetroPanel2.Controls.Add(Me.MetroButton1)
-        Me.MetroPanel2.HorizontalScrollbarBarColor = True
-        Me.MetroPanel2.HorizontalScrollbarHighlightOnWheel = False
-        Me.MetroPanel2.HorizontalScrollbarSize = 10
-        Me.MetroPanel2.Location = New System.Drawing.Point(3, 3)
-        Me.MetroPanel2.Name = "MetroPanel2"
-        Me.MetroPanel2.Size = New System.Drawing.Size(806, 497)
-        Me.MetroPanel2.TabIndex = 0
-        Me.MetroPanel2.VerticalScrollbarBarColor = True
-        Me.MetroPanel2.VerticalScrollbarHighlightOnWheel = False
-        Me.MetroPanel2.VerticalScrollbarSize = 10
-        '
-        'MetroButton4
-        '
-        Me.MetroButton4.Location = New System.Drawing.Point(309, 251)
-        Me.MetroButton4.Name = "MetroButton4"
-        Me.MetroButton4.Size = New System.Drawing.Size(88, 44)
-        Me.MetroButton4.TabIndex = 12
-        Me.MetroButton4.Text = "Delete"
-        Me.MetroButton4.UseSelectable = True
-        '
-        'MetroButton3
-        '
-        Me.MetroButton3.Location = New System.Drawing.Point(212, 251)
-        Me.MetroButton3.Name = "MetroButton3"
-        Me.MetroButton3.Size = New System.Drawing.Size(91, 44)
-        Me.MetroButton3.TabIndex = 11
-        Me.MetroButton3.Text = "Update Record"
-        Me.MetroButton3.UseSelectable = True
-        '
-        'MetroButton2
-        '
-        Me.MetroButton2.Location = New System.Drawing.Point(136, 251)
-        Me.MetroButton2.Name = "MetroButton2"
-        Me.MetroButton2.Size = New System.Drawing.Size(70, 44)
-        Me.MetroButton2.TabIndex = 10
-        Me.MetroButton2.Text = "Add record"
-        Me.MetroButton2.UseSelectable = True
-        '
-        'MetroButton1
-        '
-        Me.MetroButton1.Location = New System.Drawing.Point(53, 251)
-        Me.MetroButton1.Name = "MetroButton1"
-        Me.MetroButton1.Size = New System.Drawing.Size(77, 44)
-        Me.MetroButton1.TabIndex = 9
-        Me.MetroButton1.Text = "Get Json"
-        Me.MetroButton1.UseSelectable = True
-        '
         'MetroTabPage1
         '
         Me.MetroTabPage1.Controls.Add(Me.MetroButton5)
@@ -358,14 +266,14 @@ Partial Class frmMain
         Me.MetroTabPage1.Name = "MetroTabPage1"
         Me.MetroTabPage1.Size = New System.Drawing.Size(1409, 809)
         Me.MetroTabPage1.TabIndex = 2
-        Me.MetroTabPage1.Text = "Customers"
+        Me.MetroTabPage1.Text = "Maintenance"
         Me.MetroTabPage1.VerticalScrollbarBarColor = True
         Me.MetroTabPage1.VerticalScrollbarHighlightOnWheel = False
         Me.MetroTabPage1.VerticalScrollbarSize = 10
         '
         'MetroButton5
         '
-        Me.MetroButton5.Location = New System.Drawing.Point(151, 405)
+        Me.MetroButton5.Location = New System.Drawing.Point(281, 405)
         Me.MetroButton5.Name = "MetroButton5"
         Me.MetroButton5.Size = New System.Drawing.Size(88, 44)
         Me.MetroButton5.TabIndex = 14
@@ -374,7 +282,7 @@ Partial Class frmMain
         '
         'MetroButton6
         '
-        Me.MetroButton6.Location = New System.Drawing.Point(3, 405)
+        Me.MetroButton6.Location = New System.Drawing.Point(48, 405)
         Me.MetroButton6.Name = "MetroButton6"
         Me.MetroButton6.Size = New System.Drawing.Size(70, 44)
         Me.MetroButton6.TabIndex = 13
@@ -557,10 +465,10 @@ Partial Class frmMain
         DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.dgrdInstalledMachines.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle6
         Me.dgrdInstalledMachines.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgrdInstalledMachines.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.CustCode, Me.SerialNumber, Me.ModelId, Me.CertNumber, Me.InstallationDate, Me.SalesValue, Me.SupplierInvoice, Me.CustomerInvoice, Me.WeightsMeasureDocketNo, Me.GuaranteeExpiryDate, Me.InService, Me.Location, Me.TagId, Me.ContractNumber, Me.CalibrationType, Me.Capacity, Me.MinimumGraduation, Me.SalesPerson, Me.SelectColumn, Me.AdhocSelect, Me.PartInfo, Me.Tolerance, Me.ViewCert})
+        Me.dgrdInstalledMachines.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.SerialNumber, Me.ModelId, Me.CertNumber, Me.InstallationDate, Me.ViewCert})
         DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle7.Font = New System.Drawing.Font("Segoe UI", 18.0!)
+        DataGridViewCellStyle7.Font = New System.Drawing.Font("Segoe UI", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         DataGridViewCellStyle7.ForeColor = System.Drawing.Color.FromArgb(CType(CType(136, Byte), Integer), CType(CType(136, Byte), Integer), CType(CType(136, Byte), Integer))
         DataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.GradientInactiveCaption
         DataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer))
@@ -587,166 +495,6 @@ Partial Class frmMain
         Me.dgrdInstalledMachines.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.dgrdInstalledMachines.Size = New System.Drawing.Size(1386, 237)
         Me.dgrdInstalledMachines.TabIndex = 27
-        '
-        'CustCode
-        '
-        Me.CustCode.HeaderText = "CustomerCode"
-        Me.CustCode.Name = "CustCode"
-        Me.CustCode.ReadOnly = True
-        Me.CustCode.Visible = False
-        '
-        'SerialNumber
-        '
-        Me.SerialNumber.HeaderText = "Serial No."
-        Me.SerialNumber.Name = "SerialNumber"
-        Me.SerialNumber.ReadOnly = True
-        '
-        'ModelId
-        '
-        Me.ModelId.HeaderText = "Model Id"
-        Me.ModelId.Name = "ModelId"
-        Me.ModelId.ReadOnly = True
-        '
-        'CertNumber
-        '
-        Me.CertNumber.HeaderText = "Cert No."
-        Me.CertNumber.Name = "CertNumber"
-        Me.CertNumber.ReadOnly = True
-        '
-        'InstallationDate
-        '
-        Me.InstallationDate.HeaderText = "Installation Date"
-        Me.InstallationDate.Name = "InstallationDate"
-        Me.InstallationDate.ReadOnly = True
-        '
-        'SalesValue
-        '
-        Me.SalesValue.HeaderText = "Sales Value"
-        Me.SalesValue.Name = "SalesValue"
-        Me.SalesValue.ReadOnly = True
-        Me.SalesValue.Visible = False
-        '
-        'SupplierInvoice
-        '
-        Me.SupplierInvoice.HeaderText = "Supplier Invoice"
-        Me.SupplierInvoice.Name = "SupplierInvoice"
-        Me.SupplierInvoice.ReadOnly = True
-        Me.SupplierInvoice.Visible = False
-        '
-        'CustomerInvoice
-        '
-        Me.CustomerInvoice.HeaderText = "Customer Invoice"
-        Me.CustomerInvoice.Name = "CustomerInvoice"
-        Me.CustomerInvoice.ReadOnly = True
-        Me.CustomerInvoice.Visible = False
-        '
-        'WeightsMeasureDocketNo
-        '
-        Me.WeightsMeasureDocketNo.HeaderText = "WeightMeasureDocketNo"
-        Me.WeightsMeasureDocketNo.Name = "WeightsMeasureDocketNo"
-        Me.WeightsMeasureDocketNo.ReadOnly = True
-        Me.WeightsMeasureDocketNo.Visible = False
-        '
-        'GuaranteeExpiryDate
-        '
-        Me.GuaranteeExpiryDate.HeaderText = "GuaranteeExpiryDate"
-        Me.GuaranteeExpiryDate.Name = "GuaranteeExpiryDate"
-        Me.GuaranteeExpiryDate.ReadOnly = True
-        Me.GuaranteeExpiryDate.Visible = False
-        '
-        'InService
-        '
-        Me.InService.HeaderText = "InService"
-        Me.InService.Name = "InService"
-        Me.InService.ReadOnly = True
-        Me.InService.Visible = False
-        '
-        'Location
-        '
-        Me.Location.HeaderText = "Location"
-        Me.Location.Name = "Location"
-        Me.Location.ReadOnly = True
-        Me.Location.Visible = False
-        '
-        'TagId
-        '
-        Me.TagId.HeaderText = "TagId"
-        Me.TagId.Name = "TagId"
-        Me.TagId.ReadOnly = True
-        Me.TagId.Visible = False
-        '
-        'ContractNumber
-        '
-        Me.ContractNumber.HeaderText = "Contract Number"
-        Me.ContractNumber.Name = "ContractNumber"
-        Me.ContractNumber.ReadOnly = True
-        Me.ContractNumber.Visible = False
-        '
-        'CalibrationType
-        '
-        Me.CalibrationType.HeaderText = "CalibrationType"
-        Me.CalibrationType.Name = "CalibrationType"
-        Me.CalibrationType.ReadOnly = True
-        Me.CalibrationType.Visible = False
-        '
-        'Capacity
-        '
-        Me.Capacity.HeaderText = "Capactiy"
-        Me.Capacity.Name = "Capacity"
-        Me.Capacity.ReadOnly = True
-        Me.Capacity.Visible = False
-        '
-        'MinimumGraduation
-        '
-        Me.MinimumGraduation.HeaderText = "MinimumGraduation"
-        Me.MinimumGraduation.Name = "MinimumGraduation"
-        Me.MinimumGraduation.ReadOnly = True
-        Me.MinimumGraduation.Visible = False
-        '
-        'SalesPerson
-        '
-        Me.SalesPerson.HeaderText = "SalesPerson"
-        Me.SalesPerson.Name = "SalesPerson"
-        Me.SalesPerson.ReadOnly = True
-        Me.SalesPerson.Visible = False
-        '
-        'SelectColumn
-        '
-        Me.SelectColumn.HeaderText = "SelectColumn"
-        Me.SelectColumn.Name = "SelectColumn"
-        Me.SelectColumn.ReadOnly = True
-        Me.SelectColumn.Visible = False
-        '
-        'AdhocSelect
-        '
-        Me.AdhocSelect.HeaderText = "adhocSelect"
-        Me.AdhocSelect.Name = "AdhocSelect"
-        Me.AdhocSelect.ReadOnly = True
-        Me.AdhocSelect.Visible = False
-        '
-        'PartInfo
-        '
-        Me.PartInfo.HeaderText = "partinfo"
-        Me.PartInfo.Name = "PartInfo"
-        Me.PartInfo.ReadOnly = True
-        Me.PartInfo.Visible = False
-        '
-        'Tolerance
-        '
-        Me.Tolerance.HeaderText = "Tolerance"
-        Me.Tolerance.Name = "Tolerance"
-        Me.Tolerance.ReadOnly = True
-        Me.Tolerance.Visible = False
-        '
-        'ViewCert
-        '
-        Me.ViewCert.FillWeight = 30.0!
-        Me.ViewCert.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.ViewCert.HeaderText = ""
-        Me.ViewCert.Name = "ViewCert"
-        Me.ViewCert.ReadOnly = True
-        Me.ViewCert.Text = "View Cert"
-        Me.ViewCert.UseColumnTextForButtonValue = True
         '
         'dgrdCustomers
         '
@@ -1238,6 +986,40 @@ Partial Class frmMain
         Me.PrintPreviewDialog1.Name = "PrintPreviewDialog1"
         Me.PrintPreviewDialog1.Visible = False
         '
+        'SerialNumber
+        '
+        Me.SerialNumber.HeaderText = "Serial No."
+        Me.SerialNumber.Name = "SerialNumber"
+        Me.SerialNumber.ReadOnly = True
+        '
+        'ModelId
+        '
+        Me.ModelId.HeaderText = "Model Id"
+        Me.ModelId.Name = "ModelId"
+        Me.ModelId.ReadOnly = True
+        '
+        'CertNumber
+        '
+        Me.CertNumber.HeaderText = "Cert No."
+        Me.CertNumber.Name = "CertNumber"
+        Me.CertNumber.ReadOnly = True
+        '
+        'InstallationDate
+        '
+        Me.InstallationDate.HeaderText = "Installation Date"
+        Me.InstallationDate.Name = "InstallationDate"
+        Me.InstallationDate.ReadOnly = True
+        '
+        'ViewCert
+        '
+        Me.ViewCert.FillWeight = 30.0!
+        Me.ViewCert.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ViewCert.HeaderText = ""
+        Me.ViewCert.Name = "ViewCert"
+        Me.ViewCert.ReadOnly = True
+        Me.ViewCert.Text = "View Cert"
+        Me.ViewCert.UseColumnTextForButtonValue = True
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1253,8 +1035,6 @@ Partial Class frmMain
         Me.MetroPanel1.ResumeLayout(False)
         Me.TableLayoutPanel1.ResumeLayout(False)
         CType(Me.dgrdPrintVariables, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.tabPageTest.ResumeLayout(False)
-        Me.MetroPanel2.ResumeLayout(False)
         Me.MetroTabPage1.ResumeLayout(False)
         Me.tabCustomersNew.ResumeLayout(False)
         Me.tabCustomersNew.PerformLayout()
@@ -1265,16 +1045,10 @@ Partial Class frmMain
     End Sub
     Friend WithEvents tabPages As MetroFramework.Controls.MetroTabControl
     Friend WithEvents tabPrintCetificate As System.Windows.Forms.TabPage
-    Friend WithEvents tabPageTest As System.Windows.Forms.TabPage
     Friend WithEvents MetroPanel1 As MetroFramework.Controls.MetroPanel
     Friend WithEvents printPreviewCtrl As System.Windows.Forms.PrintPreviewControl
     Friend WithEvents PrintPreviewDialog1 As System.Windows.Forms.PrintPreviewDialog
     Friend WithEvents dgrdPrintVariables As MetroFramework.Controls.MetroGrid
-    Friend WithEvents MetroPanel2 As MetroFramework.Controls.MetroPanel
-    Friend WithEvents MetroButton4 As MetroFramework.Controls.MetroButton
-    Friend WithEvents MetroButton3 As MetroFramework.Controls.MetroButton
-    Friend WithEvents MetroButton2 As MetroFramework.Controls.MetroButton
-    Friend WithEvents MetroButton1 As MetroFramework.Controls.MetroButton
     Friend WithEvents TableLayoutPanel1 As System.Windows.Forms.TableLayoutPanel
     Friend WithEvents FieldName As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents FieldValue As System.Windows.Forms.DataGridViewTextBoxColumn
@@ -1316,30 +1090,12 @@ Partial Class frmMain
     Friend WithEvents Label1 As Label
     Friend WithEvents btnDeleteCustomer As MetroFramework.Controls.MetroButton
     Friend WithEvents VScrollBar1 As VScrollBar
-    Friend WithEvents CustCode As DataGridViewTextBoxColumn
+    Friend WithEvents searchByCode As MetroFramework.Controls.MetroRadioButton
+    Friend WithEvents searchByName As MetroFramework.Controls.MetroRadioButton
+    Friend WithEvents btnNewCert As MetroFramework.Controls.MetroButton
     Friend WithEvents SerialNumber As DataGridViewTextBoxColumn
     Friend WithEvents ModelId As DataGridViewTextBoxColumn
     Friend WithEvents CertNumber As DataGridViewTextBoxColumn
     Friend WithEvents InstallationDate As DataGridViewTextBoxColumn
-    Friend WithEvents SalesValue As DataGridViewTextBoxColumn
-    Friend WithEvents SupplierInvoice As DataGridViewTextBoxColumn
-    Friend WithEvents CustomerInvoice As DataGridViewTextBoxColumn
-    Friend WithEvents WeightsMeasureDocketNo As DataGridViewTextBoxColumn
-    Friend WithEvents GuaranteeExpiryDate As DataGridViewTextBoxColumn
-    Friend WithEvents InService As DataGridViewTextBoxColumn
-    Friend WithEvents Location As DataGridViewTextBoxColumn
-    Friend WithEvents TagId As DataGridViewTextBoxColumn
-    Friend WithEvents ContractNumber As DataGridViewTextBoxColumn
-    Friend WithEvents CalibrationType As DataGridViewTextBoxColumn
-    Friend WithEvents Capacity As DataGridViewTextBoxColumn
-    Friend WithEvents MinimumGraduation As DataGridViewTextBoxColumn
-    Friend WithEvents SalesPerson As DataGridViewTextBoxColumn
-    Friend WithEvents SelectColumn As DataGridViewTextBoxColumn
-    Friend WithEvents AdhocSelect As DataGridViewTextBoxColumn
-    Friend WithEvents PartInfo As DataGridViewTextBoxColumn
-    Friend WithEvents Tolerance As DataGridViewTextBoxColumn
     Friend WithEvents ViewCert As DataGridViewButtonColumn
-    Friend WithEvents searchByCode As MetroFramework.Controls.MetroRadioButton
-    Friend WithEvents searchByName As MetroFramework.Controls.MetroRadioButton
-    Friend WithEvents btnNewCert As MetroFramework.Controls.MetroButton
 End Class

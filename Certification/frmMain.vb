@@ -15,6 +15,8 @@ Public Class frmMain
 
     Private _addingCustomer As Boolean = False
 
+
+
 #Region "Form"
 
     ''' <summary>
@@ -225,7 +227,8 @@ Public Class frmMain
             Me.txtFax.Text = dgrdCustomers.Rows(e.RowIndex).Cells("Fax").Value.ToString
             Me.txtContacts.Text = dgrdCustomers.Rows(e.RowIndex).Cells("Contacts").Value.ToString
             Me.txtNotes.Text = dgrdCustomers.Rows(e.RowIndex).Cells("Notes").Value.ToString
-            LoadCustomerCerts(Me.txtCode.Text)
+
+            LoadCustomerCerts()
         End If
     End Sub
 
@@ -233,38 +236,57 @@ Public Class frmMain
     ''' <summary>
     ''' Load the relative Customer Certs
     ''' </summary>
-    ''' <param name="customerCode"></param>
-    Private Sub LoadCustomerCerts(ByVal customerCode As String)
+    Private Sub LoadCustomerCerts()
         ' Refresh certs
         dgrdInstalledMachines.Rows.Clear()
         Try
-            If Not (String.IsNullOrEmpty(customerCode)) Then
+            If Not (String.IsNullOrEmpty(Me.txtCode.Text)) Then
                 Dim json As String = File.ReadAllText("Data\InstalledMachines.json")
                 Dim jsonObject As JArray = JArray.Parse(json)
-                For Each cert As JToken In jsonObject.Where(Function(obj) obj("CustCode").Value(Of String)() = customerCode)
+                For Each InstalledMachine As JToken In jsonObject.Where(Function(obj) obj("CustCode").Value(Of String)() = Me.txtCode.Text)
                     Dim row As DataGridViewRow = Me.dgrdInstalledMachines.Rows(Me.dgrdInstalledMachines.Rows.Add)
-                    row.Cells("CustCode").Value = cert("CustCode").ToString
-                    row.Cells("ModelId").Value = cert("ModelId").ToString
-                    row.Cells("SerialNumber").Value = cert("SerialNumber").ToString
-                    row.Cells("CertNumber").Value = cert("CertNumber").ToString
-                    row.Cells("InstallationDate").Value = cert("InstallationDate").ToString
-                    row.Cells("SalesValue").Value = cert("SalesValue").ToString
-                    row.Cells("SupplierInvoice").Value = cert("SupplierInvoice").ToString
-                    row.Cells("CustomerInvoice").Value = cert("CustomerInvoice").ToString
-                    row.Cells("WeightsMeasureDocketNo").Value = cert("WeightsMeasureDocketNo").ToString
-                    row.Cells("GuaranteeExpiryDate").Value = cert("GuaranteeExpiryDate").ToString
-                    row.Cells("InService").Value = cert("InService").ToString
-                    row.Cells("Location").Value = cert("Location").ToString
-                    row.Cells("TagId").Value = cert("TagId").ToString
-                    row.Cells("ContractNumber").Value = cert("ContractNumber").ToString
-                    row.Cells("CalibrationType").Value = cert("CalibrationType").ToString
-                    row.Cells("Capacity").Value = cert("Capacity").ToString
-                    row.Cells("MinimumGraduation").Value = cert("MinimumGraduation").ToString
-                    row.Cells("SalesPerson").Value = cert("SalesPerson").ToString
-                    row.Cells("SelectColumn").Value = cert("SelectColumn").ToString
-                    row.Cells("AdhocSelect").Value = cert("AdhocSelect").ToString
-                    row.Cells("partinfo").Value = cert("partinfo").ToString
-                    row.Cells("Tolerance").Value = cert("Tolerance").ToString
+
+                    Dim cert As New Certificate
+
+                    ' Add row to datagrid for selection
+                    row.Cells("ModelId").Value = InstalledMachine("ModelId").ToString
+                    row.Cells("SerialNumber").Value = InstalledMachine("SerialNumber").ToString
+                    row.Cells("CertNumber").Value = InstalledMachine("CertNumber").ToString
+                    row.Cells("InstallationDate").Value = InstalledMachine("InstallationDate").ToString
+
+                    ' Main cert details
+                    cert.CertificateNumber = InstalledMachine("CertNumber").ToString
+                    cert.ModelId = InstalledMachine("ModelId").ToString
+                    cert.SerialNumber = InstalledMachine("SerialNumber").ToString
+                    cert.InstallationDate = InstalledMachine("InstallationDate").ToString
+
+                    ' Set Customer Details
+                    cert.CustomerCode = Me.txtCode.Text
+                    cert.CustomerName = Me.txtName.Text
+                    cert.CustomerAddress1 = Me.txtAddress1.Text
+                    cert.CustomerAddress2 = Me.txtAddress2.Text
+                    cert.CustomerAddress3 = Me.txtAddress3.Text
+                    cert.CustomerAddress4 = Me.txtAddress4.Text
+
+
+
+                    'row.Cells("SalesValue").Value = InstalledMachine("SalesValue").ToString
+                    'row.Cells("SupplierInvoice").Value = InstalledMachine("SupplierInvoice").ToString
+                    'row.Cells("CustomerInvoice").Value = InstalledMachine("CustomerInvoice").ToString
+                    'row.Cells("WeightsMeasureDocketNo").Value = InstalledMachine("WeightsMeasureDocketNo").ToString
+                    'row.Cells("GuaranteeExpiryDate").Value = InstalledMachine("GuaranteeExpiryDate").ToString
+                    'row.Cells("InService").Value = InstalledMachine("InService").ToString
+                    'row.Cells("Location").Value = InstalledMachine("Location").ToString
+                    'row.Cells("TagId").Value = InstalledMachine("TagId").ToString
+                    'row.Cells("ContractNumber").Value = InstalledMachine("ContractNumber").ToString
+                    'row.Cells("CalibrationType").Value = InstalledMachine("CalibrationType").ToString
+                    'row.Cells("Capacity").Value = InstalledMachine("Capacity").ToString
+                    'row.Cells("MinimumGraduation").Value = InstalledMachine("MinimumGraduation").ToString
+                    'row.Cells("SalesPerson").Value = InstalledMachine("SalesPerson").ToString
+                    'row.Cells("SelectColumn").Value = InstalledMachine("SelectColumn").ToString
+                    'row.Cells("AdhocSelect").Value = InstalledMachine("AdhocSelect").ToString
+                    'row.Cells("partinfo").Value = InstalledMachine("partinfo").ToString
+                    'row.Cells("Tolerance").Value = InstalledMachine("Tolerance").ToString
                     'View Cert Button
                     row.Cells("ViewCert").Value = "View Cert"
                     row.Cells("ViewCert").Tag = cert
@@ -274,6 +296,26 @@ Public Class frmMain
         Catch ex As Exception
             Console.WriteLine("Update Error : " + ex.Message.ToString())
         End Try
+    End Sub
+
+
+    ''' <summary>
+    ''' Installed Machines - View Cert
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    Private Sub dgrdInstalledMachines_CellClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles dgrdInstalledMachines.CellMouseClick
+        If (e.RowIndex > -1) Then
+            If (e.ColumnIndex = dgrdInstalledMachines.Columns("ViewCert").Index) Then
+                Dim frm As New frmPrint(dgrdInstalledMachines.Rows(e.RowIndex).Cells("ViewCert").Tag)
+                Dim diaResult As DialogResult
+                diaResult = frm.ShowDialog()
+                If diaResult = DialogResult.OK Then
+                    'Refresh the grid
+                    LoadCustomerCerts()
+                End If
+            End If
+        End If
     End Sub
 
 
@@ -290,7 +332,7 @@ Public Class frmMain
 
                 If (_addingCustomer) Then
                     'Dim newCust As New JToken
-                    Dim newCustomerMember As String = "{ 'Code': '" & txtCode.Text &
+                    Dim newCustomerMember As String = "{ 'Code': '" & Me.txtCode.Text &
                         "','Name': '" & txtName.Text &
                         "','Address1': '" & txtAddress1.Text &
                         "','Address2': '" & txtAddress2.Text &
@@ -534,51 +576,6 @@ Public Class frmMain
 
 
 
-
-
-
-#Region "Test"
-
-    Private Sub PopulateDictionary()
-        '_dictStaticValues = New Dictionary(Of String, String())
-        '_dictStaticValues.Add("Cert No", {"No. 17549", "700", "50"})
-        '_dictStaticValues.Add("Customer No", {"5022", "50", "400"})
-        '_dictStaticValues.Add("Customer Name", {"Kingspan Ltd t/a Aeroboard", "50", "430"})
-        '_dictStaticValues.Add("Customer Address1", {"Askeaton", "50", "460"})
-        '_dictStaticValues.Add("Customer Address2", {"Co. Limerick", "50", "490"})
-        '_dictStaticValues.Add("Test Weights M1", {"", "80", "550"})
-        '_dictStaticValues.Add("Test Weights F1", {"B3118", "80", "580"})
-        '_dictStaticValues.Add("Calibration Interval", {"6 Monthly", "180", "80"})
-        '_dictStaticValues.Add("Tag Identifier", {"KS-01", "50", "400"})
-        '_dictStaticValues.Add("Location", {"Quality Lab", "50", "400"})
-        '_dictStaticValues.Add("Manufacturer", {"Adam Equipment", "50", "400"})
-        '_dictStaticValues.Add("Model", {"ACB 1500", "50", "400"})
-        '_dictStaticValues.Add("Serial No", {"AE325F00180", "50", "400"})
-        '_dictStaticValues.Add("Capacity", {"1500g", "50", "400"})
-        '_dictStaticValues.Add("Min Graduations", {"0.05g", "50", "400"})
-        '_dictStaticValues.Add("Required Tolerance", {"1 Division", "50", "400"})
-        '_dictStaticValues.Add("Electronic", {"X", "50", "400"})
-        '_dictStaticValues.Add("Procedure", {"Quality Assurance Procedure 15", "50", "400"})
-        '_dictStaticValues.Add("Calibration Weight 1", {"0g", "50", "400"})
-        '_dictStaticValues.Add("Calibration Weight 2", {"100g", "50", "400"})
-        '_dictStaticValues.Add("Calibration Weight 3", {"300g", "50", "400"})
-        '_dictStaticValues.Add("Calibration Weight 4", {"500g", "50", "400"})
-        '_dictStaticValues.Add("Calibration Weight 5", {"800g", "50", "400"})
-        '_dictStaticValues.Add("Calibration Weight 6", {"1200g", "50", "400"})
-        '_dictStaticValues.Add("Calibration Weight 7", {"1500g", "50", "400"})
-        ' LoadStaticRecords()
-    End Sub
-
-    Private Sub dgrdInstalledMachines_CellClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles dgrdInstalledMachines.CellMouseClick
-        If (e.RowIndex > -1) Then
-            If (e.ColumnIndex = dgrdInstalledMachines.Columns("ViewCert").Index) Then
-                Dim frm As New frmPrint(dgrdInstalledMachines.Rows(e.RowIndex).Cells("CustCode").Value, dgrdInstalledMachines.Rows(e.RowIndex).Cells("SerialNumber").Value)
-                frm.ShowDialog()
-            End If
-        End If
-    End Sub
-
-#End Region
 
 
 
