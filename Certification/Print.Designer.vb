@@ -39,37 +39,34 @@ Partial Class frmPrint
         Me.cbModel = New System.Windows.Forms.ComboBox()
         Me.ckElectronic = New System.Windows.Forms.CheckBox()
         Me.Label5 = New System.Windows.Forms.Label()
+        Me.Label14 = New System.Windows.Forms.Label()
         Me.txtCapacity = New System.Windows.Forms.TextBox()
+        Me.cbProcedure = New System.Windows.Forms.ComboBox()
         Me.txtMinGraduation = New System.Windows.Forms.TextBox()
+        Me.cbCalibrationInterval = New System.Windows.Forms.ComboBox()
         Me.Label4 = New System.Windows.Forms.Label()
+        Me.Label10 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.txtModelId = New System.Windows.Forms.TextBox()
         Me.txtManufacturer = New System.Windows.Forms.TextBox()
+        Me.txtLocation = New System.Windows.Forms.TextBox()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.txtTagId = New System.Windows.Forms.TextBox()
+        Me.Label9 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.txtSerialNumber = New System.Windows.Forms.TextBox()
-        Me.Label8 = New System.Windows.Forms.Label()
-        Me.txtLocation = New System.Windows.Forms.TextBox()
-        Me.Label9 = New System.Windows.Forms.Label()
-        Me.txtTagId = New System.Windows.Forms.TextBox()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.txtTolerance = New System.Windows.Forms.TextBox()
-        Me.Label10 = New System.Windows.Forms.Label()
-        Me.cbCalibrationInterval = New System.Windows.Forms.ComboBox()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.txtTestWeightsM1 = New System.Windows.Forms.TextBox()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.txtTestWeightsF1 = New System.Windows.Forms.TextBox()
-        Me.cbProcedure = New System.Windows.Forms.ComboBox()
-        Me.Label14 = New System.Windows.Forms.Label()
         Me.Label15 = New System.Windows.Forms.Label()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.Label17 = New System.Windows.Forms.Label()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
-        Me.txtCalWeight1 = New System.Windows.Forms.TextBox()
-        Me.txtCalWeight2 = New System.Windows.Forms.TextBox()
-        Me.txtCalWeight3 = New System.Windows.Forms.TextBox()
         Me.Label18 = New System.Windows.Forms.Label()
         Me.txtCalWeight7 = New System.Windows.Forms.TextBox()
         Me.txtCalWeight6 = New System.Windows.Forms.TextBox()
@@ -78,6 +75,11 @@ Partial Class frmPrint
         Me.Label20 = New System.Windows.Forms.Label()
         Me.txtCalWeight4 = New System.Windows.Forms.TextBox()
         Me.Label21 = New System.Windows.Forms.Label()
+        Me.txtCalWeight3 = New System.Windows.Forms.TextBox()
+        Me.txtCalWeight2 = New System.Windows.Forms.TextBox()
+        Me.txtCalWeight1 = New System.Windows.Forms.TextBox()
+        Me.btnPreview = New System.Windows.Forms.Button()
+        Me.btnPrint = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -158,14 +160,14 @@ Partial Class frmPrint
         '
         'btnSave
         '
-        Me.btnSave.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.btnSave.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnSave.Font = New System.Drawing.Font("Segoe UI", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSave.Location = New System.Drawing.Point(813, 659)
+        Me.btnSave.Location = New System.Drawing.Point(987, 659)
         Me.btnSave.Name = "btnSave"
-        Me.btnSave.Size = New System.Drawing.Size(498, 83)
+        Me.btnSave.Size = New System.Drawing.Size(145, 83)
         Me.btnSave.TabIndex = 16
-        Me.btnSave.Text = "Print And Save"
+        Me.btnSave.Text = "Save Changes"
         Me.btnSave.UseVisualStyleBackColor = False
         '
         'Label7
@@ -264,23 +266,54 @@ Partial Class frmPrint
         Me.Label5.TabIndex = 26
         Me.Label5.Text = "Min Grad."
         '
+        'Label14
+        '
+        Me.Label14.AutoSize = True
+        Me.Label14.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label14.Location = New System.Drawing.Point(20, 178)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(81, 21)
+        Me.Label14.TabIndex = 46
+        Me.Label14.Text = "Procedure"
+        '
         'txtCapacity
         '
         Me.txtCapacity.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtCapacity.Location = New System.Drawing.Point(483, 105)
         Me.txtCapacity.Name = "txtCapacity"
-        Me.txtCapacity.ReadOnly = True
         Me.txtCapacity.Size = New System.Drawing.Size(260, 29)
         Me.txtCapacity.TabIndex = 25
+        '
+        'cbProcedure
+        '
+        Me.cbProcedure.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbProcedure.FlatStyle = System.Windows.Forms.FlatStyle.System
+        Me.cbProcedure.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cbProcedure.FormattingEnabled = True
+        Me.cbProcedure.Items.AddRange(New Object() {"Quality Assurance Procedure 15"})
+        Me.cbProcedure.Location = New System.Drawing.Point(130, 175)
+        Me.cbProcedure.Name = "cbProcedure"
+        Me.cbProcedure.Size = New System.Drawing.Size(270, 29)
+        Me.cbProcedure.TabIndex = 45
         '
         'txtMinGraduation
         '
         Me.txtMinGraduation.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtMinGraduation.Location = New System.Drawing.Point(130, 105)
         Me.txtMinGraduation.Name = "txtMinGraduation"
-        Me.txtMinGraduation.ReadOnly = True
         Me.txtMinGraduation.Size = New System.Drawing.Size(255, 29)
         Me.txtMinGraduation.TabIndex = 24
+        '
+        'cbCalibrationInterval
+        '
+        Me.cbCalibrationInterval.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbCalibrationInterval.FlatStyle = System.Windows.Forms.FlatStyle.System
+        Me.cbCalibrationInterval.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cbCalibrationInterval.FormattingEnabled = True
+        Me.cbCalibrationInterval.Location = New System.Drawing.Point(564, 180)
+        Me.cbCalibrationInterval.Name = "cbCalibrationInterval"
+        Me.cbCalibrationInterval.Size = New System.Drawing.Size(179, 29)
+        Me.cbCalibrationInterval.TabIndex = 29
         '
         'Label4
         '
@@ -291,6 +324,16 @@ Partial Class frmPrint
         Me.Label4.Size = New System.Drawing.Size(69, 21)
         Me.Label4.TabIndex = 23
         Me.Label4.Text = "Capacity"
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label10.Location = New System.Drawing.Point(406, 183)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(142, 21)
+        Me.Label10.TabIndex = 40
+        Me.Label10.Text = "Calibration Interval"
         '
         'Label3
         '
@@ -340,6 +383,42 @@ Partial Class frmPrint
         Me.txtManufacturer.Size = New System.Drawing.Size(255, 29)
         Me.txtManufacturer.TabIndex = 10
         '
+        'txtLocation
+        '
+        Me.txtLocation.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtLocation.Location = New System.Drawing.Point(130, 140)
+        Me.txtLocation.Name = "txtLocation"
+        Me.txtLocation.Size = New System.Drawing.Size(356, 29)
+        Me.txtLocation.TabIndex = 34
+        '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label8.Location = New System.Drawing.Point(20, 143)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(69, 21)
+        Me.Label8.TabIndex = 33
+        Me.Label8.Text = "Location"
+        '
+        'txtTagId
+        '
+        Me.txtTagId.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtTagId.Location = New System.Drawing.Point(569, 140)
+        Me.txtTagId.Name = "txtTagId"
+        Me.txtTagId.Size = New System.Drawing.Size(174, 29)
+        Me.txtTagId.TabIndex = 36
+        '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label9.Location = New System.Drawing.Point(513, 143)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(50, 21)
+        Me.Label9.TabIndex = 35
+        Me.Label9.Text = "Tag Id"
+        '
         'Label6
         '
         Me.Label6.AutoSize = True
@@ -358,42 +437,6 @@ Partial Class frmPrint
         Me.txtSerialNumber.Size = New System.Drawing.Size(280, 29)
         Me.txtSerialNumber.TabIndex = 29
         '
-        'Label8
-        '
-        Me.Label8.AutoSize = True
-        Me.Label8.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label8.Location = New System.Drawing.Point(20, 143)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(69, 21)
-        Me.Label8.TabIndex = 33
-        Me.Label8.Text = "Location"
-        '
-        'txtLocation
-        '
-        Me.txtLocation.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtLocation.Location = New System.Drawing.Point(130, 140)
-        Me.txtLocation.Name = "txtLocation"
-        Me.txtLocation.Size = New System.Drawing.Size(356, 29)
-        Me.txtLocation.TabIndex = 34
-        '
-        'Label9
-        '
-        Me.Label9.AutoSize = True
-        Me.Label9.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label9.Location = New System.Drawing.Point(513, 143)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(50, 21)
-        Me.Label9.TabIndex = 35
-        Me.Label9.Text = "Tag Id"
-        '
-        'txtTagId
-        '
-        Me.txtTagId.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtTagId.Location = New System.Drawing.Point(569, 140)
-        Me.txtTagId.Name = "txtTagId"
-        Me.txtTagId.Size = New System.Drawing.Size(174, 29)
-        Me.txtTagId.TabIndex = 36
-        '
         'Label11
         '
         Me.Label11.AutoSize = True
@@ -411,28 +454,6 @@ Partial Class frmPrint
         Me.txtTolerance.Name = "txtTolerance"
         Me.txtTolerance.Size = New System.Drawing.Size(206, 29)
         Me.txtTolerance.TabIndex = 39
-        '
-        'Label10
-        '
-        Me.Label10.AutoSize = True
-        Me.Label10.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label10.Location = New System.Drawing.Point(406, 183)
-        Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(142, 21)
-        Me.Label10.TabIndex = 40
-        Me.Label10.Text = "Calibration Interval"
-        '
-        'cbCalibrationInterval
-        '
-        Me.cbCalibrationInterval.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbCalibrationInterval.FlatStyle = System.Windows.Forms.FlatStyle.System
-        Me.cbCalibrationInterval.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cbCalibrationInterval.FormattingEnabled = True
-        Me.cbCalibrationInterval.Items.AddRange(New Object() {"1 Monthly", "2 Monthly", "3 Monthly", "4 Monthly", "5 Monthly", "6 Monthly", "7 Monthly", "8 Monthly", "9 Monthly", "10  Monthly", "11 Monthly", "12 Monthly"})
-        Me.cbCalibrationInterval.Location = New System.Drawing.Point(564, 180)
-        Me.cbCalibrationInterval.Name = "cbCalibrationInterval"
-        Me.cbCalibrationInterval.Size = New System.Drawing.Size(179, 29)
-        Me.cbCalibrationInterval.TabIndex = 29
         '
         'Label12
         '
@@ -469,28 +490,6 @@ Partial Class frmPrint
         Me.txtTestWeightsF1.Name = "txtTestWeightsF1"
         Me.txtTestWeightsF1.Size = New System.Drawing.Size(206, 29)
         Me.txtTestWeightsF1.TabIndex = 44
-        '
-        'cbProcedure
-        '
-        Me.cbProcedure.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbProcedure.FlatStyle = System.Windows.Forms.FlatStyle.System
-        Me.cbProcedure.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cbProcedure.FormattingEnabled = True
-        Me.cbProcedure.Items.AddRange(New Object() {"Quality Assurance Procedure 15"})
-        Me.cbProcedure.Location = New System.Drawing.Point(130, 175)
-        Me.cbProcedure.Name = "cbProcedure"
-        Me.cbProcedure.Size = New System.Drawing.Size(270, 29)
-        Me.cbProcedure.TabIndex = 45
-        '
-        'Label14
-        '
-        Me.Label14.AutoSize = True
-        Me.Label14.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label14.Location = New System.Drawing.Point(20, 178)
-        Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(81, 21)
-        Me.Label14.TabIndex = 46
-        Me.Label14.Text = "Procedure"
         '
         'Label15
         '
@@ -551,30 +550,6 @@ Partial Class frmPrint
         Me.GroupBox3.TabIndex = 50
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Weight Details"
-        '
-        'txtCalWeight1
-        '
-        Me.txtCalWeight1.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtCalWeight1.Location = New System.Drawing.Point(568, 79)
-        Me.txtCalWeight1.Name = "txtCalWeight1"
-        Me.txtCalWeight1.Size = New System.Drawing.Size(175, 29)
-        Me.txtCalWeight1.TabIndex = 49
-        '
-        'txtCalWeight2
-        '
-        Me.txtCalWeight2.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtCalWeight2.Location = New System.Drawing.Point(172, 120)
-        Me.txtCalWeight2.Name = "txtCalWeight2"
-        Me.txtCalWeight2.Size = New System.Drawing.Size(206, 29)
-        Me.txtCalWeight2.TabIndex = 50
-        '
-        'txtCalWeight3
-        '
-        Me.txtCalWeight3.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtCalWeight3.Location = New System.Drawing.Point(568, 120)
-        Me.txtCalWeight3.Name = "txtCalWeight3"
-        Me.txtCalWeight3.Size = New System.Drawing.Size(175, 29)
-        Me.txtCalWeight3.TabIndex = 51
         '
         'Label18
         '
@@ -648,11 +623,61 @@ Partial Class frmPrint
         Me.Label21.TabIndex = 52
         Me.Label21.Text = "Calibration Weight 4"
         '
+        'txtCalWeight3
+        '
+        Me.txtCalWeight3.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtCalWeight3.Location = New System.Drawing.Point(568, 120)
+        Me.txtCalWeight3.Name = "txtCalWeight3"
+        Me.txtCalWeight3.Size = New System.Drawing.Size(175, 29)
+        Me.txtCalWeight3.TabIndex = 51
+        '
+        'txtCalWeight2
+        '
+        Me.txtCalWeight2.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtCalWeight2.Location = New System.Drawing.Point(172, 120)
+        Me.txtCalWeight2.Name = "txtCalWeight2"
+        Me.txtCalWeight2.Size = New System.Drawing.Size(206, 29)
+        Me.txtCalWeight2.TabIndex = 50
+        '
+        'txtCalWeight1
+        '
+        Me.txtCalWeight1.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtCalWeight1.Location = New System.Drawing.Point(568, 79)
+        Me.txtCalWeight1.Name = "txtCalWeight1"
+        Me.txtCalWeight1.Size = New System.Drawing.Size(175, 29)
+        Me.txtCalWeight1.TabIndex = 49
+        '
+        'btnPreview
+        '
+        Me.btnPreview.BackColor = System.Drawing.Color.PaleGoldenrod
+        Me.btnPreview.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnPreview.Font = New System.Drawing.Font("Segoe UI", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnPreview.Location = New System.Drawing.Point(813, 660)
+        Me.btnPreview.Name = "btnPreview"
+        Me.btnPreview.Size = New System.Drawing.Size(133, 83)
+        Me.btnPreview.TabIndex = 51
+        Me.btnPreview.Text = "Preview"
+        Me.btnPreview.UseVisualStyleBackColor = False
+        '
+        'btnPrint
+        '
+        Me.btnPrint.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.btnPrint.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnPrint.Font = New System.Drawing.Font("Segoe UI", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnPrint.Location = New System.Drawing.Point(1178, 659)
+        Me.btnPrint.Name = "btnPrint"
+        Me.btnPrint.Size = New System.Drawing.Size(133, 83)
+        Me.btnPrint.TabIndex = 52
+        Me.btnPrint.Text = "Print"
+        Me.btnPrint.UseVisualStyleBackColor = False
+        '
         'frmPrint
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1334, 765)
+        Me.Controls.Add(Me.btnPrint)
+        Me.Controls.Add(Me.btnPreview)
         Me.Controls.Add(Me.txtSerialNumber)
         Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.GroupBox2)
@@ -732,4 +757,6 @@ Partial Class frmPrint
     Friend WithEvents txtCalWeight3 As TextBox
     Friend WithEvents txtCalWeight2 As TextBox
     Friend WithEvents txtCalWeight1 As TextBox
+    Friend WithEvents btnPreview As Button
+    Friend WithEvents btnPrint As Button
 End Class

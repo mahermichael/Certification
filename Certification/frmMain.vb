@@ -28,6 +28,7 @@ Public Class frmMain
         LoadCustomers()
         '  CreatePrintDocument()
 
+
     End Sub
 
 
@@ -125,7 +126,7 @@ Public Class frmMain
             Me.txtFax.Text = dgrdCustomers.Rows(e.RowIndex).Cells("Fax").Value.ToString
             Me.txtContacts.Text = dgrdCustomers.Rows(e.RowIndex).Cells("Contacts").Value.ToString
             Me.txtNotes.Text = dgrdCustomers.Rows(e.RowIndex).Cells("Notes").Value.ToString
-
+            lblInstalledMachines.Text = "Installed Machines For : " & Me.txtName.Text
             LoadCustomerCerts()
         End If
     End Sub
@@ -150,13 +151,12 @@ Public Class frmMain
                     row.Cells("ModelId").Value = InstalledMachine("ModelId").ToString
                     row.Cells("SerialNumber").Value = InstalledMachine("SerialNumber").ToString
                     row.Cells("CertNumber").Value = InstalledMachine("CertNumber").ToString
-                    row.Cells("InstallationDate").Value = InstalledMachine("InstallationDate").ToString
-
+                    row.Cells("TagId").Value = InstalledMachine("TagId").ToString
                     ' Main cert details
                     cert.CertificateNumber = InstalledMachine("CertNumber").ToString
                     cert.ModelId = InstalledMachine("ModelId").ToString
                     cert.SerialNumber = InstalledMachine("SerialNumber").ToString
-                    cert.InstallationDate = InstalledMachine("InstallationDate").ToString
+                    cert.TagId = InstalledMachine("TagId").ToString
 
                     ' Set Customer Details
                     cert.CustomerCode = Me.txtCode.Text
@@ -166,31 +166,30 @@ Public Class frmMain
                     cert.CustomerAddress3 = Me.txtAddress3.Text
                     cert.CustomerAddress4 = Me.txtAddress4.Text
 
+                    ' Secondary Cert Details
+                    cert.Location = InstalledMachine("Location").ToString
+                    cert.Procedure = InstalledMachine("Procedure").ToString
+                    cert.CalibrationInterval = InstalledMachine("Calibration Interval").ToString
+                    cert.Capacity = InstalledMachine("Capacity").ToString
+                    cert.MinGraduations = InstalledMachine("Min Graduations").ToString
+                    cert.RequiredTolerance = InstalledMachine("Required Tolerance").ToString
+                    cert.TestWeightM1 = InstalledMachine("Test Weights M1").ToString
+                    cert.TestWeightsF1 = InstalledMachine("Test Weights F1").ToString
+                    cert.CalibrationWeight1 = InstalledMachine("Calibration Weight 1").ToString
+                    cert.CalibrationWeight2 = InstalledMachine("Calibration Weight 2").ToString
+                    cert.CalibrationWeight3 = InstalledMachine("Calibration Weight 3").ToString
+                    cert.CalibrationWeight4 = InstalledMachine("Calibration Weight 4").ToString
+                    cert.CalibrationWeight5 = InstalledMachine("Calibration Weight 5").ToString
+                    cert.CalibrationWeight6 = InstalledMachine("Calibration Weight 6").ToString
+                    cert.CalibrationWeight7 = InstalledMachine("Calibration Weight 7").ToString
 
-
-                    'row.Cells("SalesValue").Value = InstalledMachine("SalesValue").ToString
-                    'row.Cells("SupplierInvoice").Value = InstalledMachine("SupplierInvoice").ToString
-                    'row.Cells("CustomerInvoice").Value = InstalledMachine("CustomerInvoice").ToString
-                    'row.Cells("WeightsMeasureDocketNo").Value = InstalledMachine("WeightsMeasureDocketNo").ToString
-                    'row.Cells("GuaranteeExpiryDate").Value = InstalledMachine("GuaranteeExpiryDate").ToString
-                    'row.Cells("InService").Value = InstalledMachine("InService").ToString
-                    'row.Cells("Location").Value = InstalledMachine("Location").ToString
-                    'row.Cells("TagId").Value = InstalledMachine("TagId").ToString
-                    'row.Cells("ContractNumber").Value = InstalledMachine("ContractNumber").ToString
-                    'row.Cells("CalibrationType").Value = InstalledMachine("CalibrationType").ToString
-                    'row.Cells("Capacity").Value = InstalledMachine("Capacity").ToString
-                    'row.Cells("MinimumGraduation").Value = InstalledMachine("MinimumGraduation").ToString
-                    'row.Cells("SalesPerson").Value = InstalledMachine("SalesPerson").ToString
-                    'row.Cells("SelectColumn").Value = InstalledMachine("SelectColumn").ToString
-                    'row.Cells("AdhocSelect").Value = InstalledMachine("AdhocSelect").ToString
-                    'row.Cells("partinfo").Value = InstalledMachine("partinfo").ToString
-                    'row.Cells("Tolerance").Value = InstalledMachine("Tolerance").ToString
                     'View Cert Button
                     row.Cells("ViewCert").Value = "View Cert"
                     row.Cells("ViewCert").Tag = cert
                 Next
             End If
             Me.dgrdInstalledMachines.Refresh()
+            dgrdInstalledMachines.ClearSelection()
         Catch ex As Exception
             Console.WriteLine("Update Error : " + ex.Message.ToString())
         End Try
@@ -438,5 +437,8 @@ Public Class frmMain
         Return txtCode.Text & "-" & certNumberSuffix
     End Function
 
+    Private Sub dgrdCustomers_DataBindingComplete(sender As Object, e As DataGridViewBindingCompleteEventArgs) Handles dgrdCustomers.DataBindingComplete
+        dgrdCustomers.ClearSelection()
+    End Sub
 
 End Class

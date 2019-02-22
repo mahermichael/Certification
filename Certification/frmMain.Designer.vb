@@ -42,17 +42,12 @@ Partial Class frmMain
         Me.searchByName = New MetroFramework.Controls.MetroRadioButton()
         Me.VScrollBar1 = New System.Windows.Forms.VScrollBar()
         Me.btnDeleteCustomer = New MetroFramework.Controls.MetroButton()
-        Me.Label1 = New System.Windows.Forms.Label()
+        Me.lblInstalledMachines = New System.Windows.Forms.Label()
         Me.btnAddCustomer = New MetroFramework.Controls.MetroButton()
         Me.btnSaveCustomer = New MetroFramework.Controls.MetroButton()
         Me.MetroLabel12 = New MetroFramework.Controls.MetroLabel()
         Me.txtSearchCustomer = New System.Windows.Forms.TextBox()
         Me.dgrdInstalledMachines = New MetroFramework.Controls.MetroGrid()
-        Me.SerialNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ModelId = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.CertNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.InstallationDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ViewCert = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.dgrdCustomers = New MetroFramework.Controls.MetroGrid()
         Me.txtNotes = New MetroFramework.Controls.MetroTextBox()
         Me.txtContacts = New MetroFramework.Controls.MetroTextBox()
@@ -91,6 +86,11 @@ Partial Class frmMain
         Me.MetroTextBox9 = New MetroFramework.Controls.MetroTextBox()
         Me.MetroTextBox10 = New MetroFramework.Controls.MetroTextBox()
         Me.PrintPreviewDialog1 = New System.Windows.Forms.PrintPreviewDialog()
+        Me.SerialNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ModelId = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CertNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TagId = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ViewCert = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.tabPages.SuspendLayout()
         Me.tabCustomersNew.SuspendLayout()
         CType(Me.dgrdInstalledMachines, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -118,7 +118,7 @@ Partial Class frmMain
         Me.tabCustomersNew.Controls.Add(Me.searchByName)
         Me.tabCustomersNew.Controls.Add(Me.VScrollBar1)
         Me.tabCustomersNew.Controls.Add(Me.btnDeleteCustomer)
-        Me.tabCustomersNew.Controls.Add(Me.Label1)
+        Me.tabCustomersNew.Controls.Add(Me.lblInstalledMachines)
         Me.tabCustomersNew.Controls.Add(Me.btnAddCustomer)
         Me.tabCustomersNew.Controls.Add(Me.btnSaveCustomer)
         Me.tabCustomersNew.Controls.Add(Me.MetroLabel12)
@@ -164,9 +164,9 @@ Partial Class frmMain
         Me.btnNewCert.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.btnNewCert.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnNewCert.Font = New System.Drawing.Font("Segoe UI", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnNewCert.Location = New System.Drawing.Point(1065, 491)
+        Me.btnNewCert.Location = New System.Drawing.Point(1065, 496)
         Me.btnNewCert.Name = "btnNewCert"
-        Me.btnNewCert.Size = New System.Drawing.Size(324, 75)
+        Me.btnNewCert.Size = New System.Drawing.Size(324, 70)
         Me.btnNewCert.TabIndex = 42
         Me.btnNewCert.Text = "Create New Cert For Selected Customer"
         Me.btnNewCert.UseVisualStyleBackColor = False
@@ -215,17 +215,16 @@ Partial Class frmMain
         Me.btnDeleteCustomer.UseCustomBackColor = True
         Me.btnDeleteCustomer.UseSelectable = True
         '
-        'Label1
+        'lblInstalledMachines
         '
-        Me.Label1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.lblInstalledMachines.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Label1.Font = New System.Drawing.Font("Segoe UI", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(3, 496)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(1386, 70)
-        Me.Label1.TabIndex = 34
-        Me.Label1.Text = "Installed Machines For Selected Customer"
-        Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.lblInstalledMachines.Font = New System.Drawing.Font("Segoe UI", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblInstalledMachines.Location = New System.Drawing.Point(3, 496)
+        Me.lblInstalledMachines.Name = "lblInstalledMachines"
+        Me.lblInstalledMachines.Size = New System.Drawing.Size(1386, 70)
+        Me.lblInstalledMachines.TabIndex = 34
+        Me.lblInstalledMachines.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'btnAddCustomer
         '
@@ -295,7 +294,7 @@ Partial Class frmMain
         DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.dgrdInstalledMachines.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
         Me.dgrdInstalledMachines.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgrdInstalledMachines.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.SerialNumber, Me.ModelId, Me.CertNumber, Me.InstallationDate, Me.ViewCert})
+        Me.dgrdInstalledMachines.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.SerialNumber, Me.ModelId, Me.CertNumber, Me.TagId, Me.ViewCert})
         DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
         DataGridViewCellStyle3.Font = New System.Drawing.Font("Segoe UI", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -325,40 +324,6 @@ Partial Class frmMain
         Me.dgrdInstalledMachines.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.dgrdInstalledMachines.Size = New System.Drawing.Size(1386, 237)
         Me.dgrdInstalledMachines.TabIndex = 27
-        '
-        'SerialNumber
-        '
-        Me.SerialNumber.HeaderText = "Serial No."
-        Me.SerialNumber.Name = "SerialNumber"
-        Me.SerialNumber.ReadOnly = True
-        '
-        'ModelId
-        '
-        Me.ModelId.HeaderText = "Model Id"
-        Me.ModelId.Name = "ModelId"
-        Me.ModelId.ReadOnly = True
-        '
-        'CertNumber
-        '
-        Me.CertNumber.HeaderText = "Cert No."
-        Me.CertNumber.Name = "CertNumber"
-        Me.CertNumber.ReadOnly = True
-        '
-        'InstallationDate
-        '
-        Me.InstallationDate.HeaderText = "Installation Date"
-        Me.InstallationDate.Name = "InstallationDate"
-        Me.InstallationDate.ReadOnly = True
-        '
-        'ViewCert
-        '
-        Me.ViewCert.FillWeight = 30.0!
-        Me.ViewCert.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.ViewCert.HeaderText = ""
-        Me.ViewCert.Name = "ViewCert"
-        Me.ViewCert.ReadOnly = True
-        Me.ViewCert.Text = "View Cert"
-        Me.ViewCert.UseColumnTextForButtonValue = True
         '
         'dgrdCustomers
         '
@@ -1203,6 +1168,40 @@ Partial Class frmMain
         Me.PrintPreviewDialog1.Name = "PrintPreviewDialog1"
         Me.PrintPreviewDialog1.Visible = False
         '
+        'SerialNumber
+        '
+        Me.SerialNumber.HeaderText = "Serial No."
+        Me.SerialNumber.Name = "SerialNumber"
+        Me.SerialNumber.ReadOnly = True
+        '
+        'ModelId
+        '
+        Me.ModelId.HeaderText = "Model Id"
+        Me.ModelId.Name = "ModelId"
+        Me.ModelId.ReadOnly = True
+        '
+        'CertNumber
+        '
+        Me.CertNumber.HeaderText = "Cert No."
+        Me.CertNumber.Name = "CertNumber"
+        Me.CertNumber.ReadOnly = True
+        '
+        'TagId
+        '
+        Me.TagId.HeaderText = "Tag Id"
+        Me.TagId.Name = "TagId"
+        Me.TagId.ReadOnly = True
+        '
+        'ViewCert
+        '
+        Me.ViewCert.FillWeight = 30.0!
+        Me.ViewCert.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ViewCert.HeaderText = ""
+        Me.ViewCert.Name = "ViewCert"
+        Me.ViewCert.ReadOnly = True
+        Me.ViewCert.Text = "View Cert"
+        Me.ViewCert.UseColumnTextForButtonValue = True
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1256,16 +1255,11 @@ Partial Class frmMain
     Friend WithEvents MetroLabel12 As MetroFramework.Controls.MetroLabel
     Friend WithEvents btnSaveCustomer As MetroFramework.Controls.MetroButton
     Friend WithEvents btnAddCustomer As MetroFramework.Controls.MetroButton
-    Friend WithEvents Label1 As Label
+    Friend WithEvents lblInstalledMachines As Label
     Friend WithEvents btnDeleteCustomer As MetroFramework.Controls.MetroButton
     Friend WithEvents VScrollBar1 As VScrollBar
     Friend WithEvents searchByCode As MetroFramework.Controls.MetroRadioButton
     Friend WithEvents searchByName As MetroFramework.Controls.MetroRadioButton
-    Friend WithEvents SerialNumber As DataGridViewTextBoxColumn
-    Friend WithEvents ModelId As DataGridViewTextBoxColumn
-    Friend WithEvents CertNumber As DataGridViewTextBoxColumn
-    Friend WithEvents InstallationDate As DataGridViewTextBoxColumn
-    Friend WithEvents ViewCert As DataGridViewButtonColumn
     Friend WithEvents MetroRadioButton1 As MetroFramework.Controls.MetroRadioButton
     Friend WithEvents MetroRadioButton2 As MetroFramework.Controls.MetroRadioButton
     Friend WithEvents VScrollBar2 As VScrollBar
@@ -1282,4 +1276,9 @@ Partial Class frmMain
     Friend WithEvents MetroTextBox9 As MetroFramework.Controls.MetroTextBox
     Friend WithEvents MetroTextBox10 As MetroFramework.Controls.MetroTextBox
     Friend WithEvents btnNewCert As Button
+    Friend WithEvents SerialNumber As DataGridViewTextBoxColumn
+    Friend WithEvents ModelId As DataGridViewTextBoxColumn
+    Friend WithEvents CertNumber As DataGridViewTextBoxColumn
+    Friend WithEvents TagId As DataGridViewTextBoxColumn
+    Friend WithEvents ViewCert As DataGridViewButtonColumn
 End Class
