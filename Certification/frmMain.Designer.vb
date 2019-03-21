@@ -40,7 +40,7 @@ Partial Class frmMain
         Me.btnNewCert = New System.Windows.Forms.Button()
         Me.searchByCode = New MetroFramework.Controls.MetroRadioButton()
         Me.searchByName = New MetroFramework.Controls.MetroRadioButton()
-        Me.VScrollBar1 = New System.Windows.Forms.VScrollBar()
+        Me.ScrollBarCustomers = New System.Windows.Forms.VScrollBar()
         Me.btnDeleteCustomer = New MetroFramework.Controls.MetroButton()
         Me.lblInstalledMachines = New System.Windows.Forms.Label()
         Me.btnAddCustomer = New MetroFramework.Controls.MetroButton()
@@ -48,6 +48,11 @@ Partial Class frmMain
         Me.MetroLabel12 = New MetroFramework.Controls.MetroLabel()
         Me.txtSearchCustomer = New System.Windows.Forms.TextBox()
         Me.dgrdInstalledMachines = New MetroFramework.Controls.MetroGrid()
+        Me.SerialNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ModelId = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CertNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TagId = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ViewCert = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.dgrdCustomers = New MetroFramework.Controls.MetroGrid()
         Me.txtNotes = New MetroFramework.Controls.MetroTextBox()
         Me.txtContacts = New MetroFramework.Controls.MetroTextBox()
@@ -69,16 +74,16 @@ Partial Class frmMain
         Me.MetroLabel3 = New MetroFramework.Controls.MetroLabel()
         Me.MetroLabel2 = New MetroFramework.Controls.MetroLabel()
         Me.MetroLabel1 = New MetroFramework.Controls.MetroLabel()
-        Me.MetroTabPage1 = New MetroFramework.Controls.MetroTabPage()
+        Me.tabMaintainMachines = New MetroFramework.Controls.MetroTabPage()
         Me.MetroRadioButton1 = New MetroFramework.Controls.MetroRadioButton()
         Me.MetroRadioButton2 = New MetroFramework.Controls.MetroRadioButton()
-        Me.VScrollBar2 = New System.Windows.Forms.VScrollBar()
+        Me.ScrollbarMachines = New System.Windows.Forms.VScrollBar()
         Me.MetroButton1 = New MetroFramework.Controls.MetroButton()
         Me.MetroButton2 = New MetroFramework.Controls.MetroButton()
         Me.MetroButton3 = New MetroFramework.Controls.MetroButton()
         Me.MetroLabel11 = New MetroFramework.Controls.MetroLabel()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.MetroGrid1 = New MetroFramework.Controls.MetroGrid()
+        Me.dgrdMachines = New MetroFramework.Controls.MetroGrid()
         Me.MetroTextBox5 = New MetroFramework.Controls.MetroTextBox()
         Me.MetroTextBox6 = New MetroFramework.Controls.MetroTextBox()
         Me.MetroTextBox7 = New MetroFramework.Controls.MetroTextBox()
@@ -86,27 +91,22 @@ Partial Class frmMain
         Me.MetroTextBox9 = New MetroFramework.Controls.MetroTextBox()
         Me.MetroTextBox10 = New MetroFramework.Controls.MetroTextBox()
         Me.PrintPreviewDialog1 = New System.Windows.Forms.PrintPreviewDialog()
-        Me.SerialNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ModelId = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.CertNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.TagId = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ViewCert = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.tabPages.SuspendLayout()
         Me.tabCustomersNew.SuspendLayout()
         CType(Me.dgrdInstalledMachines, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dgrdCustomers, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.MetroTabPage1.SuspendLayout()
-        CType(Me.MetroGrid1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.tabMaintainMachines.SuspendLayout()
+        CType(Me.dgrdMachines, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'tabPages
         '
         Me.tabPages.Controls.Add(Me.tabCustomersNew)
-        Me.tabPages.Controls.Add(Me.MetroTabPage1)
+        Me.tabPages.Controls.Add(Me.tabMaintainMachines)
         Me.tabPages.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tabPages.Location = New System.Drawing.Point(20, 60)
         Me.tabPages.Name = "tabPages"
-        Me.tabPages.SelectedIndex = 0
+        Me.tabPages.SelectedIndex = 1
         Me.tabPages.Size = New System.Drawing.Size(1417, 851)
         Me.tabPages.TabIndex = 0
         Me.tabPages.UseSelectable = True
@@ -116,7 +116,7 @@ Partial Class frmMain
         Me.tabCustomersNew.Controls.Add(Me.btnNewCert)
         Me.tabCustomersNew.Controls.Add(Me.searchByCode)
         Me.tabCustomersNew.Controls.Add(Me.searchByName)
-        Me.tabCustomersNew.Controls.Add(Me.VScrollBar1)
+        Me.tabCustomersNew.Controls.Add(Me.ScrollBarCustomers)
         Me.tabCustomersNew.Controls.Add(Me.btnDeleteCustomer)
         Me.tabCustomersNew.Controls.Add(Me.lblInstalledMachines)
         Me.tabCustomersNew.Controls.Add(Me.btnAddCustomer)
@@ -153,7 +153,7 @@ Partial Class frmMain
         Me.tabCustomersNew.Name = "tabCustomersNew"
         Me.tabCustomersNew.Size = New System.Drawing.Size(1409, 809)
         Me.tabCustomersNew.TabIndex = 3
-        Me.tabCustomersNew.Text = "Customers"
+        Me.tabCustomersNew.Text = "          Customers"
         Me.tabCustomersNew.VerticalScrollbarBarColor = True
         Me.tabCustomersNew.VerticalScrollbarHighlightOnWheel = False
         Me.tabCustomersNew.VerticalScrollbarSize = 10
@@ -164,6 +164,7 @@ Partial Class frmMain
         Me.btnNewCert.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.btnNewCert.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnNewCert.Font = New System.Drawing.Font("Segoe UI", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnNewCert.ForeColor = System.Drawing.SystemColors.ControlDarkDark
         Me.btnNewCert.Location = New System.Drawing.Point(1065, 496)
         Me.btnNewCert.Name = "btnNewCert"
         Me.btnNewCert.Size = New System.Drawing.Size(324, 70)
@@ -197,16 +198,16 @@ Partial Class frmMain
         '
         'VScrollBar1
         '
-        Me.VScrollBar1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.VScrollBar1.Location = New System.Drawing.Point(735, 59)
-        Me.VScrollBar1.Name = "VScrollBar1"
-        Me.VScrollBar1.Size = New System.Drawing.Size(44, 412)
-        Me.VScrollBar1.TabIndex = 38
+        Me.ScrollBarCustomers.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.ScrollBarCustomers.Location = New System.Drawing.Point(735, 59)
+        Me.ScrollBarCustomers.Name = "VScrollBar1"
+        Me.ScrollBarCustomers.Size = New System.Drawing.Size(44, 412)
+        Me.ScrollBarCustomers.TabIndex = 38
         '
         'btnDeleteCustomer
         '
         Me.btnDeleteCustomer.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnDeleteCustomer.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(182, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.btnDeleteCustomer.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.btnDeleteCustomer.Location = New System.Drawing.Point(1084, 45)
         Me.btnDeleteCustomer.Name = "btnDeleteCustomer"
         Me.btnDeleteCustomer.Size = New System.Drawing.Size(120, 52)
@@ -229,7 +230,7 @@ Partial Class frmMain
         'btnAddCustomer
         '
         Me.btnAddCustomer.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnAddCustomer.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.btnAddCustomer.BackColor = System.Drawing.Color.Gainsboro
         Me.btnAddCustomer.Location = New System.Drawing.Point(897, 45)
         Me.btnAddCustomer.Name = "btnAddCustomer"
         Me.btnAddCustomer.Size = New System.Drawing.Size(120, 52)
@@ -241,7 +242,7 @@ Partial Class frmMain
         'btnSaveCustomer
         '
         Me.btnSaveCustomer.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnSaveCustomer.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.btnSaveCustomer.BackColor = System.Drawing.Color.Gainsboro
         Me.btnSaveCustomer.Location = New System.Drawing.Point(1269, 45)
         Me.btnSaveCustomer.Name = "btnSaveCustomer"
         Me.btnSaveCustomer.Size = New System.Drawing.Size(120, 52)
@@ -324,6 +325,40 @@ Partial Class frmMain
         Me.dgrdInstalledMachines.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.dgrdInstalledMachines.Size = New System.Drawing.Size(1386, 237)
         Me.dgrdInstalledMachines.TabIndex = 27
+        '
+        'SerialNumber
+        '
+        Me.SerialNumber.HeaderText = "Serial No."
+        Me.SerialNumber.Name = "SerialNumber"
+        Me.SerialNumber.ReadOnly = True
+        '
+        'ModelId
+        '
+        Me.ModelId.HeaderText = "Model Id"
+        Me.ModelId.Name = "ModelId"
+        Me.ModelId.ReadOnly = True
+        '
+        'CertNumber
+        '
+        Me.CertNumber.HeaderText = "Cert No."
+        Me.CertNumber.Name = "CertNumber"
+        Me.CertNumber.ReadOnly = True
+        '
+        'TagId
+        '
+        Me.TagId.HeaderText = "Tag Id"
+        Me.TagId.Name = "TagId"
+        Me.TagId.ReadOnly = True
+        '
+        'ViewCert
+        '
+        Me.ViewCert.FillWeight = 30.0!
+        Me.ViewCert.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.ViewCert.HeaderText = ""
+        Me.ViewCert.Name = "ViewCert"
+        Me.ViewCert.ReadOnly = True
+        Me.ViewCert.Text = "View Cert"
+        Me.ViewCert.UseColumnTextForButtonValue = True
         '
         'dgrdCustomers
         '
@@ -805,34 +840,34 @@ Partial Class frmMain
         Me.MetroLabel1.TabIndex = 6
         Me.MetroLabel1.Text = "Code"
         '
-        'MetroTabPage1
+        'tabMaintainMachines
         '
-        Me.MetroTabPage1.Controls.Add(Me.MetroRadioButton1)
-        Me.MetroTabPage1.Controls.Add(Me.MetroRadioButton2)
-        Me.MetroTabPage1.Controls.Add(Me.VScrollBar2)
-        Me.MetroTabPage1.Controls.Add(Me.MetroButton1)
-        Me.MetroTabPage1.Controls.Add(Me.MetroButton2)
-        Me.MetroTabPage1.Controls.Add(Me.MetroButton3)
-        Me.MetroTabPage1.Controls.Add(Me.MetroLabel11)
-        Me.MetroTabPage1.Controls.Add(Me.TextBox1)
-        Me.MetroTabPage1.Controls.Add(Me.MetroGrid1)
-        Me.MetroTabPage1.Controls.Add(Me.MetroTextBox5)
-        Me.MetroTabPage1.Controls.Add(Me.MetroTextBox6)
-        Me.MetroTabPage1.Controls.Add(Me.MetroTextBox7)
-        Me.MetroTabPage1.Controls.Add(Me.MetroTextBox8)
-        Me.MetroTabPage1.Controls.Add(Me.MetroTextBox9)
-        Me.MetroTabPage1.Controls.Add(Me.MetroTextBox10)
-        Me.MetroTabPage1.HorizontalScrollbarBarColor = True
-        Me.MetroTabPage1.HorizontalScrollbarHighlightOnWheel = False
-        Me.MetroTabPage1.HorizontalScrollbarSize = 10
-        Me.MetroTabPage1.Location = New System.Drawing.Point(4, 38)
-        Me.MetroTabPage1.Name = "MetroTabPage1"
-        Me.MetroTabPage1.Size = New System.Drawing.Size(1409, 809)
-        Me.MetroTabPage1.TabIndex = 2
-        Me.MetroTabPage1.Text = "Maintenance"
-        Me.MetroTabPage1.VerticalScrollbarBarColor = True
-        Me.MetroTabPage1.VerticalScrollbarHighlightOnWheel = False
-        Me.MetroTabPage1.VerticalScrollbarSize = 10
+        Me.tabMaintainMachines.Controls.Add(Me.MetroRadioButton1)
+        Me.tabMaintainMachines.Controls.Add(Me.MetroRadioButton2)
+        Me.tabMaintainMachines.Controls.Add(Me.ScrollbarMachines)
+        Me.tabMaintainMachines.Controls.Add(Me.MetroButton1)
+        Me.tabMaintainMachines.Controls.Add(Me.MetroButton2)
+        Me.tabMaintainMachines.Controls.Add(Me.MetroButton3)
+        Me.tabMaintainMachines.Controls.Add(Me.MetroLabel11)
+        Me.tabMaintainMachines.Controls.Add(Me.TextBox1)
+        Me.tabMaintainMachines.Controls.Add(Me.dgrdMachines)
+        Me.tabMaintainMachines.Controls.Add(Me.MetroTextBox5)
+        Me.tabMaintainMachines.Controls.Add(Me.MetroTextBox6)
+        Me.tabMaintainMachines.Controls.Add(Me.MetroTextBox7)
+        Me.tabMaintainMachines.Controls.Add(Me.MetroTextBox8)
+        Me.tabMaintainMachines.Controls.Add(Me.MetroTextBox9)
+        Me.tabMaintainMachines.Controls.Add(Me.MetroTextBox10)
+        Me.tabMaintainMachines.HorizontalScrollbarBarColor = True
+        Me.tabMaintainMachines.HorizontalScrollbarHighlightOnWheel = False
+        Me.tabMaintainMachines.HorizontalScrollbarSize = 10
+        Me.tabMaintainMachines.Location = New System.Drawing.Point(4, 38)
+        Me.tabMaintainMachines.Name = "tabMaintainMachines"
+        Me.tabMaintainMachines.Size = New System.Drawing.Size(1409, 809)
+        Me.tabMaintainMachines.TabIndex = 2
+        Me.tabMaintainMachines.Text = "                              Maintain Machines"
+        Me.tabMaintainMachines.VerticalScrollbarBarColor = True
+        Me.tabMaintainMachines.VerticalScrollbarHighlightOnWheel = False
+        Me.tabMaintainMachines.VerticalScrollbarSize = 10
         '
         'MetroRadioButton1
         '
@@ -856,18 +891,18 @@ Partial Class frmMain
         Me.MetroRadioButton2.Text = "Search By Name"
         Me.MetroRadioButton2.UseSelectable = True
         '
-        'VScrollBar2
+        'ScrollbarMachines
         '
-        Me.VScrollBar2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.VScrollBar2.Location = New System.Drawing.Point(582, 77)
-        Me.VScrollBar2.Name = "VScrollBar2"
-        Me.VScrollBar2.Size = New System.Drawing.Size(44, 267)
-        Me.VScrollBar2.TabIndex = 67
+        Me.ScrollbarMachines.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.ScrollbarMachines.Location = New System.Drawing.Point(810, 77)
+        Me.ScrollbarMachines.Name = "ScrollbarMachines"
+        Me.ScrollbarMachines.Size = New System.Drawing.Size(44, 722)
+        Me.ScrollbarMachines.TabIndex = 67
         '
         'MetroButton1
         '
         Me.MetroButton1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.MetroButton1.Location = New System.Drawing.Point(905, 93)
+        Me.MetroButton1.Location = New System.Drawing.Point(1077, 77)
         Me.MetroButton1.Name = "MetroButton1"
         Me.MetroButton1.Size = New System.Drawing.Size(120, 52)
         Me.MetroButton1.TabIndex = 66
@@ -877,7 +912,7 @@ Partial Class frmMain
         'MetroButton2
         '
         Me.MetroButton2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.MetroButton2.Location = New System.Drawing.Point(730, 93)
+        Me.MetroButton2.Location = New System.Drawing.Point(902, 77)
         Me.MetroButton2.Name = "MetroButton2"
         Me.MetroButton2.Size = New System.Drawing.Size(120, 52)
         Me.MetroButton2.TabIndex = 65
@@ -887,7 +922,7 @@ Partial Class frmMain
         'MetroButton3
         '
         Me.MetroButton3.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.MetroButton3.Location = New System.Drawing.Point(1102, 93)
+        Me.MetroButton3.Location = New System.Drawing.Point(1274, 77)
         Me.MetroButton3.Name = "MetroButton3"
         Me.MetroButton3.Size = New System.Drawing.Size(120, 52)
         Me.MetroButton3.TabIndex = 64
@@ -913,21 +948,21 @@ Partial Class frmMain
         Me.TextBox1.Size = New System.Drawing.Size(156, 29)
         Me.TextBox1.TabIndex = 62
         '
-        'MetroGrid1
+        'dgrdMachines
         '
-        Me.MetroGrid1.AllowUserToAddRows = False
-        Me.MetroGrid1.AllowUserToDeleteRows = False
-        Me.MetroGrid1.AllowUserToResizeRows = False
+        Me.dgrdMachines.AllowUserToAddRows = False
+        Me.dgrdMachines.AllowUserToDeleteRows = False
+        Me.dgrdMachines.AllowUserToResizeRows = False
         DataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.MetroGrid1.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle9
-        Me.MetroGrid1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.dgrdMachines.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle9
+        Me.dgrdMachines.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.MetroGrid1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        Me.MetroGrid1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells
-        Me.MetroGrid1.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.MetroGrid1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.MetroGrid1.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None
-        Me.MetroGrid1.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
+        Me.dgrdMachines.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.dgrdMachines.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells
+        Me.dgrdMachines.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.dgrdMachines.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.dgrdMachines.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None
+        Me.dgrdMachines.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
         DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle10.BackColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
         DataGridViewCellStyle10.Font = New System.Drawing.Font("Segoe UI", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -935,8 +970,8 @@ Partial Class frmMain
         DataGridViewCellStyle10.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
         DataGridViewCellStyle10.SelectionForeColor = System.Drawing.Color.Silver
         DataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.MetroGrid1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle10
-        Me.MetroGrid1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgrdMachines.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle10
+        Me.dgrdMachines.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle11.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
         DataGridViewCellStyle11.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -944,15 +979,15 @@ Partial Class frmMain
         DataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.GradientInactiveCaption
         DataGridViewCellStyle11.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer))
         DataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.MetroGrid1.DefaultCellStyle = DataGridViewCellStyle11
-        Me.MetroGrid1.EnableHeadersVisualStyles = False
-        Me.MetroGrid1.Font = New System.Drawing.Font("Segoe UI", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
-        Me.MetroGrid1.GridColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.MetroGrid1.Location = New System.Drawing.Point(0, 77)
-        Me.MetroGrid1.MultiSelect = False
-        Me.MetroGrid1.Name = "MetroGrid1"
-        Me.MetroGrid1.ReadOnly = True
-        Me.MetroGrid1.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
+        Me.dgrdMachines.DefaultCellStyle = DataGridViewCellStyle11
+        Me.dgrdMachines.EnableHeadersVisualStyles = False
+        Me.dgrdMachines.Font = New System.Drawing.Font("Segoe UI", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
+        Me.dgrdMachines.GridColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.dgrdMachines.Location = New System.Drawing.Point(0, 77)
+        Me.dgrdMachines.MultiSelect = False
+        Me.dgrdMachines.Name = "dgrdMachines"
+        Me.dgrdMachines.ReadOnly = True
+        Me.dgrdMachines.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
         DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle12.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(174, Byte), Integer), CType(CType(219, Byte), Integer))
         DataGridViewCellStyle12.Font = New System.Drawing.Font("Segoe UI", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
@@ -960,12 +995,12 @@ Partial Class frmMain
         DataGridViewCellStyle12.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(247, Byte), Integer))
         DataGridViewCellStyle12.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer))
         DataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.MetroGrid1.RowHeadersDefaultCellStyle = DataGridViewCellStyle12
-        Me.MetroGrid1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
-        Me.MetroGrid1.ScrollBars = System.Windows.Forms.ScrollBars.None
-        Me.MetroGrid1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.MetroGrid1.Size = New System.Drawing.Size(561, 267)
-        Me.MetroGrid1.TabIndex = 61
+        Me.dgrdMachines.RowHeadersDefaultCellStyle = DataGridViewCellStyle12
+        Me.dgrdMachines.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
+        Me.dgrdMachines.ScrollBars = System.Windows.Forms.ScrollBars.None
+        Me.dgrdMachines.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.dgrdMachines.Size = New System.Drawing.Size(798, 722)
+        Me.dgrdMachines.TabIndex = 61
         '
         'MetroTextBox5
         '
@@ -983,7 +1018,7 @@ Partial Class frmMain
         Me.MetroTextBox5.CustomButton.UseSelectable = True
         Me.MetroTextBox5.CustomButton.Visible = False
         Me.MetroTextBox5.Lines = New String(-1) {}
-        Me.MetroTextBox5.Location = New System.Drawing.Point(730, 296)
+        Me.MetroTextBox5.Location = New System.Drawing.Point(902, 279)
         Me.MetroTextBox5.MaxLength = 32767
         Me.MetroTextBox5.Name = "MetroTextBox5"
         Me.MetroTextBox5.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
@@ -1014,7 +1049,7 @@ Partial Class frmMain
         Me.MetroTextBox6.CustomButton.UseSelectable = True
         Me.MetroTextBox6.CustomButton.Visible = False
         Me.MetroTextBox6.Lines = New String(-1) {}
-        Me.MetroTextBox6.Location = New System.Drawing.Point(730, 266)
+        Me.MetroTextBox6.Location = New System.Drawing.Point(902, 250)
         Me.MetroTextBox6.MaxLength = 32767
         Me.MetroTextBox6.Name = "MetroTextBox6"
         Me.MetroTextBox6.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
@@ -1045,7 +1080,7 @@ Partial Class frmMain
         Me.MetroTextBox7.CustomButton.UseSelectable = True
         Me.MetroTextBox7.CustomButton.Visible = False
         Me.MetroTextBox7.Lines = New String(-1) {}
-        Me.MetroTextBox7.Location = New System.Drawing.Point(730, 237)
+        Me.MetroTextBox7.Location = New System.Drawing.Point(902, 221)
         Me.MetroTextBox7.MaxLength = 32767
         Me.MetroTextBox7.Name = "MetroTextBox7"
         Me.MetroTextBox7.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
@@ -1076,7 +1111,7 @@ Partial Class frmMain
         Me.MetroTextBox8.CustomButton.UseSelectable = True
         Me.MetroTextBox8.CustomButton.Visible = False
         Me.MetroTextBox8.Lines = New String(-1) {}
-        Me.MetroTextBox8.Location = New System.Drawing.Point(730, 209)
+        Me.MetroTextBox8.Location = New System.Drawing.Point(902, 193)
         Me.MetroTextBox8.MaxLength = 32767
         Me.MetroTextBox8.Name = "MetroTextBox8"
         Me.MetroTextBox8.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
@@ -1108,7 +1143,7 @@ Partial Class frmMain
         Me.MetroTextBox9.CustomButton.UseSelectable = True
         Me.MetroTextBox9.CustomButton.Visible = False
         Me.MetroTextBox9.Lines = New String(-1) {}
-        Me.MetroTextBox9.Location = New System.Drawing.Point(730, 180)
+        Me.MetroTextBox9.Location = New System.Drawing.Point(902, 164)
         Me.MetroTextBox9.MaxLength = 32767
         Me.MetroTextBox9.Name = "MetroTextBox9"
         Me.MetroTextBox9.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
@@ -1141,7 +1176,7 @@ Partial Class frmMain
         Me.MetroTextBox10.CustomButton.UseSelectable = True
         Me.MetroTextBox10.CustomButton.Visible = False
         Me.MetroTextBox10.Lines = New String(-1) {}
-        Me.MetroTextBox10.Location = New System.Drawing.Point(730, 151)
+        Me.MetroTextBox10.Location = New System.Drawing.Point(902, 135)
         Me.MetroTextBox10.MaxLength = 32767
         Me.MetroTextBox10.Name = "MetroTextBox10"
         Me.MetroTextBox10.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
@@ -1168,40 +1203,6 @@ Partial Class frmMain
         Me.PrintPreviewDialog1.Name = "PrintPreviewDialog1"
         Me.PrintPreviewDialog1.Visible = False
         '
-        'SerialNumber
-        '
-        Me.SerialNumber.HeaderText = "Serial No."
-        Me.SerialNumber.Name = "SerialNumber"
-        Me.SerialNumber.ReadOnly = True
-        '
-        'ModelId
-        '
-        Me.ModelId.HeaderText = "Model Id"
-        Me.ModelId.Name = "ModelId"
-        Me.ModelId.ReadOnly = True
-        '
-        'CertNumber
-        '
-        Me.CertNumber.HeaderText = "Cert No."
-        Me.CertNumber.Name = "CertNumber"
-        Me.CertNumber.ReadOnly = True
-        '
-        'TagId
-        '
-        Me.TagId.HeaderText = "Tag Id"
-        Me.TagId.Name = "TagId"
-        Me.TagId.ReadOnly = True
-        '
-        'ViewCert
-        '
-        Me.ViewCert.FillWeight = 30.0!
-        Me.ViewCert.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.ViewCert.HeaderText = ""
-        Me.ViewCert.Name = "ViewCert"
-        Me.ViewCert.ReadOnly = True
-        Me.ViewCert.Text = "View Cert"
-        Me.ViewCert.UseColumnTextForButtonValue = True
-        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1217,15 +1218,15 @@ Partial Class frmMain
         Me.tabCustomersNew.PerformLayout()
         CType(Me.dgrdInstalledMachines, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.dgrdCustomers, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.MetroTabPage1.ResumeLayout(False)
-        Me.MetroTabPage1.PerformLayout()
-        CType(Me.MetroGrid1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.tabMaintainMachines.ResumeLayout(False)
+        Me.tabMaintainMachines.PerformLayout()
+        CType(Me.dgrdMachines, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
     Friend WithEvents tabPages As MetroFramework.Controls.MetroTabControl
     Friend WithEvents PrintPreviewDialog1 As System.Windows.Forms.PrintPreviewDialog
-    Friend WithEvents MetroTabPage1 As MetroFramework.Controls.MetroTabPage
+    Friend WithEvents tabMaintainMachines As MetroFramework.Controls.MetroTabPage
     Friend WithEvents CustomerCode As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents CustomerName As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents tabCustomersNew As MetroFramework.Controls.MetroTabPage
@@ -1257,18 +1258,18 @@ Partial Class frmMain
     Friend WithEvents btnAddCustomer As MetroFramework.Controls.MetroButton
     Friend WithEvents lblInstalledMachines As Label
     Friend WithEvents btnDeleteCustomer As MetroFramework.Controls.MetroButton
-    Friend WithEvents VScrollBar1 As VScrollBar
+    Friend WithEvents ScrollBarCustomers As VScrollBar
     Friend WithEvents searchByCode As MetroFramework.Controls.MetroRadioButton
     Friend WithEvents searchByName As MetroFramework.Controls.MetroRadioButton
     Friend WithEvents MetroRadioButton1 As MetroFramework.Controls.MetroRadioButton
     Friend WithEvents MetroRadioButton2 As MetroFramework.Controls.MetroRadioButton
-    Friend WithEvents VScrollBar2 As VScrollBar
+    Friend WithEvents ScrollbarMachines As VScrollBar
     Friend WithEvents MetroButton1 As MetroFramework.Controls.MetroButton
     Friend WithEvents MetroButton2 As MetroFramework.Controls.MetroButton
     Friend WithEvents MetroButton3 As MetroFramework.Controls.MetroButton
     Friend WithEvents MetroLabel11 As MetroFramework.Controls.MetroLabel
     Friend WithEvents TextBox1 As TextBox
-    Friend WithEvents MetroGrid1 As MetroFramework.Controls.MetroGrid
+    Friend WithEvents dgrdMachines As MetroFramework.Controls.MetroGrid
     Friend WithEvents MetroTextBox5 As MetroFramework.Controls.MetroTextBox
     Friend WithEvents MetroTextBox6 As MetroFramework.Controls.MetroTextBox
     Friend WithEvents MetroTextBox7 As MetroFramework.Controls.MetroTextBox

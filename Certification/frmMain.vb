@@ -24,9 +24,10 @@ Public Class frmMain
     ''' </summary>
     Public Sub New()
         InitializeComponent()
-        ' LoadPrintVariables()
+        ' Load Customers
         LoadCustomers()
-        '  CreatePrintDocument()
+        ' Load Machines
+        LoadMachines()
 
 
     End Sub
@@ -45,9 +46,6 @@ Public Class frmMain
     End Sub
 
 #End Region
-
-
-
 
 #Region "Customers"
 
@@ -79,7 +77,7 @@ Public Class frmMain
             ' Set themax customer Id for adding new customers
             SetMaxCustomerId()
 
-            VScrollBar1.Maximum = dgrdCustomers.Rows.Count
+            ScrollBarCustomers.Maximum = dgrdCustomers.Rows.Count
         Catch ex As Exception
             MessageBox.Show(ex.Message)
         End Try
@@ -100,13 +98,10 @@ Public Class frmMain
         Else
             CType(dgrdCustomers.DataSource, DataTable).DefaultView.RowFilter = String.Format("Code like '{0}%'", txtSearchCustomer.Text)
         End If
-        VScrollBar1.Maximum = dgrdCustomers.Rows.Count
+        ScrollBarCustomers.Maximum = dgrdCustomers.Rows.Count
 
     End Sub
 
-
-
-    ' Private dsCustomers As DataSet
 
     ''' <summary>
     ''' Load Customer Details when customer selected
@@ -264,7 +259,7 @@ Public Class frmMain
                     ' Refresh the grid with the new row
                     dgrdCustomers.EndEdit()
                     dgrdCustomers.Refresh()
-                    VScrollBar1.Maximum = dgrdCustomers.Rows.Count
+                    ScrollBarCustomers.Maximum = dgrdCustomers.Rows.Count
                     ' Scroll to the bottom of the grid to show the new row
                     _selectedCustomerRowIndex = dgrdCustomers.RowCount - 1
                     dgrdCustomers.FirstDisplayedScrollingRowIndex = _selectedCustomerRowIndex
@@ -327,7 +322,7 @@ Public Class frmMain
                     File.WriteAllText("Data\Customers.json", output)
                     dgrdCustomers.Rows.RemoveAt(_selectedCustomerRowIndex)
                     ClearCustomerDetails()
-                    VScrollBar1.Maximum = dgrdCustomers.Rows.Count
+                    ScrollBarCustomers.Maximum = dgrdCustomers.Rows.Count
                     MessageBox.Show("Customer deleted")
                 Catch ex As Exception
                     Console.WriteLine("Error deleting Customer : " + ex.Message.ToString())
@@ -380,20 +375,6 @@ Public Class frmMain
         txtNotes.Clear()
     End Sub
 
-#End Region
-
-
-#Region "Customer Scroll Bar"
-
-    Private Sub dgrdCustomers_Scroll(sender As Object, e As ScrollEventArgs) Handles dgrdCustomers.Scroll
-        VScrollBar1.Value = e.NewValue
-    End Sub
-
-    Private Sub VScrollBar1_Scroll(sender As Object, e As ScrollEventArgs) Handles VScrollBar1.Scroll
-        dgrdCustomers.FirstDisplayedScrollingRowIndex = e.NewValue
-    End Sub
-#End Region
-
 
     ''' <summary>
     ''' Create New certificate
@@ -440,5 +421,71 @@ Public Class frmMain
     Private Sub dgrdCustomers_DataBindingComplete(sender As Object, e As DataGridViewBindingCompleteEventArgs) Handles dgrdCustomers.DataBindingComplete
         dgrdCustomers.ClearSelection()
     End Sub
+
+#End Region
+
+#Region "Customer Scroll Bar"
+
+    Private Sub dgrdCustomers_Scroll(sender As Object, e As ScrollEventArgs) Handles dgrdCustomers.Scroll
+        ScrollBarCustomers.Value = e.NewValue
+    End Sub
+
+    Private Sub VScrollBar1_Scroll(sender As Object, e As ScrollEventArgs) Handles ScrollBarCustomers.Scroll
+        dgrdCustomers.FirstDisplayedScrollingRowIndex = e.NewValue
+    End Sub
+
+#End Region
+
+#Region "Machines"
+
+    ''' <summary>
+    ''' Parse Machines json file and load machines dgrd
+    ''' </summary>
+    Private Sub LoadMachines()
+
+        Try
+            Dim json = File.ReadAllText("Data\Machines.json")
+            Dim jObject As JArray = JArray.Parse(json)
+            Dim MyTable As DataTable = JsonConvert.DeserializeObject(Of DataTable)(jObject.ToString())
+            MyTable.TableName = "Machines Table"
+            dgrdMachines.DataSource = MyTable
+            ' Dim dtTmp As DataTable = jObject
+            '   dgrdCustomers.DataSource = jObject
+            'dgrdCustomers.D
+            'dgrdCustomers.Columns("Address1").Visible = False
+            'dgrdCustomers.Columns("Address2").Visible = False
+            'dgrdCustomers.Columns("Address3").Visible = False
+            'dgrdCustomers.Columns("Address4").Visible = False
+            'dgrdCustomers.Columns("Telephone").Visible = False
+            'dgrdCustomers.Columns("Fax").Visible = False
+            'dgrdCustomers.Columns("Contacts").Visible = False
+            'dgrdCustomers.Columns("Notes").Visible = False
+
+
+
+            ' Set themax customer Id for adding new customers
+            ' SetMaxCustomerId()
+
+            ScrollbarMachines.Maximum = dgrdCustomers.Rows.Count
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+        End Try
+    End Sub
+
+#End Region
+
+
+#Region "Machines Scroll Bar"
+
+    Private Sub dgrdMachines_Scroll(sender As Object, e As ScrollEventArgs) Handles dgrdMachines.Scroll
+        ScrollBarCustomers.Value = e.NewValue
+    End Sub
+
+    Private Sub ScrollBarCustomers_Scroll(sender As Object, e As ScrollEventArgs) Handles ScrollBarCustomers.Scroll
+        dgrdMachines.FirstDisplayedScrollingRowIndex = e.NewValue
+    End Sub
+
+#End Region
+
 
 End Class
