@@ -485,6 +485,29 @@ Public Class frmMain
         dgrdMachines.FirstDisplayedScrollingRowIndex = e.NewValue
     End Sub
 
+    'Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+    '    'pnlCerts.Location = New Point(pnlCerts.Location.X - 740, pnlCerts.Location.Y)
+
+
+    '    'For i As Integer = -(pnlCerts.Width) To 0 Step 1
+    '    '    pnlCerts.Location = New Point(i, pnlCerts.Location.Y)
+    '    'Next
+
+    '    For i As Integer = 0 To 100
+    '        pnlCerts.Location = New Point(pnlCerts.Location.X - i, pnlCerts.Location.Y)
+    '        System.Threading.Thread.Sleep(10)
+    '    Next
+
+
+
+    '    '  While i As Interger = -pnlCerts.Width 
+
+    '    '     For Int() i = -(panel2.Width); i < 0; i++)
+
+    '    'panel2.Location = New Point(i, panel2.Location.Y);
+
+    'End Sub
+
 #End Region
 
 
