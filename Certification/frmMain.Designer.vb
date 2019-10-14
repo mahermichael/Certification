@@ -94,6 +94,7 @@ Partial Class frmMain
         Me.MetroTextBox9 = New MetroFramework.Controls.MetroTextBox()
         Me.MetroTextBox10 = New MetroFramework.Controls.MetroTextBox()
         Me.PrintPreviewDialog1 = New System.Windows.Forms.PrintPreviewDialog()
+        Me.btnSettings = New MetroFramework.Controls.MetroButton()
         Me.tabCertPages.SuspendLayout()
         Me.tabCustomersNew.SuspendLayout()
         Me.pnlCerts.SuspendLayout()
@@ -1238,11 +1239,24 @@ Partial Class frmMain
         Me.PrintPreviewDialog1.Name = "PrintPreviewDialog1"
         Me.PrintPreviewDialog1.Visible = False
         '
+        'btnSettings
+        '
+        Me.btnSettings.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnSettings.BackColor = System.Drawing.Color.Black
+        Me.btnSettings.ForeColor = System.Drawing.SystemColors.Info
+        Me.btnSettings.Location = New System.Drawing.Point(1328, 17)
+        Me.btnSettings.Name = "btnSettings"
+        Me.btnSettings.Size = New System.Drawing.Size(120, 37)
+        Me.btnSettings.TabIndex = 67
+        Me.btnSettings.Text = "Settings"
+        Me.btnSettings.UseSelectable = True
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1457, 931)
+        Me.Controls.Add(Me.btnSettings)
         Me.Controls.Add(Me.tabCertPages)
         Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
@@ -1321,4 +1335,5 @@ Partial Class frmMain
     Friend WithEvents TagId As DataGridViewTextBoxColumn
     Friend WithEvents ViewCert As DataGridViewButtonColumn
     Friend WithEvents MetroLabel13 As MetroFramework.Controls.MetroLabel
+    Friend WithEvents btnSettings As MetroFramework.Controls.MetroButton
 End Class

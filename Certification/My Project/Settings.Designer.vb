@@ -53,6 +53,30 @@ Namespace My
                 Return defaultInstance
             End Get
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property DataLocation() As String
+            Get
+                Return CType(Me("DataLocation"),String)
+            End Get
+            Set
+                Me("DataLocation") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property BackupLocation() As String
+            Get
+                Return CType(Me("BackupLocation"),String)
+            End Get
+            Set
+                Me("BackupLocation") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

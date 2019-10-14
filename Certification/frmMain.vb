@@ -39,10 +39,14 @@ Public Class frmMain
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     Private Sub frmMain_HandleDestroyed(sender As Object, e As EventArgs) Handles Me.HandleDestroyed
-        Dim path As String = Directory.GetCurrentDirectory() & "\Data"
-        If Not (Directory.Exists(path)) Then
-            Directory.CreateDirectory(path)
+        If (String.IsNullOrEmpty(My.Settings.DataLocation)) Then
+            Dim path As String = Directory.GetCurrentDirectory() & "\Data"
+            If Not (Directory.Exists(path)) Then
+                Directory.CreateDirectory(path)
+            End If
+            My.Settings.DataLocation = path
         End If
+
     End Sub
 
 #End Region
@@ -55,7 +59,7 @@ Public Class frmMain
     Private Sub LoadCustomers()
 
         Try
-            Dim json = File.ReadAllText("Data\Customers.json")
+            Dim json = File.ReadAllText(My.Settings.DataLocation & "\Customers.json")
             Dim jObject As JArray = JArray.Parse(json)
             Dim MyTable As DataTable = JsonConvert.DeserializeObject(Of DataTable)(jObject.ToString())
             MyTable.TableName = "Test Table"
@@ -110,6 +114,7 @@ Public Class frmMain
     ''' <param name="e"></param>
     Private Sub dgrdCustomers_CellMouseClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles dgrdCustomers.CellMouseClick
         If (e.RowIndex > -1) Then
+            Cursor.Current = Cursors.WaitCursor
             _selectedCustomerRowIndex = e.RowIndex
             Me.txtCode.Text = dgrdCustomers.Rows(e.RowIndex).Cells("Code").Value.ToString
             Me.txtName.Text = dgrdCustomers.Rows(e.RowIndex).Cells("Name").Value.ToString
@@ -123,6 +128,7 @@ Public Class frmMain
             Me.txtNotes.Text = dgrdCustomers.Rows(e.RowIndex).Cells("Notes").Value.ToString
             lblInstalledMachines.Text = "Installed Machines For : " & Me.txtName.Text
             LoadCustomerCerts()
+            Cursor.Current = Cursors.Default
         End If
     End Sub
 
@@ -135,7 +141,7 @@ Public Class frmMain
         dgrdInstalledMachines.Rows.Clear()
         Try
             If Not (String.IsNullOrEmpty(Me.txtCode.Text)) Then
-                Dim json As String = File.ReadAllText("Data\InstalledMachines.json")
+                Dim json As String = File.ReadAllText(My.Settings.DataLocation & "\InstalledMachines.json")
                 Dim jsonObject As JArray = JArray.Parse(json)
                 For Each InstalledMachine As JToken In jsonObject.Where(Function(obj) obj("CustCode").Value(Of String)() = Me.txtCode.Text)
                     Dim row As DataGridViewRow = Me.dgrdInstalledMachines.Rows(Me.dgrdInstalledMachines.Rows.Add)
@@ -219,7 +225,7 @@ Public Class frmMain
     Private Sub btnSaveCustomer_Click(sender As Object, e As EventArgs) Handles btnSaveCustomer.Click
         If (ValidateCustomer()) Then
             Try
-                Dim json As String = File.ReadAllText("Data\Customers.json")
+                Dim json As String = File.ReadAllText(My.Settings.DataLocation & "\Customers.json")
                 Dim jsonObject As JArray = JArray.Parse(json)
                 If (_addingCustomer) Then
                     'Dim newCust As New JToken
@@ -314,7 +320,7 @@ Public Class frmMain
             Dim result As Integer = MessageBox.Show("Do you wish to Delete Customer " & txtName.Text, "Delete Customer", MessageBoxButtons.YesNo)
             If result = DialogResult.Yes Then
                 Try
-                    Dim json As String = File.ReadAllText("Data\Customers.json")
+                    Dim json As String = File.ReadAllText(My.Settings.DataLocation & "\Customers.json")
                     Dim jsonObject As JArray = JArray.Parse(json)
                     Dim customerToDelete As JToken = jsonObject.FirstOrDefault(Function(obj) obj("Code").Value(Of String)() = txtCode.Text)
                     jsonObject.Remove(customerToDelete)
@@ -444,7 +450,7 @@ Public Class frmMain
     Private Sub LoadMachines()
 
         Try
-            Dim json = File.ReadAllText("Data\Machines.json")
+            Dim json = File.ReadAllText(My.Settings.DataLocation & "\Machines.json")
             Dim jObject As JArray = JArray.Parse(json)
             Dim MyTable As DataTable = JsonConvert.DeserializeObject(Of DataTable)(jObject.ToString())
             MyTable.TableName = "Machines Table"
@@ -485,6 +491,7 @@ Public Class frmMain
         dgrdMachines.FirstDisplayedScrollingRowIndex = e.NewValue
     End Sub
 
+
     'Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
     '    'pnlCerts.Location = New Point(pnlCerts.Location.X - 740, pnlCerts.Location.Y)
 
@@ -509,6 +516,17 @@ Public Class frmMain
     'End Sub
 
 #End Region
+
+
+    Private Sub btnSettings_Click(sender As Object, e As EventArgs) Handles btnSettings.Click
+        Dim frm As New Settings()
+        Dim diaResult As DialogResult
+        diaResult = frm.ShowDialog()
+        If diaResult = DialogResult.OK Then
+            'Refresh the grid
+            LoadCustomerCerts()
+        End If
+    End Sub
 
 
 End Class
