@@ -27,9 +27,8 @@ Public Class frmMain
         ' Load Customers
         LoadCustomers()
         ' Load Machines
-        'LoadMachines()
-
-        tabCertPages.TabPages.RemoveAt(1)
+        LoadMachines()
+        'tabCertPages.TabPages.RemoveAt(1)
     End Sub
 
 
