@@ -1,0 +1,164 @@
+[
+    {
+      "fieldName": "Cert No",
+      "fieldValue": "No. 17549",
+      "fromLeft": "700",
+      "fromTop": "40"
+    },
+    {
+      "fieldName": "Customer No",
+      "fieldValue": "5022",
+      "fromLeft": "10",
+      "fromTop": "190"
+    },
+    {
+      "fieldName": "Customer Name",
+      "fieldValue": "Kingspan Ltd t/a Aeroboard",
+      "fromLeft": "70",
+      "fromTop": "190"
+    },
+    {
+      "fieldName": "Customer Address1",
+      "fieldValue": "Askeaton",
+      "fromLeft": "70",
+      "fromTop": "220"
+    },
+	{
+      "fieldName": "Customer Address2",
+      "fieldValue": "Address 2",
+      "fromLeft": "70",
+      "fromTop": "250"
+    },
+    {
+      "fieldName": "Customer Address3",
+      "fieldValue": "Co. Limerick",
+      "fromLeft": "70",
+      "fromTop": "270"
+    },
+	{
+      "fieldName": "Customer Address4",
+      "fieldValue": "Address 4",
+      "fromLeft": "70",
+      "fromTop": "290"
+    },
+    {
+      "fieldName": "Test Weights M1",
+      "fieldValue": "",
+      "fromLeft": "80",
+      "fromTop": "550"
+    },
+    {
+      "fieldName": "Test Weights F1",
+      "fieldValue": "B3118",
+      "fromLeft": "100",
+      "fromTop": "320"
+    },
+    {
+      "fieldName": "Calibration Interval",
+      "fieldValue": "6 Monthly",
+      "fromLeft": "600",
+      "fromTop": "100"
+    },
+    {
+      "fieldName": "Tag Identifier",
+      "fieldValue": "KS-01",
+      "fromLeft": "650",
+      "fromTop": "180"
+    },
+    {
+      "fieldName": "Location",
+      "fieldValue": "Quality Lab",
+      "fromLeft": "650",
+      "fromTop": "210"
+    },
+    {
+      "fieldName": "Manufacturer",
+      "fieldValue": "Adam Equipment",
+      "fromLeft": "650",
+      "fromTop": "240"
+    },
+    {
+      "fieldName": "Model",
+      "fieldValue": "ACB 1500",
+      "fromLeft": "650",
+      "fromTop": "270"
+    },
+    {
+      "fieldName": "Serial No",
+      "fieldValue": "AE325F00180",
+      "fromLeft": "650",
+      "fromTop": "300"
+    },
+    {
+      "fieldName": "Capacity",
+      "fieldValue": "1500g",
+      "fromLeft": "650",
+      "fromTop": "330"
+    },
+    {
+      "fieldName": "Min Graduations",
+      "fieldValue": "0.05g",
+      "fromLeft": "650",
+      "fromTop": "360"
+    },
+    {
+      "fieldName": "Required Tolerance",
+      "fieldValue": "1 Division",
+      "fromLeft": "650",
+      "fromTop": "390"
+    },
+    {
+      "fieldName": "Electronic",
+      "fieldValue": " X",
+      "fromLeft": "620",
+      "fromTop": "440"
+    },
+    {
+      "fieldName": "Procedure",
+      "fieldValue": "Quality Assurance Procedure 15",
+      "fromLeft": "600",
+      "fromTop": "500"
+    },
+    {
+      "fieldName": "Calibration Weight 1",
+      "fieldValue": "0g",
+      "fromLeft": "50",
+      "fromTop": "600"
+    },
+    {
+      "fieldName": "Calibration Weight 2",
+      "fieldValue": "100g",
+      "fromLeft": "50",
+      "fromTop": "620"
+    },
+    {
+      "fieldName": "Calibration Weight 3",
+      "fieldValue": "300g",
+      "fromLeft": "50",
+      "fromTop": "640"
+    },
+    {
+      "fieldName": "Calibration Weight 4",
+      "fieldValue": "500g",
+      "fromLeft": "50",
+      "fromTop": "660"
+    },
+    {
+      "fieldName": "Calibration Weight 5",
+      "fieldValue": "800g",
+      "fromLeft": "50",
+      "fromTop": "680"
+    },
+    {
+      "fieldName": "Calibration Weight 6",
+      "fieldValue": "1200g",
+      "fromLeft": "50",
+      "fromTop": "700"
+    },
+    {
+      "fieldName": "Calibration Weight 7",
+      "fieldValue": "1500g",
+      "fromLeft": "50",
+      "fromTop": "720"
+    }
+  ]
