@@ -40,8 +40,8 @@ Public Class Settings
     ''' </summary>
     Public Sub New()
         InitializeComponent()
-        Me.txtBackupLocation.Text = My.Settings.BackupLocation.ToString()
-        Me.txtDataLocation.Text = My.Settings.DataLocation.ToString()
+        Me.txtBackupLocation.Text = My.Settings.BackupLocation1.ToString()
+        Me.txtDataLocation.Text = My.Settings.DataLocation1.ToString()
     End Sub
 
 
@@ -61,8 +61,10 @@ Public Class Settings
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
-        My.Settings.BackupLocation = Me.txtBackupLocation.Text
-        My.Settings.DataLocation = Me.txtDataLocation.Text
+        My.Settings.BackupLocation1 = Me.txtBackupLocation.Text
+        My.Settings.DataLocation1 = Me.txtDataLocation.Text
+        My.Settings.Width = Me.txtWidth.Text
+        My.Settings.Height = Me.txtHeight.Text
         Me.Close()
     End Sub
 
@@ -74,17 +76,22 @@ Public Class Settings
     ''' <param name="e"></param>
     Private Sub btnPerformBackup_Click(sender As Object, e As EventArgs) Handles btnPerformBackup.Click
         If Not (String.IsNullOrEmpty(txtBackupLocation.Text)) Then
-            Dim path As String = txtBackupLocation.Text
-            If Not (Directory.Exists(path)) Then
-                Directory.CreateDirectory(path)
-            End If
-            Dim startPath = Me.txtDataLocation.Text
-            Dim zipPath = Me.txtBackupLocation.Text & "\result.zip"
+            Try
+                Dim path As String = txtBackupLocation.Text
+                If Not (Directory.Exists(path)) Then
+                    Directory.CreateDirectory(path)
+                End If
+                Dim startPath = Me.txtDataLocation.Text
+                Dim zipPath = Me.txtBackupLocation.Text & "\Backup-" & DateTime.Now.ToString("yyyy-dd-M--HH-mm-ss") & ".zip"
 
-            Dim z As FastZip = New FastZip()
-            z.CreateEmptyDirectories = True
+                Dim z As FastZip = New FastZip()
+                z.CreateEmptyDirectories = True
 
-            z.CreateZip(zipPath, startPath, True, "")
+                z.CreateZip(zipPath, startPath, True, "")
+            Catch ex As Exception
+                MessageBox.Show("Error Performing backup : " & ex.Message)
+            End Try
+            MessageBox.Show("Backup complete !")
             'Try
             '    ZipFile.
             'Catch ex As Exception
@@ -100,25 +107,6 @@ Public Class Settings
 
         End If
     End Sub
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 End Class

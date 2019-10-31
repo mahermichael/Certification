@@ -56,25 +56,49 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
-        Public Property DataLocation() As String
+         Global.System.Configuration.DefaultSettingValueAttribute("Z:\CertificationSystem\Data")>  _
+        Public Property DataLocation1() As String
             Get
-                Return CType(Me("DataLocation"),String)
+                Return CType(Me("DataLocation1"),String)
             End Get
             Set
-                Me("DataLocation") = value
+                Me("DataLocation1") = value
             End Set
         End Property
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
-        Public Property BackupLocation() As String
+         Global.System.Configuration.DefaultSettingValueAttribute("Z:\CertificationSystem\Backup")>  _
+        Public Property BackupLocation1() As String
             Get
-                Return CType(Me("BackupLocation"),String)
+                Return CType(Me("BackupLocation1"),String)
             End Get
             Set
-                Me("BackupLocation") = value
+                Me("BackupLocation1") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("813")>  _
+        Public Property Width() As Integer
+            Get
+                Return CType(Me("Width"),Integer)
+            End Get
+            Set
+                Me("Width") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("1000")>  _
+        Public Property Height() As Integer
+            Get
+                Return CType(Me("Height"),Integer)
+            End Get
+            Set
+                Me("Height") = value
             End Set
         End Property
     End Class
@@ -88,9 +112,9 @@ Namespace My
     Friend Module MySettingsProperty
         
         <Global.System.ComponentModel.Design.HelpKeywordAttribute("My.Settings")>  _
-        Friend ReadOnly Property Settings() As Global.Certification.My.MySettings
+        Friend ReadOnly Property Settings() As Global.CertificationSystem.My.MySettings
             Get
-                Return Global.Certification.My.MySettings.Default
+                Return Global.CertificationSystem.My.MySettings.Default
             End Get
         End Property
     End Module

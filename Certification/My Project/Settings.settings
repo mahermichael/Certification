@@ -2,11 +2,17 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="My" GeneratedClassName="MySettings" UseMySettingsClassName="true">
   <Profiles />
   <Settings>
-    <Setting Name="DataLocation" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+    <Setting Name="DataLocation1" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Z:\CertificationSystem\Data</Value>
     </Setting>
-    <Setting Name="BackupLocation" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+    <Setting Name="BackupLocation1" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Z:\CertificationSystem\Backup</Value>
+    </Setting>
+    <Setting Name="Width" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">813</Value>
+    </Setting>
+    <Setting Name="Height" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">1000</Value>
     </Setting>
   </Settings>
 </SettingsFile>

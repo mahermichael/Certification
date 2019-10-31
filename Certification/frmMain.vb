@@ -11,9 +11,16 @@ Public Class frmMain
 
     Private _selectedCustomerRowIndex As Integer = -1
 
+    Private _selectedMachineRowIndex As Integer = -1
+
     Private _maxCustomerId As Integer = -1
 
+    Private _maxMachineId As Integer = -1
+
     Private _addingCustomer As Boolean = False
+
+    Private _addingMachine As Boolean = False
+
 
 
 
@@ -29,6 +36,8 @@ Public Class frmMain
         ' Load Machines
         LoadMachines()
         'tabCertPages.TabPages.RemoveAt(1)
+        Me.tabCertPages.SelectedIndex = 0
+
     End Sub
 
 
@@ -38,12 +47,19 @@ Public Class frmMain
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     Private Sub frmMain_HandleDestroyed(sender As Object, e As EventArgs) Handles Me.HandleDestroyed
-        If (String.IsNullOrEmpty(My.Settings.DataLocation)) Then
+        If (String.IsNullOrEmpty(My.Settings.DataLocation1)) Then
             Dim path As String = Directory.GetCurrentDirectory() & "\Data"
             If Not (Directory.Exists(path)) Then
                 Directory.CreateDirectory(path)
             End If
-            My.Settings.DataLocation = path
+            My.Settings.DataLocation1 = path
+        End If
+        If (String.IsNullOrEmpty(My.Settings.BackupLocation1)) Then
+            Dim path As String = Directory.GetCurrentDirectory() & "\Backup"
+            If Not (Directory.Exists(path)) Then
+                Directory.CreateDirectory(path)
+            End If
+            My.Settings.BackupLocation1 = path
         End If
 
     End Sub
@@ -58,14 +74,11 @@ Public Class frmMain
     Private Sub LoadCustomers()
 
         Try
-            Dim json = File.ReadAllText(My.Settings.DataLocation & "\Customers.json")
+            Dim json = File.ReadAllText(My.Settings.DataLocation1 & "\Customers.json")
             Dim jObject As JArray = JArray.Parse(json)
             Dim MyTable As DataTable = JsonConvert.DeserializeObject(Of DataTable)(jObject.ToString())
             MyTable.TableName = "Test Table"
             dgrdCustomers.DataSource = MyTable
-            ' Dim dtTmp As DataTable = jObject
-            '   dgrdCustomers.DataSource = jObject
-            'dgrdCustomers.D
             dgrdCustomers.Columns("Address1").Visible = False
             dgrdCustomers.Columns("Address2").Visible = False
             dgrdCustomers.Columns("Address3").Visible = False
@@ -74,9 +87,6 @@ Public Class frmMain
             dgrdCustomers.Columns("Fax").Visible = False
             dgrdCustomers.Columns("Contacts").Visible = False
             dgrdCustomers.Columns("Notes").Visible = False
-
-
-
             ' Set themax customer Id for adding new customers
             SetMaxCustomerId()
 
@@ -140,7 +150,7 @@ Public Class frmMain
         dgrdInstalledMachines.Rows.Clear()
         Try
             If Not (String.IsNullOrEmpty(Me.txtCode.Text)) Then
-                Dim json As String = File.ReadAllText(My.Settings.DataLocation & "\InstalledMachines.json")
+                Dim json As String = File.ReadAllText(My.Settings.DataLocation1 & "\InstalledMachines.json")
                 Dim jsonObject As JArray = JArray.Parse(json)
                 For Each InstalledMachine As JToken In jsonObject.Where(Function(obj) obj("CustCode").Value(Of String)() = Me.txtCode.Text)
                     Dim row As DataGridViewRow = Me.dgrdInstalledMachines.Rows(Me.dgrdInstalledMachines.Rows.Add)
@@ -224,10 +234,9 @@ Public Class frmMain
     Private Sub btnSaveCustomer_Click(sender As Object, e As EventArgs) Handles btnSaveCustomer.Click
         If (ValidateCustomer()) Then
             Try
-                Dim json As String = File.ReadAllText(My.Settings.DataLocation & "\Customers.json")
+                Dim json As String = File.ReadAllText(My.Settings.DataLocation1 & "\Customers.json")
                 Dim jsonObject As JArray = JArray.Parse(json)
                 If (_addingCustomer) Then
-                    'Dim newCust As New JToken
                     Dim newCustomerMember As String = "{ 'Code': '" & Me.txtCode.Text &
                         "','Name': '" & txtName.Text &
                         "','Address1': '" & txtAddress1.Text &
@@ -242,7 +251,7 @@ Public Class frmMain
                     Dim newCompany As JObject = JObject.Parse(newCustomerMember)
                     jsonObject.Add(newCompany)
                     Dim output As String = Newtonsoft.Json.JsonConvert.SerializeObject(jsonObject, Newtonsoft.Json.Formatting.Indented)
-                    File.WriteAllText("Data\Customers.json", output)
+                    File.WriteAllText(My.Settings.DataLocation1 & "\Customers.json", output)
                     _maxCustomerId += 1
                     ' Dim row As DataGridViewRow = Me.dgrdCustomers.Rows(Me.dgrdCustomers.Rows.Add)
                     Dim dtCustomers As DataTable = dgrdCustomers.DataSource
@@ -286,7 +295,7 @@ Public Class frmMain
                         Next
 
                         Dim output As String = Newtonsoft.Json.JsonConvert.SerializeObject(jsonObject, Newtonsoft.Json.Formatting.Indented)
-                        File.WriteAllText("Data\Customers.json", output)
+                        File.WriteAllText(My.Settings.DataLocation1 & "\Customers.json", output)
                         ' Update the open customer grid also
                         dgrdCustomers.Rows(_selectedCustomerRowIndex).Cells("Name").Value = txtName.Text
                         dgrdCustomers.Rows(_selectedCustomerRowIndex).Cells("Address1").Value = txtAddress1.Text
@@ -319,12 +328,12 @@ Public Class frmMain
             Dim result As Integer = MessageBox.Show("Do you wish to Delete Customer " & txtName.Text, "Delete Customer", MessageBoxButtons.YesNo)
             If result = DialogResult.Yes Then
                 Try
-                    Dim json As String = File.ReadAllText(My.Settings.DataLocation & "\Customers.json")
+                    Dim json As String = File.ReadAllText(My.Settings.DataLocation1 & "\Customers.json")
                     Dim jsonObject As JArray = JArray.Parse(json)
                     Dim customerToDelete As JToken = jsonObject.FirstOrDefault(Function(obj) obj("Code").Value(Of String)() = txtCode.Text)
                     jsonObject.Remove(customerToDelete)
                     Dim output As String = Newtonsoft.Json.JsonConvert.SerializeObject(jsonObject, Newtonsoft.Json.Formatting.Indented)
-                    File.WriteAllText("Data\Customers.json", output)
+                    File.WriteAllText(My.Settings.DataLocation1 & "\Customers.json", output)
                     dgrdCustomers.Rows.RemoveAt(_selectedCustomerRowIndex)
                     ClearCustomerDetails()
                     ScrollBarCustomers.Maximum = dgrdCustomers.Rows.Count
@@ -447,34 +456,56 @@ Public Class frmMain
     ''' Parse Machines json file and load machines dgrd
     ''' </summary>
     Private Sub LoadMachines()
-
         Try
-            Dim json = File.ReadAllText(My.Settings.DataLocation & "\Machines.json")
+            Dim json = File.ReadAllText(My.Settings.DataLocation1 & "\Machines.json")
             Dim jObject As JArray = JArray.Parse(json)
             Dim MyTable As DataTable = JsonConvert.DeserializeObject(Of DataTable)(jObject.ToString())
             MyTable.TableName = "Machines Table"
             dgrdMachines.DataSource = MyTable
-            ' Dim dtTmp As DataTable = jObject
-            '   dgrdCustomers.DataSource = jObject
-            'dgrdCustomers.D
-            'dgrdCustomers.Columns("Address1").Visible = False
-            'dgrdCustomers.Columns("Address2").Visible = False
-            'dgrdCustomers.Columns("Address3").Visible = False
-            'dgrdCustomers.Columns("Address4").Visible = False
-            'dgrdCustomers.Columns("Telephone").Visible = False
-            'dgrdCustomers.Columns("Fax").Visible = False
-            'dgrdCustomers.Columns("Contacts").Visible = False
-            'dgrdCustomers.Columns("Notes").Visible = False
-
-
-
-            ' Set themax customer Id for adding new customers
-            ' SetMaxCustomerId()
-
-            ScrollbarMachines.Maximum = dgrdCustomers.Rows.Count
+            ' Set the max machine Id for adding new machines
+            SetMaxMachineId()
+            ScrollbarMachines.Maximum = dgrdMachines.Rows.Count
         Catch ex As Exception
             MessageBox.Show(ex.Message)
         End Try
+    End Sub
+
+
+    ''' <summary>
+    '''  Set the Max Machine Id for adding new Machines
+    ''' </summary>
+    Private Sub SetMaxMachineId()
+        For x As Integer = 0 To dgrdMachines.Rows.Count - 1
+            If (IsNumeric(dgrdMachines.Rows(x).Cells("Model ID").Value)) Then
+                If (_maxMachineId < dgrdMachines.Rows(x).Cells("Model ID").Value) Then
+                    _maxMachineId = dgrdMachines.Rows(x).Cells(0).Value
+                End If
+            Else
+                Continue For
+            End If
+        Next
+    End Sub
+
+
+    ''' <summary>
+    ''' Load Machine based on the Selected Machine
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    Private Sub dgrdMachines_CellMouseClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles dgrdMachines.CellMouseClick
+        If (e.RowIndex > -1) Then
+            Cursor.Current = Cursors.WaitCursor
+            _selectedMachineRowIndex = e.RowIndex
+            Me.txtModelId.Text = dgrdMachines.Rows(e.RowIndex).Cells("Model Id").Value.ToString
+            Me.txtModelDescription.Text = dgrdMachines.Rows(e.RowIndex).Cells("Model Description").Value.ToString
+            Me.txtManufacturer.Text = dgrdMachines.Rows(e.RowIndex).Cells("Manufacturer").Value.ToString
+            Me.txtCertType.Text = dgrdMachines.Rows(e.RowIndex).Cells("Cert Type").Value.ToString
+            Me.txtElectronicMechanical.Text = dgrdMachines.Rows(e.RowIndex).Cells("Electronic Mechanical").Value.ToString
+            Me.txtDefaultCapacity.Text = dgrdMachines.Rows(e.RowIndex).Cells("Default_Capacity").Value.ToString
+            Me.txtDefaultMinGrad.Text = dgrdMachines.Rows(e.RowIndex).Cells("Default_Min_Grad").Value.ToString
+            Me.txtInservice.Text = dgrdMachines.Rows(e.RowIndex).Cells("Inservice").Value.ToString
+            Cursor.Current = Cursors.Default
+        End If
     End Sub
 
 #End Region
@@ -483,10 +514,10 @@ Public Class frmMain
 #Region "Machines Scroll Bar"
 
     Private Sub dgrdMachines_Scroll(sender As Object, e As ScrollEventArgs) Handles dgrdMachines.Scroll
-        ScrollBarCustomers.Value = e.NewValue
+        ScrollbarMachines.Value = e.NewValue
     End Sub
 
-    Private Sub ScrollBarCustomers_Scroll(sender As Object, e As ScrollEventArgs) Handles ScrollBarCustomers.Scroll
+    Private Sub ScrollbarMachines_Scroll(sender As Object, e As ScrollEventArgs) Handles ScrollbarMachines.Scroll
         dgrdMachines.FirstDisplayedScrollingRowIndex = e.NewValue
     End Sub
 
@@ -528,4 +559,140 @@ Public Class frmMain
     End Sub
 
 
+    Private Sub btnAddNewMachine_Click(sender As Object, e As EventArgs) Handles btnAddNewMachine.Click
+        _addingMachine = True
+        ' Clear all fields
+        ClearMachineDetails()
+        txtModelId.Text = _maxMachineId + 1
+    End Sub
+
+
+    Private Sub ClearMachineDetails()
+        Me.txtModelDescription.Clear()
+        Me.txtManufacturer.Clear()
+        Me.txtCertType.Clear()
+        Me.txtElectronicMechanical.Clear()
+        Me.txtDefaultCapacity.Clear()
+        Me.txtDefaultMinGrad.Clear()
+        Me.txtInservice.Clear()
+    End Sub
+
+    Private Sub btnSaveMachines_Click(sender As Object, e As EventArgs) Handles btnSaveMachines.Click
+        If (ValidateMachine()) Then
+            Try
+                Dim json As String = File.ReadAllText(My.Settings.DataLocation1 & "\Machines.json")
+                Dim jsonObject As JArray = JArray.Parse(json)
+                If (_addingMachine) Then
+                    Dim newMachineMember As String = "{ 'Model ID': '" & Me.txtModelId.Text &
+                        "','Model Description': '" & txtModelDescription.Text &
+                        "','Manufacturer': '" & txtManufacturer.Text &
+                        "','Cert Type': '" & txtCertType.Text &
+                        "','Electronic Mechanical': '" & txtElectronicMechanical.Text &
+                        "','Default_Capacity': '" & txtDefaultCapacity.Text &
+                        "','Default_Min_Grad': '" & txtDefaultMinGrad.Text &
+                        "','Inservice': '" & txtInservice.Text &
+                        "'}"
+                    Dim newMachine As JObject = JObject.Parse(newMachineMember)
+                    jsonObject.Add(newMachine)
+                    Dim output As String = Newtonsoft.Json.JsonConvert.SerializeObject(jsonObject, Newtonsoft.Json.Formatting.Indented)
+                    File.WriteAllText(My.Settings.DataLocation1 & "\Machines.json", output)
+                    _maxMachineId += 1
+
+                    Dim dtMachines As DataTable = dgrdMachines.DataSource
+
+                    Dim row As DataRow = dtMachines.NewRow
+
+                    row("Model ID") = txtModelId.Text
+                    row("Model Description") = txtModelDescription.Text
+                    row("Manufacturer") = txtManufacturer.Text
+                    row("Cert Type") = txtCertType.Text
+                    row("Electronic Mechanical") = txtElectronicMechanical.Text
+                    row("Default_Capacity") = txtDefaultCapacity.Text
+                    row("Default_Min_Grad") = txtDefaultMinGrad.Text
+                    row("Inservice") = txtInservice.Text
+                    dtMachines.Rows.Add(row)
+
+                    ' Refresh the grid with the new row
+                    dgrdMachines.EndEdit()
+                    dgrdMachines.Refresh()
+                    ScrollbarMachines.Maximum = dgrdMachines.Rows.Count
+                    ' Scroll to the bottom of the grid to show the new row
+                    _selectedMachineRowIndex = dgrdMachines.RowCount - 1
+                    dgrdMachines.FirstDisplayedScrollingRowIndex = _selectedMachineRowIndex
+
+                    MessageBox.Show("New Machine Created")
+                    _addingMachine = False
+                Else
+                    Try
+                        For Each machine As JToken In jsonObject.Where(Function(obj) obj("Model ID").Value(Of String)() = txtModelId.Text)
+                            machine("Model Description") = txtModelDescription.Text
+                            machine("Manufacturer") = txtManufacturer.Text
+                            machine("Cert Type") = txtCertType.Text
+                            machine("Electronic Mechanical") = txtElectronicMechanical.Text
+                            machine("Default_Capacity") = txtDefaultCapacity.Text
+                            machine("Default_Min_Grad") = txtDefaultMinGrad.Text
+                            machine("Inservice") = txtInservice.Text
+                        Next
+
+                        Dim output As String = Newtonsoft.Json.JsonConvert.SerializeObject(jsonObject, Newtonsoft.Json.Formatting.Indented)
+                        File.WriteAllText(My.Settings.DataLocation1 & "\Machines.json", output)
+                        ' Update the open machines grid also
+                        dgrdMachines.Rows(_selectedMachineRowIndex).Cells("Model Description").Value = txtModelDescription.Text
+                        dgrdMachines.Rows(_selectedMachineRowIndex).Cells("Manufacturer").Value = txtManufacturer.Text
+                        dgrdMachines.Rows(_selectedMachineRowIndex).Cells("Cert Type").Value = txtCertType.Text
+                        dgrdMachines.Rows(_selectedMachineRowIndex).Cells("Electronic Mechanical").Value = txtElectronicMechanical.Text
+                        dgrdMachines.Rows(_selectedMachineRowIndex).Cells("Default_Capacity").Value = txtDefaultCapacity.Text
+                        dgrdMachines.Rows(_selectedMachineRowIndex).Cells("Default_Min_Grad").Value = txtDefaultMinGrad.Text
+                        dgrdMachines.Rows(_selectedMachineRowIndex).Cells("Inservice").Value = txtInservice.Text
+                        MessageBox.Show("Machine Updated")
+                    Catch ex As Exception
+                        MessageBox.Show("Update Error : " + ex.Message.ToString() + " Please try again.")
+                    End Try
+                End If
+            Catch ex As Exception
+                MessageBox.Show(ex.Message)
+            End Try
+        End If
+    End Sub
+
+    Private Function ValidateMachine() As Boolean
+        If (String.IsNullOrEmpty(txtModelDescription.Text)) Then
+            MessageBox.Show("Model Description Empty.")
+            Return False
+        End If
+        Return True
+    End Function
+
+    Private Sub btnDeleteMachine_Click(sender As Object, e As EventArgs) Handles btnDeleteMachine.Click
+        If Not (String.IsNullOrEmpty(txtModelDescription.Text)) Then
+            Dim result As Integer = MessageBox.Show("Do you wish to Delete Machine " & txtModelDescription.Text, "Delete Machine", MessageBoxButtons.YesNo)
+            If result = DialogResult.Yes Then
+                Try
+                    Dim json As String = File.ReadAllText(My.Settings.DataLocation1 & "\Machines.json")
+                    Dim jsonObject As JArray = JArray.Parse(json)
+                    Dim machineToDelete As JToken = jsonObject.FirstOrDefault(Function(obj) obj("Model ID").Value(Of String)() = txtCode.Text)
+                    jsonObject.Remove(machineToDelete)
+                    Dim output As String = Newtonsoft.Json.JsonConvert.SerializeObject(jsonObject, Newtonsoft.Json.Formatting.Indented)
+                    File.WriteAllText(My.Settings.DataLocation1 & "\Machines.json", output)
+                    dgrdMachines.Rows.RemoveAt(_selectedMachineRowIndex)
+                    ClearMachineDetails()
+                    ScrollbarMachines.Maximum = dgrdMachines.Rows.Count
+                    MessageBox.Show("Machine deleted")
+                Catch ex As Exception
+                    MessageBox.Show("Error deleting Machine : " + ex.Message.ToString())
+                End Try
+            Else
+                Exit Sub
+            End If
+        End If
+    End Sub
+
+    Private Sub txtMachineSearch_TextChanged(sender As Object, e As EventArgs) Handles txtMachineSearch.TextChanged
+        If (searchByMachineName.Checked) Then
+            CType(dgrdMachines.DataSource, DataTable).DefaultView.RowFilter = String.Format("[Model Description] like '{0}%'", txtMachineSearch.Text)
+        Else
+            CType(dgrdMachines.DataSource, DataTable).DefaultView.RowFilter = String.Format("[Model ID] like '{0}%'", txtMachineSearch.Text)
+        End If
+        ScrollbarMachines.Maximum = dgrdMachines.Rows.Count
+    End Sub
 End Class

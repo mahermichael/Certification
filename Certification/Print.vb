@@ -46,7 +46,7 @@ Public Class frmPrint
 
     Private Sub LoadMachineDetails()
         Try
-            Dim json = File.ReadAllText("Data\Machines.json")
+            Dim json = File.ReadAllText(My.Settings.DataLocation1 & "\Machines.json")
             _machinesArray = JArray.Parse(json)
             cbModel.Items.Clear()
             For Each item In _machinesArray
@@ -193,7 +193,7 @@ Public Class frmPrint
         ' Hide Print dialog
         Dim prntController As PrintController = New StandardPrintController()
         _printDoc.PrintController = prntController
-        Dim pprSize As New PaperSize("custom", 827, 1170)
+        Dim pprSize As New PaperSize("custom", My.Settings.Width, My.Settings.Height)
         _printDoc.DefaultPageSettings.PaperSize = pprSize
         _printDoc.DefaultPageSettings.Landscape = False
         AddHandler _printDoc.PrintPage, AddressOf PrintDocument1_PrintPage
@@ -211,7 +211,7 @@ Public Class frmPrint
         Else
 
             Dim reportFont As Font = New Drawing.Font("Times New Roman", 14)
-            Dim json As String = File.ReadAllText("Data\PrintLocations.json")
+            Dim json As String = File.ReadAllText(My.Settings.DataLocation1 & "\PrintLocations.json")
             Dim jsonObject As JArray = JArray.Parse(json)
             ' customer code
             For Each printLocation As JToken In jsonObject.Where(Function(obj) obj("fieldName").Value(Of String)() = "Customer No")
@@ -338,7 +338,7 @@ Public Class frmPrint
     ''' <param name="e"></param>
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         Try
-            Dim json As String = File.ReadAllText("Data\InstalledMachines.json")
+            Dim json As String = File.ReadAllText(My.Settings.DataLocation1 & "\InstalledMachines.json")
             Dim jsonObject As JArray = JArray.Parse(json)
             If (_newRecord) Then
                 Dim newInstalledMachine As New JObject
@@ -404,7 +404,7 @@ Public Class frmPrint
             End If
 
             Dim output As String = Newtonsoft.Json.JsonConvert.SerializeObject(jsonObject, Newtonsoft.Json.Formatting.Indented)
-            File.WriteAllText("Data\InstalledMachines.json", output)
+            File.WriteAllText(My.Settings.DataLocation1 & "\InstalledMachines.json", output)
 
             MessageBox.Show("Customer Updated")
 

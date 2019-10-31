@@ -22,19 +22,19 @@ Partial Class frmMain
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle17 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle18 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle19 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle20 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle21 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle22 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle20 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle23 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle24 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle25 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle26 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle17 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMain))
         Me.tabCertPages = New MetroFramework.Controls.MetroTabControl()
         Me.tabCustomersNew = New MetroFramework.Controls.MetroTabPage()
@@ -78,22 +78,24 @@ Partial Class frmMain
         Me.MetroLabel1 = New MetroFramework.Controls.MetroLabel()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.tabMaintainMachines = New MetroFramework.Controls.MetroTabPage()
+        Me.txtInservice = New MetroFramework.Controls.MetroTextBox()
+        Me.txtDefaultMinGrad = New MetroFramework.Controls.MetroTextBox()
         Me.MetroLabel13 = New MetroFramework.Controls.MetroLabel()
-        Me.MetroRadioButton1 = New MetroFramework.Controls.MetroRadioButton()
-        Me.MetroRadioButton2 = New MetroFramework.Controls.MetroRadioButton()
+        Me.searchByMachineCode = New MetroFramework.Controls.MetroRadioButton()
+        Me.searchByMachineName = New MetroFramework.Controls.MetroRadioButton()
         Me.ScrollbarMachines = New System.Windows.Forms.VScrollBar()
-        Me.MetroButton1 = New MetroFramework.Controls.MetroButton()
-        Me.MetroButton2 = New MetroFramework.Controls.MetroButton()
-        Me.MetroButton3 = New MetroFramework.Controls.MetroButton()
+        Me.btnDeleteMachine = New MetroFramework.Controls.MetroButton()
+        Me.btnAddNewMachine = New MetroFramework.Controls.MetroButton()
+        Me.btnSaveMachines = New MetroFramework.Controls.MetroButton()
         Me.MetroLabel11 = New MetroFramework.Controls.MetroLabel()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.txtMachineSearch = New System.Windows.Forms.TextBox()
         Me.dgrdMachines = New MetroFramework.Controls.MetroGrid()
-        Me.MetroTextBox5 = New MetroFramework.Controls.MetroTextBox()
-        Me.MetroTextBox6 = New MetroFramework.Controls.MetroTextBox()
-        Me.MetroTextBox7 = New MetroFramework.Controls.MetroTextBox()
-        Me.MetroTextBox8 = New MetroFramework.Controls.MetroTextBox()
-        Me.MetroTextBox9 = New MetroFramework.Controls.MetroTextBox()
-        Me.MetroTextBox10 = New MetroFramework.Controls.MetroTextBox()
+        Me.txtDefaultCapacity = New MetroFramework.Controls.MetroTextBox()
+        Me.txtElectronicMechanical = New MetroFramework.Controls.MetroTextBox()
+        Me.txtCertType = New MetroFramework.Controls.MetroTextBox()
+        Me.txtManufacturer = New MetroFramework.Controls.MetroTextBox()
+        Me.txtModelDescription = New MetroFramework.Controls.MetroTextBox()
+        Me.txtModelId = New MetroFramework.Controls.MetroTextBox()
         Me.PrintPreviewDialog1 = New System.Windows.Forms.PrintPreviewDialog()
         Me.btnSettings = New MetroFramework.Controls.MetroButton()
         Me.tabCertPages.SuspendLayout()
@@ -113,7 +115,7 @@ Partial Class frmMain
         Me.tabCertPages.FontSize = MetroFramework.MetroTabControlSize.Tall
         Me.tabCertPages.Location = New System.Drawing.Point(20, 60)
         Me.tabCertPages.Name = "tabCertPages"
-        Me.tabCertPages.SelectedIndex = 0
+        Me.tabCertPages.SelectedIndex = 1
         Me.tabCertPages.Size = New System.Drawing.Size(1417, 851)
         Me.tabCertPages.TabIndex = 0
         Me.tabCertPages.UseSelectable = True
@@ -183,8 +185,8 @@ Partial Class frmMain
         Me.dgrdInstalledMachines.AllowUserToAddRows = False
         Me.dgrdInstalledMachines.AllowUserToDeleteRows = False
         Me.dgrdInstalledMachines.AllowUserToResizeRows = False
-        DataGridViewCellStyle14.BackColor = System.Drawing.Color.Gainsboro
-        Me.dgrdInstalledMachines.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle14
+        DataGridViewCellStyle18.BackColor = System.Drawing.Color.Gainsboro
+        Me.dgrdInstalledMachines.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle18
         Me.dgrdInstalledMachines.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -194,24 +196,24 @@ Partial Class frmMain
         Me.dgrdInstalledMachines.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.dgrdInstalledMachines.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None
         Me.dgrdInstalledMachines.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
-        DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle15.BackColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-        DataGridViewCellStyle15.Font = New System.Drawing.Font("Segoe UI", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle15.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle15.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        DataGridViewCellStyle15.SelectionForeColor = System.Drawing.Color.Silver
-        DataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgrdInstalledMachines.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle15
+        DataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle19.BackColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        DataGridViewCellStyle19.Font = New System.Drawing.Font("Segoe UI", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle19.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle19.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        DataGridViewCellStyle19.SelectionForeColor = System.Drawing.Color.Silver
+        DataGridViewCellStyle19.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgrdInstalledMachines.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle19
         Me.dgrdInstalledMachines.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgrdInstalledMachines.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.SerialNumber, Me.ModelId, Me.CertNumber, Me.TagId, Me.ViewCert})
-        DataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle17.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle17.Font = New System.Drawing.Font("Segoe UI", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle17.ForeColor = System.Drawing.Color.FromArgb(CType(CType(136, Byte), Integer), CType(CType(136, Byte), Integer), CType(CType(136, Byte), Integer))
-        DataGridViewCellStyle17.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
-        DataGridViewCellStyle17.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer))
-        DataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgrdInstalledMachines.DefaultCellStyle = DataGridViewCellStyle17
+        DataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle21.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle21.Font = New System.Drawing.Font("Segoe UI", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle21.ForeColor = System.Drawing.Color.FromArgb(CType(CType(136, Byte), Integer), CType(CType(136, Byte), Integer), CType(CType(136, Byte), Integer))
+        DataGridViewCellStyle21.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
+        DataGridViewCellStyle21.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer))
+        DataGridViewCellStyle21.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgrdInstalledMachines.DefaultCellStyle = DataGridViewCellStyle21
         Me.dgrdInstalledMachines.EnableHeadersVisualStyles = False
         Me.dgrdInstalledMachines.Font = New System.Drawing.Font("Segoe UI", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
         Me.dgrdInstalledMachines.GridColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
@@ -220,14 +222,14 @@ Partial Class frmMain
         Me.dgrdInstalledMachines.Name = "dgrdInstalledMachines"
         Me.dgrdInstalledMachines.ReadOnly = True
         Me.dgrdInstalledMachines.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
-        DataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle18.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle18.Font = New System.Drawing.Font("Segoe UI", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle18.ForeColor = System.Drawing.Color.Gray
-        DataGridViewCellStyle18.SelectionBackColor = System.Drawing.SystemColors.Menu
-        DataGridViewCellStyle18.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer))
-        DataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgrdInstalledMachines.RowHeadersDefaultCellStyle = DataGridViewCellStyle18
+        DataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle22.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle22.Font = New System.Drawing.Font("Segoe UI", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle22.ForeColor = System.Drawing.Color.Gray
+        DataGridViewCellStyle22.SelectionBackColor = System.Drawing.SystemColors.Menu
+        DataGridViewCellStyle22.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer))
+        DataGridViewCellStyle22.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgrdInstalledMachines.RowHeadersDefaultCellStyle = DataGridViewCellStyle22
         Me.dgrdInstalledMachines.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
         Me.dgrdInstalledMachines.RowTemplate.Height = 40
         Me.dgrdInstalledMachines.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
@@ -260,10 +262,10 @@ Partial Class frmMain
         '
         'ViewCert
         '
-        DataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle16.BackColor = System.Drawing.Color.DarkGray
-        DataGridViewCellStyle16.ForeColor = System.Drawing.Color.DarkSlateGray
-        Me.ViewCert.DefaultCellStyle = DataGridViewCellStyle16
+        DataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle20.BackColor = System.Drawing.Color.DarkGray
+        DataGridViewCellStyle20.ForeColor = System.Drawing.Color.DarkSlateGray
+        Me.ViewCert.DefaultCellStyle = DataGridViewCellStyle20
         Me.ViewCert.FillWeight = 30.0!
         Me.ViewCert.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.ViewCert.HeaderText = ""
@@ -391,8 +393,8 @@ Partial Class frmMain
         Me.dgrdCustomers.AllowUserToAddRows = False
         Me.dgrdCustomers.AllowUserToDeleteRows = False
         Me.dgrdCustomers.AllowUserToResizeRows = False
-        DataGridViewCellStyle19.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.dgrdCustomers.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle19
+        DataGridViewCellStyle23.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.dgrdCustomers.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle23
         Me.dgrdCustomers.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dgrdCustomers.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
@@ -401,23 +403,23 @@ Partial Class frmMain
         Me.dgrdCustomers.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.dgrdCustomers.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None
         Me.dgrdCustomers.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
-        DataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle20.BackColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-        DataGridViewCellStyle20.Font = New System.Drawing.Font("Segoe UI", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle20.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle20.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        DataGridViewCellStyle20.SelectionForeColor = System.Drawing.Color.Silver
-        DataGridViewCellStyle20.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgrdCustomers.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle20
+        DataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle24.BackColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        DataGridViewCellStyle24.Font = New System.Drawing.Font("Segoe UI", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle24.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle24.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        DataGridViewCellStyle24.SelectionForeColor = System.Drawing.Color.Silver
+        DataGridViewCellStyle24.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgrdCustomers.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle24
         Me.dgrdCustomers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle21.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle21.Font = New System.Drawing.Font("Segoe UI", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle21.ForeColor = System.Drawing.Color.FromArgb(CType(CType(136, Byte), Integer), CType(CType(136, Byte), Integer), CType(CType(136, Byte), Integer))
-        DataGridViewCellStyle21.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
-        DataGridViewCellStyle21.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer))
-        DataGridViewCellStyle21.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgrdCustomers.DefaultCellStyle = DataGridViewCellStyle21
+        DataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle25.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle25.Font = New System.Drawing.Font("Segoe UI", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle25.ForeColor = System.Drawing.Color.FromArgb(CType(CType(136, Byte), Integer), CType(CType(136, Byte), Integer), CType(CType(136, Byte), Integer))
+        DataGridViewCellStyle25.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
+        DataGridViewCellStyle25.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer))
+        DataGridViewCellStyle25.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgrdCustomers.DefaultCellStyle = DataGridViewCellStyle25
         Me.dgrdCustomers.EnableHeadersVisualStyles = False
         Me.dgrdCustomers.Font = New System.Drawing.Font("Segoe UI", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
         Me.dgrdCustomers.GridColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
@@ -426,14 +428,14 @@ Partial Class frmMain
         Me.dgrdCustomers.Name = "dgrdCustomers"
         Me.dgrdCustomers.ReadOnly = True
         Me.dgrdCustomers.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
-        DataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle22.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle22.Font = New System.Drawing.Font("Segoe UI", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle22.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle22.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        DataGridViewCellStyle22.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer))
-        DataGridViewCellStyle22.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgrdCustomers.RowHeadersDefaultCellStyle = DataGridViewCellStyle22
+        DataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle26.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle26.Font = New System.Drawing.Font("Segoe UI", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle26.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle26.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        DataGridViewCellStyle26.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer))
+        DataGridViewCellStyle26.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgrdCustomers.RowHeadersDefaultCellStyle = DataGridViewCellStyle26
         Me.dgrdCustomers.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
         Me.dgrdCustomers.ScrollBars = System.Windows.Forms.ScrollBars.None
         Me.dgrdCustomers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
@@ -879,22 +881,24 @@ Partial Class frmMain
         '
         'tabMaintainMachines
         '
+        Me.tabMaintainMachines.Controls.Add(Me.txtInservice)
+        Me.tabMaintainMachines.Controls.Add(Me.txtDefaultMinGrad)
         Me.tabMaintainMachines.Controls.Add(Me.MetroLabel13)
-        Me.tabMaintainMachines.Controls.Add(Me.MetroRadioButton1)
-        Me.tabMaintainMachines.Controls.Add(Me.MetroRadioButton2)
+        Me.tabMaintainMachines.Controls.Add(Me.searchByMachineCode)
+        Me.tabMaintainMachines.Controls.Add(Me.searchByMachineName)
         Me.tabMaintainMachines.Controls.Add(Me.ScrollbarMachines)
-        Me.tabMaintainMachines.Controls.Add(Me.MetroButton1)
-        Me.tabMaintainMachines.Controls.Add(Me.MetroButton2)
-        Me.tabMaintainMachines.Controls.Add(Me.MetroButton3)
+        Me.tabMaintainMachines.Controls.Add(Me.btnDeleteMachine)
+        Me.tabMaintainMachines.Controls.Add(Me.btnAddNewMachine)
+        Me.tabMaintainMachines.Controls.Add(Me.btnSaveMachines)
         Me.tabMaintainMachines.Controls.Add(Me.MetroLabel11)
-        Me.tabMaintainMachines.Controls.Add(Me.TextBox1)
+        Me.tabMaintainMachines.Controls.Add(Me.txtMachineSearch)
         Me.tabMaintainMachines.Controls.Add(Me.dgrdMachines)
-        Me.tabMaintainMachines.Controls.Add(Me.MetroTextBox5)
-        Me.tabMaintainMachines.Controls.Add(Me.MetroTextBox6)
-        Me.tabMaintainMachines.Controls.Add(Me.MetroTextBox7)
-        Me.tabMaintainMachines.Controls.Add(Me.MetroTextBox8)
-        Me.tabMaintainMachines.Controls.Add(Me.MetroTextBox9)
-        Me.tabMaintainMachines.Controls.Add(Me.MetroTextBox10)
+        Me.tabMaintainMachines.Controls.Add(Me.txtDefaultCapacity)
+        Me.tabMaintainMachines.Controls.Add(Me.txtElectronicMechanical)
+        Me.tabMaintainMachines.Controls.Add(Me.txtCertType)
+        Me.tabMaintainMachines.Controls.Add(Me.txtManufacturer)
+        Me.tabMaintainMachines.Controls.Add(Me.txtModelDescription)
+        Me.tabMaintainMachines.Controls.Add(Me.txtModelId)
         Me.tabMaintainMachines.HorizontalScrollbarBarColor = True
         Me.tabMaintainMachines.HorizontalScrollbarHighlightOnWheel = False
         Me.tabMaintainMachines.HorizontalScrollbarSize = 10
@@ -907,6 +911,68 @@ Partial Class frmMain
         Me.tabMaintainMachines.VerticalScrollbarHighlightOnWheel = False
         Me.tabMaintainMachines.VerticalScrollbarSize = 10
         '
+        'txtInservice
+        '
+        Me.txtInservice.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        '
+        '
+        '
+        Me.txtInservice.CustomButton.Image = Nothing
+        Me.txtInservice.CustomButton.Location = New System.Drawing.Point(470, 1)
+        Me.txtInservice.CustomButton.Name = ""
+        Me.txtInservice.CustomButton.Size = New System.Drawing.Size(21, 21)
+        Me.txtInservice.CustomButton.Style = MetroFramework.MetroColorStyle.Blue
+        Me.txtInservice.CustomButton.TabIndex = 1
+        Me.txtInservice.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light
+        Me.txtInservice.CustomButton.UseSelectable = True
+        Me.txtInservice.CustomButton.Visible = False
+        Me.txtInservice.Lines = New String(-1) {}
+        Me.txtInservice.Location = New System.Drawing.Point(902, 575)
+        Me.txtInservice.MaxLength = 32767
+        Me.txtInservice.Name = "txtInservice"
+        Me.txtInservice.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
+        Me.txtInservice.ScrollBars = System.Windows.Forms.ScrollBars.None
+        Me.txtInservice.SelectedText = ""
+        Me.txtInservice.SelectionLength = 0
+        Me.txtInservice.SelectionStart = 0
+        Me.txtInservice.ShortcutsEnabled = True
+        Me.txtInservice.Size = New System.Drawing.Size(492, 23)
+        Me.txtInservice.TabIndex = 72
+        Me.txtInservice.UseSelectable = True
+        Me.txtInservice.WaterMarkColor = System.Drawing.Color.FromArgb(CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer))
+        Me.txtInservice.WaterMarkFont = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel)
+        '
+        'txtDefaultMinGrad
+        '
+        Me.txtDefaultMinGrad.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        '
+        '
+        '
+        Me.txtDefaultMinGrad.CustomButton.Image = Nothing
+        Me.txtDefaultMinGrad.CustomButton.Location = New System.Drawing.Point(470, 1)
+        Me.txtDefaultMinGrad.CustomButton.Name = ""
+        Me.txtDefaultMinGrad.CustomButton.Size = New System.Drawing.Size(21, 21)
+        Me.txtDefaultMinGrad.CustomButton.Style = MetroFramework.MetroColorStyle.Blue
+        Me.txtDefaultMinGrad.CustomButton.TabIndex = 1
+        Me.txtDefaultMinGrad.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light
+        Me.txtDefaultMinGrad.CustomButton.UseSelectable = True
+        Me.txtDefaultMinGrad.CustomButton.Visible = False
+        Me.txtDefaultMinGrad.Lines = New String(-1) {}
+        Me.txtDefaultMinGrad.Location = New System.Drawing.Point(902, 516)
+        Me.txtDefaultMinGrad.MaxLength = 32767
+        Me.txtDefaultMinGrad.Name = "txtDefaultMinGrad"
+        Me.txtDefaultMinGrad.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
+        Me.txtDefaultMinGrad.ScrollBars = System.Windows.Forms.ScrollBars.None
+        Me.txtDefaultMinGrad.SelectedText = ""
+        Me.txtDefaultMinGrad.SelectionLength = 0
+        Me.txtDefaultMinGrad.SelectionStart = 0
+        Me.txtDefaultMinGrad.ShortcutsEnabled = True
+        Me.txtDefaultMinGrad.Size = New System.Drawing.Size(492, 23)
+        Me.txtDefaultMinGrad.TabIndex = 71
+        Me.txtDefaultMinGrad.UseSelectable = True
+        Me.txtDefaultMinGrad.WaterMarkColor = System.Drawing.Color.FromArgb(CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer))
+        Me.txtDefaultMinGrad.WaterMarkFont = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel)
+        '
         'MetroLabel13
         '
         Me.MetroLabel13.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -918,27 +984,27 @@ Partial Class frmMain
         Me.MetroLabel13.TabIndex = 70
         Me.MetroLabel13.Text = "Model Id"
         '
-        'MetroRadioButton1
+        'searchByMachineCode
         '
-        Me.MetroRadioButton1.AutoSize = True
-        Me.MetroRadioButton1.Location = New System.Drawing.Point(483, 47)
-        Me.MetroRadioButton1.Name = "MetroRadioButton1"
-        Me.MetroRadioButton1.Size = New System.Drawing.Size(105, 15)
-        Me.MetroRadioButton1.TabIndex = 69
-        Me.MetroRadioButton1.Text = "Search By Code"
-        Me.MetroRadioButton1.UseSelectable = True
+        Me.searchByMachineCode.AutoSize = True
+        Me.searchByMachineCode.Location = New System.Drawing.Point(483, 47)
+        Me.searchByMachineCode.Name = "searchByMachineCode"
+        Me.searchByMachineCode.Size = New System.Drawing.Size(105, 15)
+        Me.searchByMachineCode.TabIndex = 69
+        Me.searchByMachineCode.Text = "Search By Code"
+        Me.searchByMachineCode.UseSelectable = True
         '
-        'MetroRadioButton2
+        'searchByMachineName
         '
-        Me.MetroRadioButton2.AutoSize = True
-        Me.MetroRadioButton2.Checked = True
-        Me.MetroRadioButton2.Location = New System.Drawing.Point(332, 47)
-        Me.MetroRadioButton2.Name = "MetroRadioButton2"
-        Me.MetroRadioButton2.Size = New System.Drawing.Size(109, 15)
-        Me.MetroRadioButton2.TabIndex = 68
-        Me.MetroRadioButton2.TabStop = True
-        Me.MetroRadioButton2.Text = "Search By Name"
-        Me.MetroRadioButton2.UseSelectable = True
+        Me.searchByMachineName.AutoSize = True
+        Me.searchByMachineName.Checked = True
+        Me.searchByMachineName.Location = New System.Drawing.Point(332, 47)
+        Me.searchByMachineName.Name = "searchByMachineName"
+        Me.searchByMachineName.Size = New System.Drawing.Size(109, 15)
+        Me.searchByMachineName.TabIndex = 68
+        Me.searchByMachineName.TabStop = True
+        Me.searchByMachineName.Text = "Search By Name"
+        Me.searchByMachineName.UseSelectable = True
         '
         'ScrollbarMachines
         '
@@ -948,35 +1014,35 @@ Partial Class frmMain
         Me.ScrollbarMachines.Size = New System.Drawing.Size(44, 722)
         Me.ScrollbarMachines.TabIndex = 67
         '
-        'MetroButton1
+        'btnDeleteMachine
         '
-        Me.MetroButton1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.MetroButton1.Location = New System.Drawing.Point(1077, 77)
-        Me.MetroButton1.Name = "MetroButton1"
-        Me.MetroButton1.Size = New System.Drawing.Size(120, 52)
-        Me.MetroButton1.TabIndex = 66
-        Me.MetroButton1.Text = "Delete Machine"
-        Me.MetroButton1.UseSelectable = True
+        Me.btnDeleteMachine.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnDeleteMachine.Location = New System.Drawing.Point(1077, 77)
+        Me.btnDeleteMachine.Name = "btnDeleteMachine"
+        Me.btnDeleteMachine.Size = New System.Drawing.Size(120, 52)
+        Me.btnDeleteMachine.TabIndex = 66
+        Me.btnDeleteMachine.Text = "Delete Machine"
+        Me.btnDeleteMachine.UseSelectable = True
         '
-        'MetroButton2
+        'btnAddNewMachine
         '
-        Me.MetroButton2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.MetroButton2.Location = New System.Drawing.Point(902, 77)
-        Me.MetroButton2.Name = "MetroButton2"
-        Me.MetroButton2.Size = New System.Drawing.Size(120, 52)
-        Me.MetroButton2.TabIndex = 65
-        Me.MetroButton2.Text = "Add New Machine"
-        Me.MetroButton2.UseSelectable = True
+        Me.btnAddNewMachine.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnAddNewMachine.Location = New System.Drawing.Point(902, 77)
+        Me.btnAddNewMachine.Name = "btnAddNewMachine"
+        Me.btnAddNewMachine.Size = New System.Drawing.Size(120, 52)
+        Me.btnAddNewMachine.TabIndex = 65
+        Me.btnAddNewMachine.Text = "Add New Machine"
+        Me.btnAddNewMachine.UseSelectable = True
         '
-        'MetroButton3
+        'btnSaveMachines
         '
-        Me.MetroButton3.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.MetroButton3.Location = New System.Drawing.Point(1274, 77)
-        Me.MetroButton3.Name = "MetroButton3"
-        Me.MetroButton3.Size = New System.Drawing.Size(120, 52)
-        Me.MetroButton3.TabIndex = 64
-        Me.MetroButton3.Text = "Save Changes"
-        Me.MetroButton3.UseSelectable = True
+        Me.btnSaveMachines.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnSaveMachines.Location = New System.Drawing.Point(1274, 77)
+        Me.btnSaveMachines.Name = "btnSaveMachines"
+        Me.btnSaveMachines.Size = New System.Drawing.Size(120, 52)
+        Me.btnSaveMachines.TabIndex = 64
+        Me.btnSaveMachines.Text = "Save Changes"
+        Me.btnSaveMachines.UseSelectable = True
         '
         'MetroLabel11
         '
@@ -989,21 +1055,21 @@ Partial Class frmMain
         Me.MetroLabel11.TabIndex = 63
         Me.MetroLabel11.Text = "Search Machines"
         '
-        'TextBox1
+        'txtMachineSearch
         '
-        Me.TextBox1.Font = New System.Drawing.Font("Arial", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox1.Location = New System.Drawing.Point(163, 37)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(156, 29)
-        Me.TextBox1.TabIndex = 62
+        Me.txtMachineSearch.Font = New System.Drawing.Font("Arial", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtMachineSearch.Location = New System.Drawing.Point(163, 37)
+        Me.txtMachineSearch.Name = "txtMachineSearch"
+        Me.txtMachineSearch.Size = New System.Drawing.Size(156, 29)
+        Me.txtMachineSearch.TabIndex = 62
         '
         'dgrdMachines
         '
         Me.dgrdMachines.AllowUserToAddRows = False
         Me.dgrdMachines.AllowUserToDeleteRows = False
         Me.dgrdMachines.AllowUserToResizeRows = False
-        DataGridViewCellStyle23.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.dgrdMachines.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle23
+        DataGridViewCellStyle14.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.dgrdMachines.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle14
         Me.dgrdMachines.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dgrdMachines.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
@@ -1012,23 +1078,23 @@ Partial Class frmMain
         Me.dgrdMachines.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.dgrdMachines.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None
         Me.dgrdMachines.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
-        DataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle24.BackColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
-        DataGridViewCellStyle24.Font = New System.Drawing.Font("Segoe UI", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle24.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle24.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        DataGridViewCellStyle24.SelectionForeColor = System.Drawing.Color.Silver
-        DataGridViewCellStyle24.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgrdMachines.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle24
+        DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle15.BackColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        DataGridViewCellStyle15.Font = New System.Drawing.Font("Segoe UI", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle15.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle15.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        DataGridViewCellStyle15.SelectionForeColor = System.Drawing.Color.Silver
+        DataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgrdMachines.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle15
         Me.dgrdMachines.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle25.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle25.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle25.ForeColor = System.Drawing.Color.FromArgb(CType(CType(136, Byte), Integer), CType(CType(136, Byte), Integer), CType(CType(136, Byte), Integer))
-        DataGridViewCellStyle25.SelectionBackColor = System.Drawing.SystemColors.GradientInactiveCaption
-        DataGridViewCellStyle25.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer))
-        DataGridViewCellStyle25.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgrdMachines.DefaultCellStyle = DataGridViewCellStyle25
+        DataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle16.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle16.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle16.ForeColor = System.Drawing.Color.FromArgb(CType(CType(136, Byte), Integer), CType(CType(136, Byte), Integer), CType(CType(136, Byte), Integer))
+        DataGridViewCellStyle16.SelectionBackColor = System.Drawing.SystemColors.GradientInactiveCaption
+        DataGridViewCellStyle16.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer))
+        DataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgrdMachines.DefaultCellStyle = DataGridViewCellStyle16
         Me.dgrdMachines.EnableHeadersVisualStyles = False
         Me.dgrdMachines.Font = New System.Drawing.Font("Segoe UI", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
         Me.dgrdMachines.GridColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
@@ -1037,210 +1103,210 @@ Partial Class frmMain
         Me.dgrdMachines.Name = "dgrdMachines"
         Me.dgrdMachines.ReadOnly = True
         Me.dgrdMachines.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
-        DataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle26.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(174, Byte), Integer), CType(CType(219, Byte), Integer))
-        DataGridViewCellStyle26.Font = New System.Drawing.Font("Segoe UI", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
-        DataGridViewCellStyle26.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        DataGridViewCellStyle26.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(247, Byte), Integer))
-        DataGridViewCellStyle26.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer))
-        DataGridViewCellStyle26.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgrdMachines.RowHeadersDefaultCellStyle = DataGridViewCellStyle26
+        DataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle17.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(174, Byte), Integer), CType(CType(219, Byte), Integer))
+        DataGridViewCellStyle17.Font = New System.Drawing.Font("Segoe UI", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel)
+        DataGridViewCellStyle17.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        DataGridViewCellStyle17.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(198, Byte), Integer), CType(CType(247, Byte), Integer))
+        DataGridViewCellStyle17.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer), CType(CType(17, Byte), Integer))
+        DataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgrdMachines.RowHeadersDefaultCellStyle = DataGridViewCellStyle17
         Me.dgrdMachines.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
         Me.dgrdMachines.ScrollBars = System.Windows.Forms.ScrollBars.None
         Me.dgrdMachines.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.dgrdMachines.Size = New System.Drawing.Size(798, 722)
         Me.dgrdMachines.TabIndex = 61
         '
-        'MetroTextBox5
+        'txtDefaultCapacity
         '
-        Me.MetroTextBox5.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        '
-        '
-        '
-        Me.MetroTextBox5.CustomButton.Image = Nothing
-        Me.MetroTextBox5.CustomButton.Location = New System.Drawing.Point(470, 1)
-        Me.MetroTextBox5.CustomButton.Name = ""
-        Me.MetroTextBox5.CustomButton.Size = New System.Drawing.Size(21, 21)
-        Me.MetroTextBox5.CustomButton.Style = MetroFramework.MetroColorStyle.Blue
-        Me.MetroTextBox5.CustomButton.TabIndex = 1
-        Me.MetroTextBox5.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light
-        Me.MetroTextBox5.CustomButton.UseSelectable = True
-        Me.MetroTextBox5.CustomButton.Visible = False
-        Me.MetroTextBox5.Lines = New String(-1) {}
-        Me.MetroTextBox5.Location = New System.Drawing.Point(902, 473)
-        Me.MetroTextBox5.MaxLength = 32767
-        Me.MetroTextBox5.Name = "MetroTextBox5"
-        Me.MetroTextBox5.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
-        Me.MetroTextBox5.ScrollBars = System.Windows.Forms.ScrollBars.None
-        Me.MetroTextBox5.SelectedText = ""
-        Me.MetroTextBox5.SelectionLength = 0
-        Me.MetroTextBox5.SelectionStart = 0
-        Me.MetroTextBox5.ShortcutsEnabled = True
-        Me.MetroTextBox5.Size = New System.Drawing.Size(492, 23)
-        Me.MetroTextBox5.TabIndex = 56
-        Me.MetroTextBox5.UseSelectable = True
-        Me.MetroTextBox5.WaterMarkColor = System.Drawing.Color.FromArgb(CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer))
-        Me.MetroTextBox5.WaterMarkFont = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel)
-        '
-        'MetroTextBox6
-        '
-        Me.MetroTextBox6.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtDefaultCapacity.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         '
         '
         '
-        Me.MetroTextBox6.CustomButton.Image = Nothing
-        Me.MetroTextBox6.CustomButton.Location = New System.Drawing.Point(470, 1)
-        Me.MetroTextBox6.CustomButton.Name = ""
-        Me.MetroTextBox6.CustomButton.Size = New System.Drawing.Size(21, 21)
-        Me.MetroTextBox6.CustomButton.Style = MetroFramework.MetroColorStyle.Blue
-        Me.MetroTextBox6.CustomButton.TabIndex = 1
-        Me.MetroTextBox6.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light
-        Me.MetroTextBox6.CustomButton.UseSelectable = True
-        Me.MetroTextBox6.CustomButton.Visible = False
-        Me.MetroTextBox6.Lines = New String(-1) {}
-        Me.MetroTextBox6.Location = New System.Drawing.Point(902, 393)
-        Me.MetroTextBox6.MaxLength = 32767
-        Me.MetroTextBox6.Name = "MetroTextBox6"
-        Me.MetroTextBox6.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
-        Me.MetroTextBox6.ScrollBars = System.Windows.Forms.ScrollBars.None
-        Me.MetroTextBox6.SelectedText = ""
-        Me.MetroTextBox6.SelectionLength = 0
-        Me.MetroTextBox6.SelectionStart = 0
-        Me.MetroTextBox6.ShortcutsEnabled = True
-        Me.MetroTextBox6.Size = New System.Drawing.Size(492, 23)
-        Me.MetroTextBox6.TabIndex = 55
-        Me.MetroTextBox6.UseSelectable = True
-        Me.MetroTextBox6.WaterMarkColor = System.Drawing.Color.FromArgb(CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer))
-        Me.MetroTextBox6.WaterMarkFont = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel)
+        Me.txtDefaultCapacity.CustomButton.Image = Nothing
+        Me.txtDefaultCapacity.CustomButton.Location = New System.Drawing.Point(470, 1)
+        Me.txtDefaultCapacity.CustomButton.Name = ""
+        Me.txtDefaultCapacity.CustomButton.Size = New System.Drawing.Size(21, 21)
+        Me.txtDefaultCapacity.CustomButton.Style = MetroFramework.MetroColorStyle.Blue
+        Me.txtDefaultCapacity.CustomButton.TabIndex = 1
+        Me.txtDefaultCapacity.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light
+        Me.txtDefaultCapacity.CustomButton.UseSelectable = True
+        Me.txtDefaultCapacity.CustomButton.Visible = False
+        Me.txtDefaultCapacity.Lines = New String(-1) {}
+        Me.txtDefaultCapacity.Location = New System.Drawing.Point(902, 454)
+        Me.txtDefaultCapacity.MaxLength = 32767
+        Me.txtDefaultCapacity.Name = "txtDefaultCapacity"
+        Me.txtDefaultCapacity.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
+        Me.txtDefaultCapacity.ScrollBars = System.Windows.Forms.ScrollBars.None
+        Me.txtDefaultCapacity.SelectedText = ""
+        Me.txtDefaultCapacity.SelectionLength = 0
+        Me.txtDefaultCapacity.SelectionStart = 0
+        Me.txtDefaultCapacity.ShortcutsEnabled = True
+        Me.txtDefaultCapacity.Size = New System.Drawing.Size(492, 23)
+        Me.txtDefaultCapacity.TabIndex = 56
+        Me.txtDefaultCapacity.UseSelectable = True
+        Me.txtDefaultCapacity.WaterMarkColor = System.Drawing.Color.FromArgb(CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer))
+        Me.txtDefaultCapacity.WaterMarkFont = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel)
         '
-        'MetroTextBox7
+        'txtElectronicMechanical
         '
-        Me.MetroTextBox7.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        '
-        '
-        '
-        Me.MetroTextBox7.CustomButton.Image = Nothing
-        Me.MetroTextBox7.CustomButton.Location = New System.Drawing.Point(470, 1)
-        Me.MetroTextBox7.CustomButton.Name = ""
-        Me.MetroTextBox7.CustomButton.Size = New System.Drawing.Size(21, 21)
-        Me.MetroTextBox7.CustomButton.Style = MetroFramework.MetroColorStyle.Blue
-        Me.MetroTextBox7.CustomButton.TabIndex = 1
-        Me.MetroTextBox7.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light
-        Me.MetroTextBox7.CustomButton.UseSelectable = True
-        Me.MetroTextBox7.CustomButton.Visible = False
-        Me.MetroTextBox7.Lines = New String(-1) {}
-        Me.MetroTextBox7.Location = New System.Drawing.Point(902, 332)
-        Me.MetroTextBox7.MaxLength = 32767
-        Me.MetroTextBox7.Name = "MetroTextBox7"
-        Me.MetroTextBox7.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
-        Me.MetroTextBox7.ScrollBars = System.Windows.Forms.ScrollBars.None
-        Me.MetroTextBox7.SelectedText = ""
-        Me.MetroTextBox7.SelectionLength = 0
-        Me.MetroTextBox7.SelectionStart = 0
-        Me.MetroTextBox7.ShortcutsEnabled = True
-        Me.MetroTextBox7.Size = New System.Drawing.Size(492, 23)
-        Me.MetroTextBox7.TabIndex = 54
-        Me.MetroTextBox7.UseSelectable = True
-        Me.MetroTextBox7.WaterMarkColor = System.Drawing.Color.FromArgb(CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer))
-        Me.MetroTextBox7.WaterMarkFont = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel)
-        '
-        'MetroTextBox8
-        '
-        Me.MetroTextBox8.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtElectronicMechanical.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         '
         '
         '
-        Me.MetroTextBox8.CustomButton.Image = Nothing
-        Me.MetroTextBox8.CustomButton.Location = New System.Drawing.Point(470, 1)
-        Me.MetroTextBox8.CustomButton.Name = ""
-        Me.MetroTextBox8.CustomButton.Size = New System.Drawing.Size(21, 21)
-        Me.MetroTextBox8.CustomButton.Style = MetroFramework.MetroColorStyle.Blue
-        Me.MetroTextBox8.CustomButton.TabIndex = 1
-        Me.MetroTextBox8.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light
-        Me.MetroTextBox8.CustomButton.UseSelectable = True
-        Me.MetroTextBox8.CustomButton.Visible = False
-        Me.MetroTextBox8.Lines = New String(-1) {}
-        Me.MetroTextBox8.Location = New System.Drawing.Point(902, 282)
-        Me.MetroTextBox8.MaxLength = 32767
-        Me.MetroTextBox8.Name = "MetroTextBox8"
-        Me.MetroTextBox8.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
-        Me.MetroTextBox8.ScrollBars = System.Windows.Forms.ScrollBars.None
-        Me.MetroTextBox8.SelectedText = ""
-        Me.MetroTextBox8.SelectionLength = 0
-        Me.MetroTextBox8.SelectionStart = 0
-        Me.MetroTextBox8.ShortcutsEnabled = True
-        Me.MetroTextBox8.Size = New System.Drawing.Size(492, 23)
-        Me.MetroTextBox8.TabIndex = 53
-        Me.MetroTextBox8.UseSelectable = True
-        Me.MetroTextBox8.WaterMarkColor = System.Drawing.Color.FromArgb(CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer))
-        Me.MetroTextBox8.WaterMarkFont = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel)
+        Me.txtElectronicMechanical.CustomButton.Image = Nothing
+        Me.txtElectronicMechanical.CustomButton.Location = New System.Drawing.Point(470, 1)
+        Me.txtElectronicMechanical.CustomButton.Name = ""
+        Me.txtElectronicMechanical.CustomButton.Size = New System.Drawing.Size(21, 21)
+        Me.txtElectronicMechanical.CustomButton.Style = MetroFramework.MetroColorStyle.Blue
+        Me.txtElectronicMechanical.CustomButton.TabIndex = 1
+        Me.txtElectronicMechanical.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light
+        Me.txtElectronicMechanical.CustomButton.UseSelectable = True
+        Me.txtElectronicMechanical.CustomButton.Visible = False
+        Me.txtElectronicMechanical.Lines = New String(-1) {}
+        Me.txtElectronicMechanical.Location = New System.Drawing.Point(902, 393)
+        Me.txtElectronicMechanical.MaxLength = 32767
+        Me.txtElectronicMechanical.Name = "txtElectronicMechanical"
+        Me.txtElectronicMechanical.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
+        Me.txtElectronicMechanical.ScrollBars = System.Windows.Forms.ScrollBars.None
+        Me.txtElectronicMechanical.SelectedText = ""
+        Me.txtElectronicMechanical.SelectionLength = 0
+        Me.txtElectronicMechanical.SelectionStart = 0
+        Me.txtElectronicMechanical.ShortcutsEnabled = True
+        Me.txtElectronicMechanical.Size = New System.Drawing.Size(492, 23)
+        Me.txtElectronicMechanical.TabIndex = 55
+        Me.txtElectronicMechanical.UseSelectable = True
+        Me.txtElectronicMechanical.WaterMarkColor = System.Drawing.Color.FromArgb(CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer))
+        Me.txtElectronicMechanical.WaterMarkFont = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel)
         '
-        'MetroTextBox9
+        'txtCertType
         '
-        Me.MetroTextBox9.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.MetroTextBox9.BackColor = System.Drawing.Color.White
-        '
-        '
-        '
-        Me.MetroTextBox9.CustomButton.Image = Nothing
-        Me.MetroTextBox9.CustomButton.Location = New System.Drawing.Point(470, 1)
-        Me.MetroTextBox9.CustomButton.Name = ""
-        Me.MetroTextBox9.CustomButton.Size = New System.Drawing.Size(21, 21)
-        Me.MetroTextBox9.CustomButton.Style = MetroFramework.MetroColorStyle.Blue
-        Me.MetroTextBox9.CustomButton.TabIndex = 1
-        Me.MetroTextBox9.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light
-        Me.MetroTextBox9.CustomButton.UseSelectable = True
-        Me.MetroTextBox9.CustomButton.Visible = False
-        Me.MetroTextBox9.Lines = New String(-1) {}
-        Me.MetroTextBox9.Location = New System.Drawing.Point(902, 227)
-        Me.MetroTextBox9.MaxLength = 32767
-        Me.MetroTextBox9.Name = "MetroTextBox9"
-        Me.MetroTextBox9.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
-        Me.MetroTextBox9.ScrollBars = System.Windows.Forms.ScrollBars.None
-        Me.MetroTextBox9.SelectedText = ""
-        Me.MetroTextBox9.SelectionLength = 0
-        Me.MetroTextBox9.SelectionStart = 0
-        Me.MetroTextBox9.ShortcutsEnabled = True
-        Me.MetroTextBox9.Size = New System.Drawing.Size(492, 23)
-        Me.MetroTextBox9.TabIndex = 52
-        Me.MetroTextBox9.UseCustomBackColor = True
-        Me.MetroTextBox9.UseSelectable = True
-        Me.MetroTextBox9.WaterMarkColor = System.Drawing.Color.FromArgb(CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer))
-        Me.MetroTextBox9.WaterMarkFont = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel)
-        '
-        'MetroTextBox10
-        '
-        Me.MetroTextBox10.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.MetroTextBox10.BackColor = System.Drawing.Color.Gainsboro
+        Me.txtCertType.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         '
         '
         '
-        Me.MetroTextBox10.CustomButton.Image = Nothing
-        Me.MetroTextBox10.CustomButton.Location = New System.Drawing.Point(470, 1)
-        Me.MetroTextBox10.CustomButton.Name = ""
-        Me.MetroTextBox10.CustomButton.Size = New System.Drawing.Size(21, 21)
-        Me.MetroTextBox10.CustomButton.Style = MetroFramework.MetroColorStyle.Blue
-        Me.MetroTextBox10.CustomButton.TabIndex = 1
-        Me.MetroTextBox10.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light
-        Me.MetroTextBox10.CustomButton.UseSelectable = True
-        Me.MetroTextBox10.CustomButton.Visible = False
-        Me.MetroTextBox10.Lines = New String(-1) {}
-        Me.MetroTextBox10.Location = New System.Drawing.Point(902, 174)
-        Me.MetroTextBox10.MaxLength = 32767
-        Me.MetroTextBox10.Name = "MetroTextBox10"
-        Me.MetroTextBox10.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
-        Me.MetroTextBox10.ReadOnly = True
-        Me.MetroTextBox10.ScrollBars = System.Windows.Forms.ScrollBars.None
-        Me.MetroTextBox10.SelectedText = ""
-        Me.MetroTextBox10.SelectionLength = 0
-        Me.MetroTextBox10.SelectionStart = 0
-        Me.MetroTextBox10.ShortcutsEnabled = True
-        Me.MetroTextBox10.Size = New System.Drawing.Size(492, 23)
-        Me.MetroTextBox10.TabIndex = 51
-        Me.MetroTextBox10.UseCustomBackColor = True
-        Me.MetroTextBox10.UseSelectable = True
-        Me.MetroTextBox10.WaterMarkColor = System.Drawing.Color.FromArgb(CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer))
-        Me.MetroTextBox10.WaterMarkFont = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel)
+        Me.txtCertType.CustomButton.Image = Nothing
+        Me.txtCertType.CustomButton.Location = New System.Drawing.Point(470, 1)
+        Me.txtCertType.CustomButton.Name = ""
+        Me.txtCertType.CustomButton.Size = New System.Drawing.Size(21, 21)
+        Me.txtCertType.CustomButton.Style = MetroFramework.MetroColorStyle.Blue
+        Me.txtCertType.CustomButton.TabIndex = 1
+        Me.txtCertType.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light
+        Me.txtCertType.CustomButton.UseSelectable = True
+        Me.txtCertType.CustomButton.Visible = False
+        Me.txtCertType.Lines = New String(-1) {}
+        Me.txtCertType.Location = New System.Drawing.Point(902, 332)
+        Me.txtCertType.MaxLength = 32767
+        Me.txtCertType.Name = "txtCertType"
+        Me.txtCertType.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
+        Me.txtCertType.ScrollBars = System.Windows.Forms.ScrollBars.None
+        Me.txtCertType.SelectedText = ""
+        Me.txtCertType.SelectionLength = 0
+        Me.txtCertType.SelectionStart = 0
+        Me.txtCertType.ShortcutsEnabled = True
+        Me.txtCertType.Size = New System.Drawing.Size(492, 23)
+        Me.txtCertType.TabIndex = 54
+        Me.txtCertType.UseSelectable = True
+        Me.txtCertType.WaterMarkColor = System.Drawing.Color.FromArgb(CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer))
+        Me.txtCertType.WaterMarkFont = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel)
+        '
+        'txtManufacturer
+        '
+        Me.txtManufacturer.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        '
+        '
+        '
+        Me.txtManufacturer.CustomButton.Image = Nothing
+        Me.txtManufacturer.CustomButton.Location = New System.Drawing.Point(470, 1)
+        Me.txtManufacturer.CustomButton.Name = ""
+        Me.txtManufacturer.CustomButton.Size = New System.Drawing.Size(21, 21)
+        Me.txtManufacturer.CustomButton.Style = MetroFramework.MetroColorStyle.Blue
+        Me.txtManufacturer.CustomButton.TabIndex = 1
+        Me.txtManufacturer.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light
+        Me.txtManufacturer.CustomButton.UseSelectable = True
+        Me.txtManufacturer.CustomButton.Visible = False
+        Me.txtManufacturer.Lines = New String(-1) {}
+        Me.txtManufacturer.Location = New System.Drawing.Point(902, 282)
+        Me.txtManufacturer.MaxLength = 32767
+        Me.txtManufacturer.Name = "txtManufacturer"
+        Me.txtManufacturer.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
+        Me.txtManufacturer.ScrollBars = System.Windows.Forms.ScrollBars.None
+        Me.txtManufacturer.SelectedText = ""
+        Me.txtManufacturer.SelectionLength = 0
+        Me.txtManufacturer.SelectionStart = 0
+        Me.txtManufacturer.ShortcutsEnabled = True
+        Me.txtManufacturer.Size = New System.Drawing.Size(492, 23)
+        Me.txtManufacturer.TabIndex = 53
+        Me.txtManufacturer.UseSelectable = True
+        Me.txtManufacturer.WaterMarkColor = System.Drawing.Color.FromArgb(CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer))
+        Me.txtManufacturer.WaterMarkFont = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel)
+        '
+        'txtModelDescription
+        '
+        Me.txtModelDescription.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtModelDescription.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.txtModelDescription.CustomButton.Image = Nothing
+        Me.txtModelDescription.CustomButton.Location = New System.Drawing.Point(470, 1)
+        Me.txtModelDescription.CustomButton.Name = ""
+        Me.txtModelDescription.CustomButton.Size = New System.Drawing.Size(21, 21)
+        Me.txtModelDescription.CustomButton.Style = MetroFramework.MetroColorStyle.Blue
+        Me.txtModelDescription.CustomButton.TabIndex = 1
+        Me.txtModelDescription.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light
+        Me.txtModelDescription.CustomButton.UseSelectable = True
+        Me.txtModelDescription.CustomButton.Visible = False
+        Me.txtModelDescription.Lines = New String(-1) {}
+        Me.txtModelDescription.Location = New System.Drawing.Point(902, 227)
+        Me.txtModelDescription.MaxLength = 32767
+        Me.txtModelDescription.Name = "txtModelDescription"
+        Me.txtModelDescription.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
+        Me.txtModelDescription.ScrollBars = System.Windows.Forms.ScrollBars.None
+        Me.txtModelDescription.SelectedText = ""
+        Me.txtModelDescription.SelectionLength = 0
+        Me.txtModelDescription.SelectionStart = 0
+        Me.txtModelDescription.ShortcutsEnabled = True
+        Me.txtModelDescription.Size = New System.Drawing.Size(492, 23)
+        Me.txtModelDescription.TabIndex = 52
+        Me.txtModelDescription.UseCustomBackColor = True
+        Me.txtModelDescription.UseSelectable = True
+        Me.txtModelDescription.WaterMarkColor = System.Drawing.Color.FromArgb(CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer))
+        Me.txtModelDescription.WaterMarkFont = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel)
+        '
+        'txtModelId
+        '
+        Me.txtModelId.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtModelId.BackColor = System.Drawing.Color.Gainsboro
+        '
+        '
+        '
+        Me.txtModelId.CustomButton.Image = Nothing
+        Me.txtModelId.CustomButton.Location = New System.Drawing.Point(470, 1)
+        Me.txtModelId.CustomButton.Name = ""
+        Me.txtModelId.CustomButton.Size = New System.Drawing.Size(21, 21)
+        Me.txtModelId.CustomButton.Style = MetroFramework.MetroColorStyle.Blue
+        Me.txtModelId.CustomButton.TabIndex = 1
+        Me.txtModelId.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light
+        Me.txtModelId.CustomButton.UseSelectable = True
+        Me.txtModelId.CustomButton.Visible = False
+        Me.txtModelId.Lines = New String(-1) {}
+        Me.txtModelId.Location = New System.Drawing.Point(902, 174)
+        Me.txtModelId.MaxLength = 32767
+        Me.txtModelId.Name = "txtModelId"
+        Me.txtModelId.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
+        Me.txtModelId.ReadOnly = True
+        Me.txtModelId.ScrollBars = System.Windows.Forms.ScrollBars.None
+        Me.txtModelId.SelectedText = ""
+        Me.txtModelId.SelectionLength = 0
+        Me.txtModelId.SelectionStart = 0
+        Me.txtModelId.ShortcutsEnabled = True
+        Me.txtModelId.Size = New System.Drawing.Size(492, 23)
+        Me.txtModelId.TabIndex = 51
+        Me.txtModelId.UseCustomBackColor = True
+        Me.txtModelId.UseSelectable = True
+        Me.txtModelId.WaterMarkColor = System.Drawing.Color.FromArgb(CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer), CType(CType(109, Byte), Integer))
+        Me.txtModelId.WaterMarkFont = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel)
         '
         'PrintPreviewDialog1
         '
@@ -1256,7 +1322,7 @@ Partial Class frmMain
         '
         Me.btnSettings.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnSettings.BackColor = System.Drawing.Color.Black
-        Me.btnSettings.BackgroundImage = Global.Certification.My.Resources.Resources.Settings
+        Me.btnSettings.BackgroundImage = Global.CertificationSystem.My.Resources.Resources.Settings
         Me.btnSettings.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnSettings.ForeColor = System.Drawing.SystemColors.Info
         Me.btnSettings.Location = New System.Drawing.Point(258, 18)
@@ -1327,21 +1393,21 @@ Partial Class frmMain
     Friend WithEvents ScrollBarCustomers As VScrollBar
     Friend WithEvents searchByCode As MetroFramework.Controls.MetroRadioButton
     Friend WithEvents searchByName As MetroFramework.Controls.MetroRadioButton
-    Friend WithEvents MetroRadioButton1 As MetroFramework.Controls.MetroRadioButton
-    Friend WithEvents MetroRadioButton2 As MetroFramework.Controls.MetroRadioButton
+    Friend WithEvents searchByMachineCode As MetroFramework.Controls.MetroRadioButton
+    Friend WithEvents searchByMachineName As MetroFramework.Controls.MetroRadioButton
     Friend WithEvents ScrollbarMachines As VScrollBar
-    Friend WithEvents MetroButton1 As MetroFramework.Controls.MetroButton
-    Friend WithEvents MetroButton2 As MetroFramework.Controls.MetroButton
-    Friend WithEvents MetroButton3 As MetroFramework.Controls.MetroButton
+    Friend WithEvents btnDeleteMachine As MetroFramework.Controls.MetroButton
+    Friend WithEvents btnAddNewMachine As MetroFramework.Controls.MetroButton
+    Friend WithEvents btnSaveMachines As MetroFramework.Controls.MetroButton
     Friend WithEvents MetroLabel11 As MetroFramework.Controls.MetroLabel
-    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents txtMachineSearch As TextBox
     Friend WithEvents dgrdMachines As MetroFramework.Controls.MetroGrid
-    Friend WithEvents MetroTextBox5 As MetroFramework.Controls.MetroTextBox
-    Friend WithEvents MetroTextBox6 As MetroFramework.Controls.MetroTextBox
-    Friend WithEvents MetroTextBox7 As MetroFramework.Controls.MetroTextBox
-    Friend WithEvents MetroTextBox8 As MetroFramework.Controls.MetroTextBox
-    Friend WithEvents MetroTextBox9 As MetroFramework.Controls.MetroTextBox
-    Friend WithEvents MetroTextBox10 As MetroFramework.Controls.MetroTextBox
+    Friend WithEvents txtDefaultCapacity As MetroFramework.Controls.MetroTextBox
+    Friend WithEvents txtElectronicMechanical As MetroFramework.Controls.MetroTextBox
+    Friend WithEvents txtCertType As MetroFramework.Controls.MetroTextBox
+    Friend WithEvents txtManufacturer As MetroFramework.Controls.MetroTextBox
+    Friend WithEvents txtModelDescription As MetroFramework.Controls.MetroTextBox
+    Friend WithEvents txtModelId As MetroFramework.Controls.MetroTextBox
     Friend WithEvents btnNewCert As Button
     Friend WithEvents pnlCerts As Panel
     Friend WithEvents SerialNumber As DataGridViewTextBoxColumn
@@ -1352,4 +1418,6 @@ Partial Class frmMain
     Friend WithEvents MetroLabel13 As MetroFramework.Controls.MetroLabel
     Friend WithEvents btnSettings As MetroFramework.Controls.MetroButton
     Friend WithEvents GroupBox1 As GroupBox
+    Friend WithEvents txtInservice As MetroFramework.Controls.MetroTextBox
+    Friend WithEvents txtDefaultMinGrad As MetroFramework.Controls.MetroTextBox
 End Class
