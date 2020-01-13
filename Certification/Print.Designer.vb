@@ -223,14 +223,18 @@ Partial Class frmPrint
         Me.GroupBox2.Controls.Add(Me.txtModelId)
         Me.GroupBox2.Controls.Add(Me.txtManufacturer)
         Me.GroupBox2.Controls.Add(Me.txtLocation)
+        Me.GroupBox2.Controls.Add(Me.txtTestWeightsM1)
+        Me.GroupBox2.Controls.Add(Me.Label12)
         Me.GroupBox2.Controls.Add(Me.Label8)
+        Me.GroupBox2.Controls.Add(Me.txtTestWeightsF1)
         Me.GroupBox2.Controls.Add(Me.txtTagId)
         Me.GroupBox2.Controls.Add(Me.Label9)
+        Me.GroupBox2.Controls.Add(Me.Label13)
         Me.GroupBox2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.GroupBox2.Font = New System.Drawing.Font("Segoe UI", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GroupBox2.Location = New System.Drawing.Point(23, 244)
+        Me.GroupBox2.Location = New System.Drawing.Point(23, 253)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(763, 219)
+        Me.GroupBox2.Size = New System.Drawing.Size(763, 259)
         Me.GroupBox2.TabIndex = 19
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Machine Details"
@@ -293,7 +297,7 @@ Partial Class frmPrint
         Me.cbProcedure.Items.AddRange(New Object() {"Quality Assurance Procedure 15"})
         Me.cbProcedure.Location = New System.Drawing.Point(130, 175)
         Me.cbProcedure.Name = "cbProcedure"
-        Me.cbProcedure.Size = New System.Drawing.Size(270, 29)
+        Me.cbProcedure.Size = New System.Drawing.Size(255, 29)
         Me.cbProcedure.TabIndex = 45
         '
         'txtMinGraduation
@@ -310,9 +314,9 @@ Partial Class frmPrint
         Me.cbCalibrationInterval.FlatStyle = System.Windows.Forms.FlatStyle.System
         Me.cbCalibrationInterval.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbCalibrationInterval.FormattingEnabled = True
-        Me.cbCalibrationInterval.Location = New System.Drawing.Point(564, 180)
+        Me.cbCalibrationInterval.Location = New System.Drawing.Point(554, 180)
         Me.cbCalibrationInterval.Name = "cbCalibrationInterval"
-        Me.cbCalibrationInterval.Size = New System.Drawing.Size(179, 29)
+        Me.cbCalibrationInterval.Size = New System.Drawing.Size(189, 29)
         Me.cbCalibrationInterval.TabIndex = 29
         '
         'Label4
@@ -441,7 +445,7 @@ Partial Class frmPrint
         '
         Me.Label11.AutoSize = True
         Me.Label11.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label11.Location = New System.Drawing.Point(12, 42)
+        Me.Label11.Location = New System.Drawing.Point(13, 44)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(142, 21)
         Me.Label11.TabIndex = 38
@@ -450,7 +454,7 @@ Partial Class frmPrint
         'txtTolerance
         '
         Me.txtTolerance.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtTolerance.Location = New System.Drawing.Point(172, 42)
+        Me.txtTolerance.Location = New System.Drawing.Point(173, 41)
         Me.txtTolerance.Name = "txtTolerance"
         Me.txtTolerance.Size = New System.Drawing.Size(206, 29)
         Me.txtTolerance.TabIndex = 39
@@ -459,43 +463,43 @@ Partial Class frmPrint
         '
         Me.Label12.AutoSize = True
         Me.Label12.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label12.Location = New System.Drawing.Point(406, 45)
+        Me.Label12.Location = New System.Drawing.Point(406, 217)
         Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(123, 21)
+        Me.Label12.Size = New System.Drawing.Size(33, 21)
         Me.Label12.TabIndex = 41
-        Me.Label12.Text = "Test Weights M1"
+        Me.Label12.Text = "M1"
         '
         'txtTestWeightsM1
         '
         Me.txtTestWeightsM1.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtTestWeightsM1.Location = New System.Drawing.Point(568, 39)
+        Me.txtTestWeightsM1.Location = New System.Drawing.Point(482, 214)
         Me.txtTestWeightsM1.Name = "txtTestWeightsM1"
-        Me.txtTestWeightsM1.Size = New System.Drawing.Size(175, 29)
+        Me.txtTestWeightsM1.Size = New System.Drawing.Size(260, 29)
         Me.txtTestWeightsM1.TabIndex = 42
         '
         'Label13
         '
         Me.Label13.AutoSize = True
         Me.Label13.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label13.Location = New System.Drawing.Point(10, 85)
+        Me.Label13.Location = New System.Drawing.Point(20, 217)
         Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(117, 21)
+        Me.Label13.Size = New System.Drawing.Size(31, 21)
         Me.Label13.TabIndex = 43
-        Me.Label13.Text = "Test Weights F1"
+        Me.Label13.Text = " F1"
         '
         'txtTestWeightsF1
         '
         Me.txtTestWeightsF1.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtTestWeightsF1.Location = New System.Drawing.Point(172, 82)
+        Me.txtTestWeightsF1.Location = New System.Drawing.Point(130, 214)
         Me.txtTestWeightsF1.Name = "txtTestWeightsF1"
-        Me.txtTestWeightsF1.Size = New System.Drawing.Size(206, 29)
+        Me.txtTestWeightsF1.Size = New System.Drawing.Size(255, 29)
         Me.txtTestWeightsF1.TabIndex = 44
         '
         'Label15
         '
         Me.Label15.AutoSize = True
         Me.Label15.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label15.Location = New System.Drawing.Point(406, 82)
+        Me.Label15.Location = New System.Drawing.Point(407, 44)
         Me.Label15.Name = "Label15"
         Me.Label15.Size = New System.Drawing.Size(152, 21)
         Me.Label15.TabIndex = 47
@@ -505,7 +509,7 @@ Partial Class frmPrint
         '
         Me.Label16.AutoSize = True
         Me.Label16.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label16.Location = New System.Drawing.Point(12, 123)
+        Me.Label16.Location = New System.Drawing.Point(13, 85)
         Me.Label16.Name = "Label16"
         Me.Label16.Size = New System.Drawing.Size(152, 21)
         Me.Label16.TabIndex = 48
@@ -515,7 +519,7 @@ Partial Class frmPrint
         '
         Me.Label17.AutoSize = True
         Me.Label17.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label17.Location = New System.Drawing.Point(406, 123)
+        Me.Label17.Location = New System.Drawing.Point(407, 85)
         Me.Label17.Name = "Label17"
         Me.Label17.Size = New System.Drawing.Size(152, 21)
         Me.Label17.TabIndex = 49
@@ -539,14 +543,10 @@ Partial Class frmPrint
         Me.GroupBox3.Controls.Add(Me.Label16)
         Me.GroupBox3.Controls.Add(Me.txtTolerance)
         Me.GroupBox3.Controls.Add(Me.Label15)
-        Me.GroupBox3.Controls.Add(Me.Label12)
-        Me.GroupBox3.Controls.Add(Me.txtTestWeightsF1)
-        Me.GroupBox3.Controls.Add(Me.txtTestWeightsM1)
-        Me.GroupBox3.Controls.Add(Me.Label13)
         Me.GroupBox3.Font = New System.Drawing.Font("Segoe UI", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GroupBox3.Location = New System.Drawing.Point(23, 501)
+        Me.GroupBox3.Location = New System.Drawing.Point(23, 540)
         Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(763, 241)
+        Me.GroupBox3.Size = New System.Drawing.Size(763, 203)
         Me.GroupBox3.TabIndex = 50
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Weight Details"
@@ -555,7 +555,7 @@ Partial Class frmPrint
         '
         Me.Label18.AutoSize = True
         Me.Label18.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label18.Location = New System.Drawing.Point(406, 200)
+        Me.Label18.Location = New System.Drawing.Point(407, 162)
         Me.Label18.Name = "Label18"
         Me.Label18.Size = New System.Drawing.Size(152, 21)
         Me.Label18.TabIndex = 56
@@ -564,7 +564,7 @@ Partial Class frmPrint
         'txtCalWeight7
         '
         Me.txtCalWeight7.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtCalWeight7.Location = New System.Drawing.Point(568, 197)
+        Me.txtCalWeight7.Location = New System.Drawing.Point(569, 159)
         Me.txtCalWeight7.Name = "txtCalWeight7"
         Me.txtCalWeight7.Size = New System.Drawing.Size(175, 29)
         Me.txtCalWeight7.TabIndex = 59
@@ -572,7 +572,7 @@ Partial Class frmPrint
         'txtCalWeight6
         '
         Me.txtCalWeight6.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtCalWeight6.Location = New System.Drawing.Point(172, 197)
+        Me.txtCalWeight6.Location = New System.Drawing.Point(173, 159)
         Me.txtCalWeight6.Name = "txtCalWeight6"
         Me.txtCalWeight6.Size = New System.Drawing.Size(206, 29)
         Me.txtCalWeight6.TabIndex = 58
@@ -580,7 +580,7 @@ Partial Class frmPrint
         'txtCalWeight5
         '
         Me.txtCalWeight5.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtCalWeight5.Location = New System.Drawing.Point(568, 159)
+        Me.txtCalWeight5.Location = New System.Drawing.Point(569, 121)
         Me.txtCalWeight5.Name = "txtCalWeight5"
         Me.txtCalWeight5.Size = New System.Drawing.Size(175, 29)
         Me.txtCalWeight5.TabIndex = 57
@@ -589,7 +589,7 @@ Partial Class frmPrint
         '
         Me.Label19.AutoSize = True
         Me.Label19.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label19.Location = New System.Drawing.Point(12, 200)
+        Me.Label19.Location = New System.Drawing.Point(13, 162)
         Me.Label19.Name = "Label19"
         Me.Label19.Size = New System.Drawing.Size(152, 21)
         Me.Label19.TabIndex = 55
@@ -599,7 +599,7 @@ Partial Class frmPrint
         '
         Me.Label20.AutoSize = True
         Me.Label20.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label20.Location = New System.Drawing.Point(406, 159)
+        Me.Label20.Location = New System.Drawing.Point(407, 121)
         Me.Label20.Name = "Label20"
         Me.Label20.Size = New System.Drawing.Size(152, 21)
         Me.Label20.TabIndex = 54
@@ -608,7 +608,7 @@ Partial Class frmPrint
         'txtCalWeight4
         '
         Me.txtCalWeight4.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtCalWeight4.Location = New System.Drawing.Point(172, 159)
+        Me.txtCalWeight4.Location = New System.Drawing.Point(173, 121)
         Me.txtCalWeight4.Name = "txtCalWeight4"
         Me.txtCalWeight4.Size = New System.Drawing.Size(206, 29)
         Me.txtCalWeight4.TabIndex = 53
@@ -617,7 +617,7 @@ Partial Class frmPrint
         '
         Me.Label21.AutoSize = True
         Me.Label21.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label21.Location = New System.Drawing.Point(10, 162)
+        Me.Label21.Location = New System.Drawing.Point(11, 124)
         Me.Label21.Name = "Label21"
         Me.Label21.Size = New System.Drawing.Size(152, 21)
         Me.Label21.TabIndex = 52
@@ -626,7 +626,7 @@ Partial Class frmPrint
         'txtCalWeight3
         '
         Me.txtCalWeight3.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtCalWeight3.Location = New System.Drawing.Point(568, 120)
+        Me.txtCalWeight3.Location = New System.Drawing.Point(569, 82)
         Me.txtCalWeight3.Name = "txtCalWeight3"
         Me.txtCalWeight3.Size = New System.Drawing.Size(175, 29)
         Me.txtCalWeight3.TabIndex = 51
@@ -634,7 +634,7 @@ Partial Class frmPrint
         'txtCalWeight2
         '
         Me.txtCalWeight2.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtCalWeight2.Location = New System.Drawing.Point(172, 120)
+        Me.txtCalWeight2.Location = New System.Drawing.Point(173, 82)
         Me.txtCalWeight2.Name = "txtCalWeight2"
         Me.txtCalWeight2.Size = New System.Drawing.Size(206, 29)
         Me.txtCalWeight2.TabIndex = 50
@@ -642,7 +642,7 @@ Partial Class frmPrint
         'txtCalWeight1
         '
         Me.txtCalWeight1.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtCalWeight1.Location = New System.Drawing.Point(568, 79)
+        Me.txtCalWeight1.Location = New System.Drawing.Point(569, 41)
         Me.txtCalWeight1.Name = "txtCalWeight1"
         Me.txtCalWeight1.Size = New System.Drawing.Size(175, 29)
         Me.txtCalWeight1.TabIndex = 49

@@ -61,6 +61,11 @@ Public Class frmPrint
                 ckElectronic.Checked = machine("Electronic Mechanical").ToString.Equals("E")
                 Dim modelIndex As Integer = cbModel.FindString(machine("Model Description"))
                 cbModel.SelectedIndex = modelIndex
+                If (machine("Cert Type").ToString.Equals("F")) Then
+                    txtTestWeightsF1.Text = My.Settings.F1.ToString()
+                Else
+                    txtTestWeightsM1.Text = My.Settings.M1.ToString()
+                End If
             Next
             '        _certificate = New Certificate
             '        _certificate.CustomerCode = customer("Code")
@@ -167,8 +172,8 @@ Public Class frmPrint
 
 
         txtTolerance.Text = _certificate.RequiredTolerance
-        txtTestWeightsM1.Text = _certificate.TestWeightM1
-        txtTestWeightsF1.Text = _certificate.TestWeightsF1
+        'txtTestWeightsM1.Text = _certificate.TestWeightM1
+        'txtTestWeightsF1.Text = _certificate.TestWeightsF1
 
         txtCalWeight1.Text = _certificate.CalibrationWeight1
         txtCalWeight2.Text = _certificate.CalibrationWeight2

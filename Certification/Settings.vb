@@ -42,6 +42,10 @@ Public Class Settings
         InitializeComponent()
         Me.txtBackupLocation.Text = My.Settings.BackupLocation1.ToString()
         Me.txtDataLocation.Text = My.Settings.DataLocation1.ToString()
+        Me.txtM1.Text = My.Settings.M1.ToString()
+        Me.txtF1.Text = My.Settings.F1.ToString()
+        Me.txtWidth.Text = My.Settings.Width.ToString()
+        Me.txtHeight.Text = My.Settings.Height.ToString()
     End Sub
 
 
@@ -63,8 +67,10 @@ Public Class Settings
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         My.Settings.BackupLocation1 = Me.txtBackupLocation.Text
         My.Settings.DataLocation1 = Me.txtDataLocation.Text
-        My.Settings.Width = Me.txtWidth.Text
-        My.Settings.Height = Me.txtHeight.Text
+        My.Settings.Width = IIf(String.IsNullOrEmpty(Me.txtWidth.Text), 0, Me.txtWidth.Text)
+        My.Settings.Height = IIf(String.IsNullOrEmpty(Me.txtHeight.Text), 0, Me.txtHeight.Text)
+        My.Settings.F1 = txtF1.Text
+        My.Settings.M1 = txtM1.Text
         Me.Close()
     End Sub
 

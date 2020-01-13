@@ -101,6 +101,30 @@ Namespace My
                 Me("Height") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("test F1")>  _
+        Public Property F1() As String
+            Get
+                Return CType(Me("F1"),String)
+            End Get
+            Set
+                Me("F1") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("test M1")>  _
+        Public Property M1() As String
+            Get
+                Return CType(Me("M1"),String)
+            End Get
+            Set
+                Me("M1") = value
+            End Set
+        End Property
     End Class
 End Namespace
 
