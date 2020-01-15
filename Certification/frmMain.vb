@@ -196,6 +196,10 @@ Public Class frmMain
                     'View Cert Button
                     row.Cells("ViewCert").Value = "View Cert"
                     row.Cells("ViewCert").Tag = cert
+
+                    'print button
+                    row.Cells("Print").Value = "Select To Print"
+                    row.Cells("Print").Tag = 0
                 Next
             End If
             Me.dgrdInstalledMachines.Refresh()
@@ -221,6 +225,14 @@ Public Class frmMain
                     'Refresh the grid
                     LoadCustomerCerts()
                 End If
+            End If
+            If (e.ColumnIndex = dgrdInstalledMachines.Columns("Print").Index) Then
+                Dim frm As New frmPrint(dgrdInstalledMachines.Rows(e.RowIndex).Cells("ViewCert").Tag, False)
+                Dim buttonCell As DataGridViewButtonCell = dgrdInstalledMachines.Rows(e.RowIndex).Cells("Print")
+                ' buttonCell.FlatStyle = FlatStyle.Popup
+                buttonCell.Style.BackColor = System.Drawing.Color.Red
+                buttonCell.Selected = False
+                dgrdInstalledMachines.Refresh()
             End If
         End If
     End Sub
@@ -547,152 +559,164 @@ Public Class frmMain
 
 #End Region
 
+#Region "Painting Override"
+
+    'Public Class MyButtonCell
+    '    Inherits DataGridViewButtonCell
+
+    '    'Protected Overrides Sub Paint(ByVal graphics As Graphics, ByVal clipBounds As Rectangle, ByVal cellBounds As Rectangle, ByVal rowIndex As Integer, ByVal elementState As DataGridViewElementStates, ByVal value As Object, ByVal formattedValue As Object, ByVal errorText As String, ByVal cellStyle As DataGridViewCellStyle, ByVal advancedBorderStyle As DataGridViewAdvancedBorderStyle, ByVal paintParts As DataGridViewPaintParts)
+    '    '    ButtonRenderer.DrawButton(graphics, cellBounds, formattedValue.ToString(), New Font("Comic Sans MS", 9.0F, FontStyle.Bold), True, System.Windows.Forms.VisualStyles.PushButtonState.[Default])
+    '    'End Sub
+    'End Class
+
+#End Region
+
 
     Private Sub btnSettings_Click(sender As Object, e As EventArgs) Handles btnSettings.Click
-        Dim frm As New Settings()
-        Dim diaResult As DialogResult
-        diaResult = frm.ShowDialog()
-        If diaResult = DialogResult.OK Then
-            'Refresh the grid
-            LoadCustomerCerts()
-        End If
-    End Sub
+            Dim frm As New Settings()
+            Dim diaResult As DialogResult
+            diaResult = frm.ShowDialog()
+            If diaResult = DialogResult.OK Then
+                'Refresh the grid
+                LoadCustomerCerts()
+            End If
+        End Sub
 
 
-    Private Sub btnAddNewMachine_Click(sender As Object, e As EventArgs) Handles btnAddNewMachine.Click
-        _addingMachine = True
-        ' Clear all fields
-        ClearMachineDetails()
-        txtModelId.Text = _maxMachineId + 1
-    End Sub
+        Private Sub btnAddNewMachine_Click(sender As Object, e As EventArgs) Handles btnAddNewMachine.Click
+            _addingMachine = True
+            ' Clear all fields
+            ClearMachineDetails()
+            txtModelId.Text = _maxMachineId + 1
+        End Sub
 
 
-    Private Sub ClearMachineDetails()
-        Me.txtModelDescription.Clear()
-        Me.txtManufacturer.Clear()
-        Me.txtCertType.Clear()
-        Me.txtElectronicMechanical.Clear()
-        Me.txtDefaultCapacity.Clear()
-        Me.txtDefaultMinGrad.Clear()
-        Me.txtInservice.Clear()
-    End Sub
+        Private Sub ClearMachineDetails()
+            Me.txtModelDescription.Clear()
+            Me.txtManufacturer.Clear()
+            Me.txtCertType.Clear()
+            Me.txtElectronicMechanical.Clear()
+            Me.txtDefaultCapacity.Clear()
+            Me.txtDefaultMinGrad.Clear()
+            Me.txtInservice.Clear()
+        End Sub
 
-    Private Sub btnSaveMachines_Click(sender As Object, e As EventArgs) Handles btnSaveMachines.Click
-        If (ValidateMachine()) Then
-            Try
-                Dim json As String = File.ReadAllText(My.Settings.DataLocation1 & "\Machines.json")
-                Dim jsonObject As JArray = JArray.Parse(json)
-                If (_addingMachine) Then
-                    Dim newMachineMember As String = "{ 'Model ID': '" & Me.txtModelId.Text &
-                        "','Model Description': '" & txtModelDescription.Text &
-                        "','Manufacturer': '" & txtManufacturer.Text &
-                        "','Cert Type': '" & txtCertType.Text &
-                        "','Electronic Mechanical': '" & txtElectronicMechanical.Text &
-                        "','Default_Capacity': '" & txtDefaultCapacity.Text &
-                        "','Default_Min_Grad': '" & txtDefaultMinGrad.Text &
-                        "','Inservice': '" & txtInservice.Text &
-                        "'}"
-                    Dim newMachine As JObject = JObject.Parse(newMachineMember)
-                    jsonObject.Add(newMachine)
-                    Dim output As String = Newtonsoft.Json.JsonConvert.SerializeObject(jsonObject, Newtonsoft.Json.Formatting.Indented)
-                    File.WriteAllText(My.Settings.DataLocation1 & "\Machines.json", output)
-                    _maxMachineId += 1
-
-                    Dim dtMachines As DataTable = dgrdMachines.DataSource
-
-                    Dim row As DataRow = dtMachines.NewRow
-
-                    row("Model ID") = txtModelId.Text
-                    row("Model Description") = txtModelDescription.Text
-                    row("Manufacturer") = txtManufacturer.Text
-                    row("Cert Type") = txtCertType.Text
-                    row("Electronic Mechanical") = txtElectronicMechanical.Text
-                    row("Default_Capacity") = txtDefaultCapacity.Text
-                    row("Default_Min_Grad") = txtDefaultMinGrad.Text
-                    row("Inservice") = txtInservice.Text
-                    dtMachines.Rows.Add(row)
-
-                    ' Refresh the grid with the new row
-                    dgrdMachines.EndEdit()
-                    dgrdMachines.Refresh()
-                    ScrollbarMachines.Maximum = dgrdMachines.Rows.Count
-                    ' Scroll to the bottom of the grid to show the new row
-                    _selectedMachineRowIndex = dgrdMachines.RowCount - 1
-                    dgrdMachines.FirstDisplayedScrollingRowIndex = _selectedMachineRowIndex
-
-                    MessageBox.Show("New Machine Created")
-                    _addingMachine = False
-                Else
-                    Try
-                        For Each machine As JToken In jsonObject.Where(Function(obj) obj("Model ID").Value(Of String)() = txtModelId.Text)
-                            machine("Model Description") = txtModelDescription.Text
-                            machine("Manufacturer") = txtManufacturer.Text
-                            machine("Cert Type") = txtCertType.Text
-                            machine("Electronic Mechanical") = txtElectronicMechanical.Text
-                            machine("Default_Capacity") = txtDefaultCapacity.Text
-                            machine("Default_Min_Grad") = txtDefaultMinGrad.Text
-                            machine("Inservice") = txtInservice.Text
-                        Next
-
-                        Dim output As String = Newtonsoft.Json.JsonConvert.SerializeObject(jsonObject, Newtonsoft.Json.Formatting.Indented)
-                        File.WriteAllText(My.Settings.DataLocation1 & "\Machines.json", output)
-                        ' Update the open machines grid also
-                        dgrdMachines.Rows(_selectedMachineRowIndex).Cells("Model Description").Value = txtModelDescription.Text
-                        dgrdMachines.Rows(_selectedMachineRowIndex).Cells("Manufacturer").Value = txtManufacturer.Text
-                        dgrdMachines.Rows(_selectedMachineRowIndex).Cells("Cert Type").Value = txtCertType.Text
-                        dgrdMachines.Rows(_selectedMachineRowIndex).Cells("Electronic Mechanical").Value = txtElectronicMechanical.Text
-                        dgrdMachines.Rows(_selectedMachineRowIndex).Cells("Default_Capacity").Value = txtDefaultCapacity.Text
-                        dgrdMachines.Rows(_selectedMachineRowIndex).Cells("Default_Min_Grad").Value = txtDefaultMinGrad.Text
-                        dgrdMachines.Rows(_selectedMachineRowIndex).Cells("Inservice").Value = txtInservice.Text
-                        MessageBox.Show("Machine Updated")
-                    Catch ex As Exception
-                        MessageBox.Show("Update Error : " + ex.Message.ToString() + " Please try again.")
-                    End Try
-                End If
-            Catch ex As Exception
-                MessageBox.Show(ex.Message)
-            End Try
-        End If
-    End Sub
-
-    Private Function ValidateMachine() As Boolean
-        If (String.IsNullOrEmpty(txtModelDescription.Text)) Then
-            MessageBox.Show("Model Description Empty.")
-            Return False
-        End If
-        Return True
-    End Function
-
-    Private Sub btnDeleteMachine_Click(sender As Object, e As EventArgs) Handles btnDeleteMachine.Click
-        If Not (String.IsNullOrEmpty(txtModelDescription.Text)) Then
-            Dim result As Integer = MessageBox.Show("Do you wish to Delete Machine " & txtModelDescription.Text, "Delete Machine", MessageBoxButtons.YesNo)
-            If result = DialogResult.Yes Then
+        Private Sub btnSaveMachines_Click(sender As Object, e As EventArgs) Handles btnSaveMachines.Click
+            If (ValidateMachine()) Then
                 Try
                     Dim json As String = File.ReadAllText(My.Settings.DataLocation1 & "\Machines.json")
                     Dim jsonObject As JArray = JArray.Parse(json)
-                    Dim machineToDelete As JToken = jsonObject.FirstOrDefault(Function(obj) obj("Model ID").Value(Of String)() = txtCode.Text)
-                    jsonObject.Remove(machineToDelete)
-                    Dim output As String = Newtonsoft.Json.JsonConvert.SerializeObject(jsonObject, Newtonsoft.Json.Formatting.Indented)
-                    File.WriteAllText(My.Settings.DataLocation1 & "\Machines.json", output)
-                    dgrdMachines.Rows.RemoveAt(_selectedMachineRowIndex)
-                    ClearMachineDetails()
-                    ScrollbarMachines.Maximum = dgrdMachines.Rows.Count
-                    MessageBox.Show("Machine deleted")
-                Catch ex As Exception
-                    MessageBox.Show("Error deleting Machine : " + ex.Message.ToString())
-                End Try
-            Else
-                Exit Sub
-            End If
-        End If
-    End Sub
+                    If (_addingMachine) Then
+                        Dim newMachineMember As String = "{ 'Model ID': '" & Me.txtModelId.Text &
+                            "','Model Description': '" & txtModelDescription.Text &
+                            "','Manufacturer': '" & txtManufacturer.Text &
+                            "','Cert Type': '" & txtCertType.Text &
+                            "','Electronic Mechanical': '" & txtElectronicMechanical.Text &
+                            "','Default_Capacity': '" & txtDefaultCapacity.Text &
+                            "','Default_Min_Grad': '" & txtDefaultMinGrad.Text &
+                            "','Inservice': '" & txtInservice.Text &
+                            "'}"
+                        Dim newMachine As JObject = JObject.Parse(newMachineMember)
+                        jsonObject.Add(newMachine)
+                        Dim output As String = Newtonsoft.Json.JsonConvert.SerializeObject(jsonObject, Newtonsoft.Json.Formatting.Indented)
+                        File.WriteAllText(My.Settings.DataLocation1 & "\Machines.json", output)
+                        _maxMachineId += 1
 
-    Private Sub txtMachineSearch_TextChanged(sender As Object, e As EventArgs) Handles txtMachineSearch.TextChanged
-        If (searchByMachineName.Checked) Then
-            CType(dgrdMachines.DataSource, DataTable).DefaultView.RowFilter = String.Format("[Model Description] like '{0}%'", txtMachineSearch.Text)
-        Else
-            CType(dgrdMachines.DataSource, DataTable).DefaultView.RowFilter = String.Format("[Model ID] like '{0}%'", txtMachineSearch.Text)
-        End If
-        ScrollbarMachines.Maximum = dgrdMachines.Rows.Count
-    End Sub
-End Class
+                        Dim dtMachines As DataTable = dgrdMachines.DataSource
+
+                        Dim row As DataRow = dtMachines.NewRow
+
+                        row("Model ID") = txtModelId.Text
+                        row("Model Description") = txtModelDescription.Text
+                        row("Manufacturer") = txtManufacturer.Text
+                        row("Cert Type") = txtCertType.Text
+                        row("Electronic Mechanical") = txtElectronicMechanical.Text
+                        row("Default_Capacity") = txtDefaultCapacity.Text
+                        row("Default_Min_Grad") = txtDefaultMinGrad.Text
+                        row("Inservice") = txtInservice.Text
+                        dtMachines.Rows.Add(row)
+
+                        ' Refresh the grid with the new row
+                        dgrdMachines.EndEdit()
+                        dgrdMachines.Refresh()
+                        ScrollbarMachines.Maximum = dgrdMachines.Rows.Count
+                        ' Scroll to the bottom of the grid to show the new row
+                        _selectedMachineRowIndex = dgrdMachines.RowCount - 1
+                        dgrdMachines.FirstDisplayedScrollingRowIndex = _selectedMachineRowIndex
+
+                        MessageBox.Show("New Machine Created")
+                        _addingMachine = False
+                    Else
+                        Try
+                            For Each machine As JToken In jsonObject.Where(Function(obj) obj("Model ID").Value(Of String)() = txtModelId.Text)
+                                machine("Model Description") = txtModelDescription.Text
+                                machine("Manufacturer") = txtManufacturer.Text
+                                machine("Cert Type") = txtCertType.Text
+                                machine("Electronic Mechanical") = txtElectronicMechanical.Text
+                                machine("Default_Capacity") = txtDefaultCapacity.Text
+                                machine("Default_Min_Grad") = txtDefaultMinGrad.Text
+                                machine("Inservice") = txtInservice.Text
+                            Next
+
+                            Dim output As String = Newtonsoft.Json.JsonConvert.SerializeObject(jsonObject, Newtonsoft.Json.Formatting.Indented)
+                            File.WriteAllText(My.Settings.DataLocation1 & "\Machines.json", output)
+                            ' Update the open machines grid also
+                            dgrdMachines.Rows(_selectedMachineRowIndex).Cells("Model Description").Value = txtModelDescription.Text
+                            dgrdMachines.Rows(_selectedMachineRowIndex).Cells("Manufacturer").Value = txtManufacturer.Text
+                            dgrdMachines.Rows(_selectedMachineRowIndex).Cells("Cert Type").Value = txtCertType.Text
+                            dgrdMachines.Rows(_selectedMachineRowIndex).Cells("Electronic Mechanical").Value = txtElectronicMechanical.Text
+                            dgrdMachines.Rows(_selectedMachineRowIndex).Cells("Default_Capacity").Value = txtDefaultCapacity.Text
+                            dgrdMachines.Rows(_selectedMachineRowIndex).Cells("Default_Min_Grad").Value = txtDefaultMinGrad.Text
+                            dgrdMachines.Rows(_selectedMachineRowIndex).Cells("Inservice").Value = txtInservice.Text
+                            MessageBox.Show("Machine Updated")
+                        Catch ex As Exception
+                            MessageBox.Show("Update Error : " + ex.Message.ToString() + " Please try again.")
+                        End Try
+                    End If
+                Catch ex As Exception
+                    MessageBox.Show(ex.Message)
+                End Try
+            End If
+        End Sub
+
+        Private Function ValidateMachine() As Boolean
+            If (String.IsNullOrEmpty(txtModelDescription.Text)) Then
+                MessageBox.Show("Model Description Empty.")
+                Return False
+            End If
+            Return True
+        End Function
+
+        Private Sub btnDeleteMachine_Click(sender As Object, e As EventArgs) Handles btnDeleteMachine.Click
+            If Not (String.IsNullOrEmpty(txtModelDescription.Text)) Then
+                Dim result As Integer = MessageBox.Show("Do you wish to Delete Machine " & txtModelDescription.Text, "Delete Machine", MessageBoxButtons.YesNo)
+                If result = DialogResult.Yes Then
+                    Try
+                        Dim json As String = File.ReadAllText(My.Settings.DataLocation1 & "\Machines.json")
+                        Dim jsonObject As JArray = JArray.Parse(json)
+                        Dim machineToDelete As JToken = jsonObject.FirstOrDefault(Function(obj) obj("Model ID").Value(Of String)() = txtCode.Text)
+                        jsonObject.Remove(machineToDelete)
+                        Dim output As String = Newtonsoft.Json.JsonConvert.SerializeObject(jsonObject, Newtonsoft.Json.Formatting.Indented)
+                        File.WriteAllText(My.Settings.DataLocation1 & "\Machines.json", output)
+                        dgrdMachines.Rows.RemoveAt(_selectedMachineRowIndex)
+                        ClearMachineDetails()
+                        ScrollbarMachines.Maximum = dgrdMachines.Rows.Count
+                        MessageBox.Show("Machine deleted")
+                    Catch ex As Exception
+                        MessageBox.Show("Error deleting Machine : " + ex.Message.ToString())
+                    End Try
+                Else
+                    Exit Sub
+                End If
+            End If
+        End Sub
+
+        Private Sub txtMachineSearch_TextChanged(sender As Object, e As EventArgs) Handles txtMachineSearch.TextChanged
+            If (searchByMachineName.Checked) Then
+                CType(dgrdMachines.DataSource, DataTable).DefaultView.RowFilter = String.Format("[Model Description] like '{0}%'", txtMachineSearch.Text)
+            Else
+                CType(dgrdMachines.DataSource, DataTable).DefaultView.RowFilter = String.Format("[Model ID] like '{0}%'", txtMachineSearch.Text)
+            End If
+            ScrollbarMachines.Maximum = dgrdMachines.Rows.Count
+        End Sub
+    End Class

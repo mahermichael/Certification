@@ -1350,7 +1350,8 @@ Partial Class frmMain
         '
         'Print
         '
-        Me.Print.HeaderText = "Select To Print"
+        Me.Print.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.Print.HeaderText = ""
         Me.Print.Name = "Print"
         Me.Print.ReadOnly = True
         Me.Print.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
