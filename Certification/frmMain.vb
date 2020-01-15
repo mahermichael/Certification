@@ -61,7 +61,6 @@ Public Class frmMain
             End If
             My.Settings.BackupLocation1 = path
         End If
-
     End Sub
 
 #End Region
@@ -227,10 +226,19 @@ Public Class frmMain
                 End If
             End If
             If (e.ColumnIndex = dgrdInstalledMachines.Columns("Print").Index) Then
-                Dim frm As New frmPrint(dgrdInstalledMachines.Rows(e.RowIndex).Cells("ViewCert").Tag, False)
                 Dim buttonCell As DataGridViewButtonCell = dgrdInstalledMachines.Rows(e.RowIndex).Cells("Print")
+                If buttonCell.Tag = 0 Then
+                    buttonCell.Style.BackColor = System.Drawing.Color.LightGreen
+                    buttonCell.Tag = 1
+                    buttonCell.Selected = False
+                    dgrdInstalledMachines.Refresh()
+                Else
+                    buttonCell.Style.BackColor = System.Drawing.Color.White
+                    buttonCell.Tag = 0
+                    buttonCell.Selected = False
+                    dgrdInstalledMachines.Refresh()
+                End If
                 ' buttonCell.FlatStyle = FlatStyle.Popup
-                buttonCell.Style.BackColor = System.Drawing.Color.Red
                 buttonCell.Selected = False
                 dgrdInstalledMachines.Refresh()
             End If
@@ -719,4 +727,25 @@ Public Class frmMain
             End If
             ScrollbarMachines.Maximum = dgrdMachines.Rows.Count
         End Sub
-    End Class
+
+    Private Sub btnPrintSelectedCerts_Click(sender As Object, e As EventArgs) Handles btnPrintSelectedCerts.Click
+        Dim i = 0
+        For Each row As DataGridViewRow In dgrdInstalledMachines.Rows
+            If row.Cells("Print").Tag = 1 Then
+                i += 1
+            End If
+        Next
+        If i > 0 Then
+            Dim frm As New CalibrationInterval(i)
+            Dim diaResult As DialogResult
+            diaResult = frm.ShowDialog()
+            If diaResult = DialogResult.OK Then
+                'Refresh the grid
+                'LoadCustomerCerts()
+            End If
+        Else
+            MessageBox.Show("Please Select a Cert to Print")
+        End If
+
+    End Sub
+End Class

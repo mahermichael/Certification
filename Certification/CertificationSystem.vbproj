@@ -155,6 +155,12 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Models\Certificate.vb" />
+    <Compile Include="CalibrationInterval.Designer.vb">
+      <DependentUpon>CalibrationInterval.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CalibrationInterval.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Settings.Designer.vb">
       <DependentUpon>Settings.vb</DependentUpon>
     </Compile>
@@ -186,6 +192,9 @@
   <ItemGroup>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CalibrationInterval.resx">
+      <DependentUpon>CalibrationInterval.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Settings.resx">
       <DependentUpon>Settings.vb</DependentUpon>

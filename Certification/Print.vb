@@ -198,8 +198,8 @@ Public Class frmPrint
         ' Hide Print dialog
         Dim prntController As PrintController = New StandardPrintController()
         _printDoc.PrintController = prntController
-        Dim pprSize As New PaperSize("custom", My.Settings.Width, My.Settings.Height)
-        _printDoc.DefaultPageSettings.PaperSize = pprSize
+        ' Dim pprSize As New PaperSize("custom", My.Settings.Width, My.Settings.Height)
+        '  _printDoc.DefaultPageSettings.PaperSize = pprSize
         _printDoc.DefaultPageSettings.Landscape = False
         AddHandler _printDoc.PrintPage, AddressOf PrintDocument1_PrintPage
         printPreviewCtrl.Document = _printDoc
