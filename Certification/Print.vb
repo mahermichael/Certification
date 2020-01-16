@@ -24,6 +24,8 @@ Public Class frmPrint
     ''' </summary>
     Private _newRecord As Boolean
 
+    Private _batchJob As Boolean
+
     ''' <summary>
     ''' Machines Array
     ''' </summary>
@@ -34,10 +36,11 @@ Public Class frmPrint
     ''' <summary>
     ''' Constructor
     ''' </summary>
-    Public Sub New(ByVal cert As Certificate, ByVal newRecord As Boolean)
+    Public Sub New(ByVal cert As Certificate, ByVal newRecord As Boolean, ByVal batchJob As Boolean)
         InitializeComponent()
         'LoadCustomerDetails(cert)
         _certificate = cert
+        _batchJob = batchJob
         _newRecord = newRecord
         DisplayCertificate()
         CreatePrintDocument()
@@ -151,8 +154,9 @@ Public Class frmPrint
         ' Secondary Details
         txtLocation.Text = _certificate.Location
 
-        Dim procIndex As Integer = cbProcedure.FindString(_certificate.Procedure)
-        cbProcedure.SelectedIndex = Math.Max(procIndex, 0)
+        'Dim procIndex As Integer = cbProcedure.FindString(_certificate.Procedure)
+        'cbProcedure.SelectedIndex = Math.Max(procIndex, 0)
+        txtProcedure.Text = _certificate.Procedure
 
         ' Hack
         cbCalibrationInterval.Items.Add("1 Monthly")
@@ -272,7 +276,7 @@ Public Class frmPrint
             Next
             ' Procedure
             For Each printLocation As JToken In jsonObject.Where(Function(obj) obj("fieldName").Value(Of String)() = "Procedure")
-                e.Graphics.DrawString(cbProcedure.SelectedItem.ToString, reportFont, Brushes.Black, printLocation("fromLeft"), printLocation("fromTop"))
+                e.Graphics.DrawString(txtProcedure.Text, reportFont, Brushes.Black, printLocation("fromLeft"), printLocation("fromTop"))
             Next
             ' Calibration Interval
             For Each printLocation As JToken In jsonObject.Where(Function(obj) obj("fieldName").Value(Of String)() = "Calibration Interval")
@@ -354,7 +358,7 @@ Public Class frmPrint
 
                 ' Secondary Details
                 newInstalledMachine("Location") = txtLocation.Text.ToString
-                newInstalledMachine("Procedure") = cbProcedure.SelectedItem.ToString
+                newInstalledMachine("Procedure") = txtProcedure.Text
                 newInstalledMachine("Calibration Interval") = cbCalibrationInterval.SelectedItem.ToString
                 newInstalledMachine("Capacity") = txtCapacity.Text.ToString
                 newInstalledMachine("Min Graduations") = txtMinGraduation.Text.ToString
@@ -385,7 +389,7 @@ Public Class frmPrint
 
                     ' Secondary Details
                     installedMachine("Location") = txtLocation.Text.ToString
-                    installedMachine("Procedure") = cbProcedure.SelectedItem.ToString
+                    installedMachine("Procedure") = txtProcedure.Text
                     installedMachine("Calibration Interval") = cbCalibrationInterval.SelectedItem.ToString
                     installedMachine("Capacity") = txtCapacity.Text.ToString
                     installedMachine("Min Graduations") = txtMinGraduation.Text.ToString
@@ -407,7 +411,10 @@ Public Class frmPrint
             Dim output As String = Newtonsoft.Json.JsonConvert.SerializeObject(jsonObject, Newtonsoft.Json.Formatting.Indented)
             File.WriteAllText(My.Settings.DataLocation1 & "\InstalledMachines.json", output)
 
-            MessageBox.Show("Customer Updated")
+            If Not _batchJob Then
+                MessageBox.Show("Customer Updated")
+            End If
+
 
             Me.DialogResult = DialogResult.OK
         Catch ex As Exception

@@ -41,7 +41,6 @@ Partial Class frmPrint
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label14 = New System.Windows.Forms.Label()
         Me.txtCapacity = New System.Windows.Forms.TextBox()
-        Me.cbProcedure = New System.Windows.Forms.ComboBox()
         Me.txtMinGraduation = New System.Windows.Forms.TextBox()
         Me.cbCalibrationInterval = New System.Windows.Forms.ComboBox()
         Me.Label4 = New System.Windows.Forms.Label()
@@ -81,6 +80,7 @@ Partial Class frmPrint
         Me.btnPreview = New System.Windows.Forms.Button()
         Me.btnPrint = New System.Windows.Forms.Button()
         Me.btnTestPrint = New System.Windows.Forms.Button()
+        Me.txtProcedure = New System.Windows.Forms.TextBox()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -208,12 +208,12 @@ Partial Class frmPrint
         '
         'GroupBox2
         '
+        Me.GroupBox2.Controls.Add(Me.txtProcedure)
         Me.GroupBox2.Controls.Add(Me.cbModel)
         Me.GroupBox2.Controls.Add(Me.ckElectronic)
         Me.GroupBox2.Controls.Add(Me.Label5)
         Me.GroupBox2.Controls.Add(Me.Label14)
         Me.GroupBox2.Controls.Add(Me.txtCapacity)
-        Me.GroupBox2.Controls.Add(Me.cbProcedure)
         Me.GroupBox2.Controls.Add(Me.txtMinGraduation)
         Me.GroupBox2.Controls.Add(Me.cbCalibrationInterval)
         Me.GroupBox2.Controls.Add(Me.Label4)
@@ -288,18 +288,6 @@ Partial Class frmPrint
         Me.txtCapacity.Name = "txtCapacity"
         Me.txtCapacity.Size = New System.Drawing.Size(260, 29)
         Me.txtCapacity.TabIndex = 25
-        '
-        'cbProcedure
-        '
-        Me.cbProcedure.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbProcedure.FlatStyle = System.Windows.Forms.FlatStyle.System
-        Me.cbProcedure.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cbProcedure.FormattingEnabled = True
-        Me.cbProcedure.Items.AddRange(New Object() {"Quality Assurance Procedure 15"})
-        Me.cbProcedure.Location = New System.Drawing.Point(130, 175)
-        Me.cbProcedure.Name = "cbProcedure"
-        Me.cbProcedure.Size = New System.Drawing.Size(255, 29)
-        Me.cbProcedure.TabIndex = 45
         '
         'txtMinGraduation
         '
@@ -684,6 +672,14 @@ Partial Class frmPrint
         Me.btnTestPrint.Text = "Test Print"
         Me.btnTestPrint.UseVisualStyleBackColor = False
         '
+        'txtProcedure
+        '
+        Me.txtProcedure.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtProcedure.Location = New System.Drawing.Point(130, 175)
+        Me.txtProcedure.Name = "txtProcedure"
+        Me.txtProcedure.Size = New System.Drawing.Size(255, 29)
+        Me.txtProcedure.TabIndex = 47
+        '
         'frmPrint
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -754,7 +750,6 @@ Partial Class frmPrint
     Friend WithEvents txtTestWeightsM1 As TextBox
     Friend WithEvents Label13 As Label
     Friend WithEvents txtTestWeightsF1 As TextBox
-    Friend WithEvents cbProcedure As ComboBox
     Friend WithEvents Label14 As Label
     Friend WithEvents Label15 As Label
     Friend WithEvents Label16 As Label
@@ -774,4 +769,5 @@ Partial Class frmPrint
     Friend WithEvents btnPreview As Button
     Friend WithEvents btnPrint As Button
     Friend WithEvents btnTestPrint As Button
+    Friend WithEvents txtProcedure As TextBox
 End Class

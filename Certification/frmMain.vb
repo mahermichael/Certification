@@ -217,7 +217,7 @@ Public Class frmMain
     Private Sub dgrdInstalledMachines_CellClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles dgrdInstalledMachines.CellMouseClick
         If (e.RowIndex > -1) Then
             If (e.ColumnIndex = dgrdInstalledMachines.Columns("ViewCert").Index) Then
-                Dim frm As New frmPrint(dgrdInstalledMachines.Rows(e.RowIndex).Cells("ViewCert").Tag, False)
+                Dim frm As New frmPrint(dgrdInstalledMachines.Rows(e.RowIndex).Cells("ViewCert").Tag, False, False)
                 Dim diaResult As DialogResult
                 diaResult = frm.ShowDialog()
                 If diaResult = DialogResult.OK Then
@@ -418,14 +418,14 @@ Public Class frmMain
     Private Sub btnNewCert_Click(sender As Object, e As EventArgs) Handles btnNewCert.Click
         If Not (String.IsNullOrEmpty(txtCode.Text)) Then
             Dim cert As New Certificate
-            cert.CertificateNumber = GenerateUniqueCertNumber()
+            cert.CertificateNumber = GenerateUniqueCertNumber("1")
             cert.CustomerCode = txtCode.Text
             cert.CustomerName = txtName.Text
             cert.CustomerAddress1 = txtAddress1.Text
             cert.CustomerAddress2 = txtAddress2.Text
             cert.CustomerAddress3 = txtAddress3.Text
             cert.CustomerAddress4 = txtAddress4.Text
-            Dim frm As New frmPrint(cert, True)
+            Dim frm As New frmPrint(cert, True, False)
             Dim diaResult As DialogResult
             diaResult = frm.ShowDialog()
             If diaResult = DialogResult.OK Then
@@ -440,8 +440,8 @@ Public Class frmMain
     ''' Generate Unique Cert Number
     ''' </summary>
     ''' <returns></returns>
-    Private Function GenerateUniqueCertNumber() As String
-        Dim certNumberSuffix As String = "1"
+    Private Function GenerateUniqueCertNumber(ByVal certNumberSuffix As String) As String
+
         For Each row As DataGridViewRow In dgrdInstalledMachines.Rows
             Dim certNumber As String = row.Cells("CertNumber").Value.ToString
             If (certNumber.StartsWith(txtCode.Text & "-")) Then
@@ -742,15 +742,19 @@ Public Class frmMain
                 diaResult = frm.ShowDialog()
                 If diaResult = DialogResult.OK Then
                     Dim calibrationInterval As String = frm.Interval
+                    Dim certIndex As Integer = 1
                     For Each row As DataGridViewRow In dgrdInstalledMachines.Rows
                         If row.Cells("Print").Tag = 1 Then
-                            Dim cert As Certificate = row.Cells("ViewCert").Tag
-                            cert.CertificateNumber = GenerateUniqueCertNumber()
+                            Dim cert As New Certificate
+                            cert = CopyCertToCert(row.Cells("ViewCert").Tag, cert)
+                            cert.CertificateNumber = GenerateUniqueCertNumber(certIndex.ToString)
                             cert.CalibrationInterval = calibrationInterval
-                            Dim frmPrint As New frmPrint(cert, False)
+                            Dim frmPrint As New frmPrint(cert, True, True)
                             Dim diaPrintResult As DialogResult
                             diaPrintResult = frmPrint.ShowDialog()
                             If diaPrintResult = DialogResult.OK Or diaPrintResult = DialogResult.Cancel Then
+                                'Refresh the grid
+                                certIndex += 1
                                 Continue For
                             End If
                         End If
@@ -764,6 +768,65 @@ Public Class frmMain
 
             Else
                 MessageBox.Show("Please Select a Cert to Print")
+            End If
+        End If
+    End Sub
+
+    Private Function CopyCertToCert(ByVal certToCopy As Certificate, ByVal newCert As Certificate) As Certificate
+        newCert.CustomerCode = certToCopy.CustomerCode
+        newCert.CustomerName = certToCopy.CustomerName
+        newCert.CustomerAddress1 = certToCopy.CustomerAddress1
+        newCert.CustomerAddress2 = certToCopy.CustomerAddress2
+        newCert.CustomerAddress3 = certToCopy.CustomerAddress3
+        newCert.CustomerAddress4 = certToCopy.CustomerAddress4
+
+        ' Main Details
+        'newCert.CertificateNumber =
+        newCert.ModelId = certToCopy.ModelId
+        newCert.SerialNumber = certToCopy.SerialNumber
+        newCert.TagId = certToCopy.TagId
+
+        ' Secondary Details
+        newCert.Location = certToCopy.Location
+        newCert.Procedure = certToCopy.Procedure
+        newCert.CalibrationInterval = certToCopy.CalibrationInterval
+        newCert.Capacity = certToCopy.Capacity
+        newCert.MinGraduations = certToCopy.MinGraduations
+        newCert.RequiredTolerance = certToCopy.RequiredTolerance
+        newCert.TestWeightM1 = certToCopy.TestWeightM1
+        newCert.TestWeightsF1 = certToCopy.TestWeightsF1
+        newCert.CalibrationWeight1 = certToCopy.CalibrationWeight1
+        newCert.CalibrationWeight2 = certToCopy.CalibrationWeight2
+        newCert.CalibrationWeight3 = certToCopy.CalibrationWeight3
+        newCert.CalibrationWeight4 = certToCopy.CalibrationWeight4
+        newCert.CalibrationWeight5 = certToCopy.CalibrationWeight5
+        newCert.CalibrationWeight6 = certToCopy.CalibrationWeight6
+        newCert.CalibrationWeight7 = certToCopy.CalibrationWeight7
+        Return newCert
+    End Function
+
+
+
+
+    Private Sub dgrdInstalledMachines_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgrdInstalledMachines.CellDoubleClick
+        If Not (dgrdInstalledMachines.Rows(e.RowIndex).Cells("ViewCert").ColumnIndex = e.ColumnIndex Or dgrdInstalledMachines.Rows(e.RowIndex).Cells("Print").ColumnIndex = e.ColumnIndex) Then
+            Dim result As Integer = MessageBox.Show("Do you wish to this Cert ?", "Delete Certificate", MessageBoxButtons.YesNo)
+            If result = DialogResult.Yes Then
+                Try
+                    Dim json As String = File.ReadAllText(My.Settings.DataLocation1 & "\InstalledMachines.json")
+                    Dim jsonObject As JArray = JArray.Parse(json)
+                    Dim certToDelete As JToken = jsonObject.FirstOrDefault(Function(obj) obj("SerialNumber").Value(Of String)() = dgrdInstalledMachines.Rows(e.RowIndex).Cells("SerialNumber").Value And obj("CertNumber").Value(Of String)() = dgrdInstalledMachines.Rows(e.RowIndex).Cells("CertNumber").Value)
+                    jsonObject.Remove(certToDelete)
+                    Dim output As String = Newtonsoft.Json.JsonConvert.SerializeObject(jsonObject, Newtonsoft.Json.Formatting.Indented)
+                    File.WriteAllText(My.Settings.DataLocation1 & "\InstalledMachines.json", output)
+                    dgrdInstalledMachines.Rows.RemoveAt(e.RowIndex)
+                    ScrollBarCustomers.Maximum = dgrdInstalledMachines.Rows.Count
+                    MessageBox.Show("Certificate deleted")
+                Catch ex As Exception
+                    Console.WriteLine("Error deleting certificate : " + ex.Message.ToString())
+                End Try
+            Else
+                Exit Sub
             End If
         End If
     End Sub
