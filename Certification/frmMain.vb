@@ -729,23 +729,42 @@ Public Class frmMain
         End Sub
 
     Private Sub btnPrintSelectedCerts_Click(sender As Object, e As EventArgs) Handles btnPrintSelectedCerts.Click
-        Dim i = 0
-        For Each row As DataGridViewRow In dgrdInstalledMachines.Rows
-            If row.Cells("Print").Tag = 1 Then
-                i += 1
-            End If
-        Next
-        If i > 0 Then
-            Dim frm As New CalibrationInterval(i)
-            Dim diaResult As DialogResult
-            diaResult = frm.ShowDialog()
-            If diaResult = DialogResult.OK Then
-                'Refresh the grid
-                'LoadCustomerCerts()
-            End If
-        Else
-            MessageBox.Show("Please Select a Cert to Print")
-        End If
+        If Not (String.IsNullOrEmpty(txtCode.Text)) Then
+            Dim i = 0
+            For Each row As DataGridViewRow In dgrdInstalledMachines.Rows
+                If row.Cells("Print").Tag = 1 Then
+                    i += 1
+                End If
+            Next
+            If i > 0 Then
+                Dim frm As New CalibrationInterval(i)
+                Dim diaResult As DialogResult
+                diaResult = frm.ShowDialog()
+                If diaResult = DialogResult.OK Then
+                    Dim calibrationInterval As String = frm.Interval
+                    For Each row As DataGridViewRow In dgrdInstalledMachines.Rows
+                        If row.Cells("Print").Tag = 1 Then
+                            Dim cert As Certificate = row.Cells("ViewCert").Tag
+                            cert.CertificateNumber = GenerateUniqueCertNumber()
+                            cert.CalibrationInterval = calibrationInterval
+                            Dim frmPrint As New frmPrint(cert, False)
+                            Dim diaPrintResult As DialogResult
+                            diaPrintResult = frmPrint.ShowDialog()
+                            If diaPrintResult = DialogResult.OK Or diaPrintResult = DialogResult.Cancel Then
+                                Continue For
+                            End If
+                        End If
+                    Next
+                    'Refresh the grid
+                    LoadCustomerCerts()
+                Else
+                    MessageBox.Show("Print Job Cancelled")
+                    Exit Sub
+                End If
 
+            Else
+                MessageBox.Show("Please Select a Cert to Print")
+            End If
+        End If
     End Sub
 End Class

@@ -336,12 +336,8 @@ Public Class frmPrint
     End Sub
 
 
-    ''' <summary>
-    ''' Save Changes to Certificate
-    ''' </summary>
-    ''' <param name="sender"></param>
-    ''' <param name="e"></param>
-    Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
+
+    Private Sub SavePrintedCert()
         Try
             Dim json As String = File.ReadAllText(My.Settings.DataLocation1 & "\InstalledMachines.json")
             Dim jsonObject As JArray = JArray.Parse(json)
@@ -417,9 +413,9 @@ Public Class frmPrint
         Catch ex As Exception
             MessageBox.Show("Error saving certificate, please try again. " & ex.Message)
         End Try
-
-
     End Sub
+
+
 
     ''' <summary>
     ''' Preview
@@ -437,11 +433,17 @@ Public Class frmPrint
     ''' <param name="e"></param>
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnPrint.Click
         _printDoc.Print()
+        SavePrintedCert()
+        Me.DialogResult = DialogResult.OK
     End Sub
 
+    Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
+        Me.DialogResult = DialogResult.Cancel
+    End Sub
 
-
-
+    Private Sub btnTestPrint_Click(sender As Object, e As EventArgs) Handles btnTestPrint.Click
+        _printDoc.Print()
+    End Sub
 
 #End Region
 

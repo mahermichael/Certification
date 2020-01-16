@@ -31,7 +31,7 @@ Partial Class frmPrint
         Me.txtCustomerAddress2 = New System.Windows.Forms.TextBox()
         Me.txtCustomerAddress4 = New System.Windows.Forms.TextBox()
         Me.txtCustomerAddress3 = New System.Windows.Forms.TextBox()
-        Me.btnSave = New System.Windows.Forms.Button()
+        Me.btnCancel = New System.Windows.Forms.Button()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.txtCertificateNumber = New System.Windows.Forms.TextBox()
@@ -52,17 +52,17 @@ Partial Class frmPrint
         Me.txtModelId = New System.Windows.Forms.TextBox()
         Me.txtManufacturer = New System.Windows.Forms.TextBox()
         Me.txtLocation = New System.Windows.Forms.TextBox()
+        Me.txtTestWeightsM1 = New System.Windows.Forms.TextBox()
+        Me.Label12 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
+        Me.txtTestWeightsF1 = New System.Windows.Forms.TextBox()
         Me.txtTagId = New System.Windows.Forms.TextBox()
         Me.Label9 = New System.Windows.Forms.Label()
+        Me.Label13 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.txtSerialNumber = New System.Windows.Forms.TextBox()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.txtTolerance = New System.Windows.Forms.TextBox()
-        Me.Label12 = New System.Windows.Forms.Label()
-        Me.txtTestWeightsM1 = New System.Windows.Forms.TextBox()
-        Me.Label13 = New System.Windows.Forms.Label()
-        Me.txtTestWeightsF1 = New System.Windows.Forms.TextBox()
         Me.Label15 = New System.Windows.Forms.Label()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.Label17 = New System.Windows.Forms.Label()
@@ -80,6 +80,7 @@ Partial Class frmPrint
         Me.txtCalWeight1 = New System.Windows.Forms.TextBox()
         Me.btnPreview = New System.Windows.Forms.Button()
         Me.btnPrint = New System.Windows.Forms.Button()
+        Me.btnTestPrint = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -158,17 +159,17 @@ Partial Class frmPrint
         Me.txtCustomerAddress3.Size = New System.Drawing.Size(346, 29)
         Me.txtCustomerAddress3.TabIndex = 12
         '
-        'btnSave
+        'btnCancel
         '
-        Me.btnSave.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnSave.Font = New System.Drawing.Font("Segoe UI", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSave.Location = New System.Drawing.Point(987, 659)
-        Me.btnSave.Name = "btnSave"
-        Me.btnSave.Size = New System.Drawing.Size(145, 83)
-        Me.btnSave.TabIndex = 16
-        Me.btnSave.Text = "Save Changes"
-        Me.btnSave.UseVisualStyleBackColor = False
+        Me.btnCancel.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(128, Byte), Integer))
+        Me.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnCancel.Font = New System.Drawing.Font("Segoe UI", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCancel.Location = New System.Drawing.Point(972, 646)
+        Me.btnCancel.Name = "btnCancel"
+        Me.btnCancel.Size = New System.Drawing.Size(168, 97)
+        Me.btnCancel.TabIndex = 16
+        Me.btnCancel.Text = "Cancel"
+        Me.btnCancel.UseVisualStyleBackColor = False
         '
         'Label7
         '
@@ -395,6 +396,24 @@ Partial Class frmPrint
         Me.txtLocation.Size = New System.Drawing.Size(356, 29)
         Me.txtLocation.TabIndex = 34
         '
+        'txtTestWeightsM1
+        '
+        Me.txtTestWeightsM1.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtTestWeightsM1.Location = New System.Drawing.Point(482, 214)
+        Me.txtTestWeightsM1.Name = "txtTestWeightsM1"
+        Me.txtTestWeightsM1.Size = New System.Drawing.Size(260, 29)
+        Me.txtTestWeightsM1.TabIndex = 42
+        '
+        'Label12
+        '
+        Me.Label12.AutoSize = True
+        Me.Label12.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label12.Location = New System.Drawing.Point(406, 217)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(33, 21)
+        Me.Label12.TabIndex = 41
+        Me.Label12.Text = "M1"
+        '
         'Label8
         '
         Me.Label8.AutoSize = True
@@ -404,6 +423,14 @@ Partial Class frmPrint
         Me.Label8.Size = New System.Drawing.Size(69, 21)
         Me.Label8.TabIndex = 33
         Me.Label8.Text = "Location"
+        '
+        'txtTestWeightsF1
+        '
+        Me.txtTestWeightsF1.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtTestWeightsF1.Location = New System.Drawing.Point(130, 214)
+        Me.txtTestWeightsF1.Name = "txtTestWeightsF1"
+        Me.txtTestWeightsF1.Size = New System.Drawing.Size(255, 29)
+        Me.txtTestWeightsF1.TabIndex = 44
         '
         'txtTagId
         '
@@ -422,6 +449,16 @@ Partial Class frmPrint
         Me.Label9.Size = New System.Drawing.Size(50, 21)
         Me.Label9.TabIndex = 35
         Me.Label9.Text = "Tag Id"
+        '
+        'Label13
+        '
+        Me.Label13.AutoSize = True
+        Me.Label13.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label13.Location = New System.Drawing.Point(20, 217)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(31, 21)
+        Me.Label13.TabIndex = 43
+        Me.Label13.Text = " F1"
         '
         'Label6
         '
@@ -458,42 +495,6 @@ Partial Class frmPrint
         Me.txtTolerance.Name = "txtTolerance"
         Me.txtTolerance.Size = New System.Drawing.Size(206, 29)
         Me.txtTolerance.TabIndex = 39
-        '
-        'Label12
-        '
-        Me.Label12.AutoSize = True
-        Me.Label12.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label12.Location = New System.Drawing.Point(406, 217)
-        Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(33, 21)
-        Me.Label12.TabIndex = 41
-        Me.Label12.Text = "M1"
-        '
-        'txtTestWeightsM1
-        '
-        Me.txtTestWeightsM1.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtTestWeightsM1.Location = New System.Drawing.Point(482, 214)
-        Me.txtTestWeightsM1.Name = "txtTestWeightsM1"
-        Me.txtTestWeightsM1.Size = New System.Drawing.Size(260, 29)
-        Me.txtTestWeightsM1.TabIndex = 42
-        '
-        'Label13
-        '
-        Me.Label13.AutoSize = True
-        Me.Label13.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label13.Location = New System.Drawing.Point(20, 217)
-        Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(31, 21)
-        Me.Label13.TabIndex = 43
-        Me.Label13.Text = " F1"
-        '
-        'txtTestWeightsF1
-        '
-        Me.txtTestWeightsF1.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtTestWeightsF1.Location = New System.Drawing.Point(130, 214)
-        Me.txtTestWeightsF1.Name = "txtTestWeightsF1"
-        Me.txtTestWeightsF1.Size = New System.Drawing.Size(255, 29)
-        Me.txtTestWeightsF1.TabIndex = 44
         '
         'Label15
         '
@@ -652,9 +653,9 @@ Partial Class frmPrint
         Me.btnPreview.BackColor = System.Drawing.Color.PaleGoldenrod
         Me.btnPreview.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnPreview.Font = New System.Drawing.Font("Segoe UI", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnPreview.Location = New System.Drawing.Point(813, 660)
+        Me.btnPreview.Location = New System.Drawing.Point(813, 645)
         Me.btnPreview.Name = "btnPreview"
-        Me.btnPreview.Size = New System.Drawing.Size(133, 83)
+        Me.btnPreview.Size = New System.Drawing.Size(133, 45)
         Me.btnPreview.TabIndex = 51
         Me.btnPreview.Text = "Preview"
         Me.btnPreview.UseVisualStyleBackColor = False
@@ -664,18 +665,31 @@ Partial Class frmPrint
         Me.btnPrint.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.btnPrint.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnPrint.Font = New System.Drawing.Font("Segoe UI", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnPrint.Location = New System.Drawing.Point(1178, 659)
+        Me.btnPrint.Location = New System.Drawing.Point(1161, 645)
         Me.btnPrint.Name = "btnPrint"
-        Me.btnPrint.Size = New System.Drawing.Size(133, 83)
+        Me.btnPrint.Size = New System.Drawing.Size(150, 97)
         Me.btnPrint.TabIndex = 52
-        Me.btnPrint.Text = "Print"
+        Me.btnPrint.Text = "Save + Print"
         Me.btnPrint.UseVisualStyleBackColor = False
+        '
+        'btnTestPrint
+        '
+        Me.btnTestPrint.BackColor = System.Drawing.Color.PaleGoldenrod
+        Me.btnTestPrint.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnTestPrint.Font = New System.Drawing.Font("Segoe UI", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnTestPrint.Location = New System.Drawing.Point(813, 699)
+        Me.btnTestPrint.Name = "btnTestPrint"
+        Me.btnTestPrint.Size = New System.Drawing.Size(133, 45)
+        Me.btnTestPrint.TabIndex = 53
+        Me.btnTestPrint.Text = "Test Print"
+        Me.btnTestPrint.UseVisualStyleBackColor = False
         '
         'frmPrint
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1334, 765)
+        Me.Controls.Add(Me.btnTestPrint)
         Me.Controls.Add(Me.btnPrint)
         Me.Controls.Add(Me.btnPreview)
         Me.Controls.Add(Me.txtSerialNumber)
@@ -684,7 +698,7 @@ Partial Class frmPrint
         Me.Controls.Add(Me.txtCertificateNumber)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.Label7)
-        Me.Controls.Add(Me.btnSave)
+        Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.printPreviewCtrl)
         Me.Controls.Add(Me.GroupBox3)
         Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -710,7 +724,7 @@ Partial Class frmPrint
     Friend WithEvents txtCustomerAddress2 As TextBox
     Friend WithEvents txtCustomerAddress4 As TextBox
     Friend WithEvents txtCustomerAddress3 As TextBox
-    Friend WithEvents btnSave As Button
+    Friend WithEvents btnCancel As Button
     Friend WithEvents Label7 As Label
     Friend WithEvents GroupBox1 As GroupBox
     Friend WithEvents txtCertificateNumber As TextBox
@@ -759,4 +773,5 @@ Partial Class frmPrint
     Friend WithEvents txtCalWeight1 As TextBox
     Friend WithEvents btnPreview As Button
     Friend WithEvents btnPrint As Button
+    Friend WithEvents btnTestPrint As Button
 End Class

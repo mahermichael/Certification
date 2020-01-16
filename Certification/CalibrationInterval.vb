@@ -7,6 +7,8 @@ Imports ICSharpCode.SharpZipLib.Zip
 
 Public Class CalibrationInterval
 
+    Public Property Interval As String
+
 
     ''' <summary>
     ''' Constructor
@@ -27,8 +29,18 @@ Public Class CalibrationInterval
         cbCalibrationInterval.Items.Add("11 Monthly")
         cbCalibrationInterval.Items.Add("12 Monthly")
         cbCalibrationInterval.SelectedItem = "6 Monthly"
+        Interval = "6 Monthly"
     End Sub
 
+    Private Sub cbCalibrationInterval_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbCalibrationInterval.SelectedIndexChanged
+        Interval = cbCalibrationInterval.SelectedItem.ToString()
+    End Sub
 
+    Private Sub btnExit_Click(sender As Object, e As EventArgs) Handles btnExit.Click
+        Me.DialogResult = DialogResult.Cancel
+    End Sub
 
+    Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
+        Me.DialogResult = DialogResult.OK
+    End Sub
 End Class
